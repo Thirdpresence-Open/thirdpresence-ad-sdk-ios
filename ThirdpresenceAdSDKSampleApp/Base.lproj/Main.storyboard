@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0N-fn-mDE">
+                                <rect key="frame" x="115" y="87" width="90" height="30"/>
+                                <state key="normal" title="Init"/>
+                                <connections>
+                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ggv-am-TX0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mii-Hd-t3u">
+                                <rect key="frame" x="115" y="187" width="90" height="30"/>
+                                <state key="normal" title="Display Ad"/>
+                                <connections>
+                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bFR-vE-X9V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4n8-Y6-ouK">
+                                <rect key="frame" x="115" y="237" width="90" height="30"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FaZ-IZ-5oJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fnm-MS-6hU">
+                                <rect key="frame" x="115" y="287" width="90" height="30"/>
+                                <state key="normal" title="Remove"/>
+                                <connections>
+                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cO2-ec-CjZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZX-sw-MdP">
+                                <rect key="frame" x="115" y="137" width="90" height="30"/>
+                                <state key="normal" title="Load Ad"/>
+                                <connections>
+                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJv-hI-jKv"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Thirdpresence Ad SDK Sample App" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yeu-am-S1t">
+                                <rect key="frame" x="12" y="28" width="296" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4n8-Y6-ouK" firstAttribute="top" secondItem="mii-Hd-t3u" secondAttribute="bottom" constant="20" id="0SQ-ZL-a4w"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="mii-Hd-t3u" secondAttribute="centerX" id="0aE-hp-DUe"/>
+                            <constraint firstItem="mii-Hd-t3u" firstAttribute="top" secondItem="hZX-sw-MdP" secondAttribute="bottom" constant="20" id="2o0-fR-VYX"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="u0N-fn-mDE" secondAttribute="centerX" id="At9-Pm-8dB"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="BJt-Ig-fk8"/>
+                            <constraint firstItem="mii-Hd-t3u" firstAttribute="leading" secondItem="4n8-Y6-ouK" secondAttribute="leading" id="Cfa-Mj-DWq"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="4n8-Y6-ouK" secondAttribute="centerX" id="Gko-ac-89a"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KgH-No-YqK"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="MtU-Gq-KnI"/>
+                            <constraint firstItem="hZX-sw-MdP" firstAttribute="leading" secondItem="mii-Hd-t3u" secondAttribute="leading" id="NBl-rs-J5F"/>
+                            <constraint firstItem="u0N-fn-mDE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="99" id="gkq-oJ-vqk"/>
+                            <constraint firstItem="hZX-sw-MdP" firstAttribute="top" secondItem="u0N-fn-mDE" secondAttribute="bottom" constant="20" id="hyg-qo-wRp"/>
+                            <constraint firstItem="fnm-MS-6hU" firstAttribute="top" secondItem="4n8-Y6-ouK" secondAttribute="bottom" constant="20" id="kA7-Zz-H0g"/>
+                            <constraint firstItem="u0N-fn-mDE" firstAttribute="leading" secondItem="hZX-sw-MdP" secondAttribute="leading" id="kms-NU-vge"/>
+                            <constraint firstItem="u0N-fn-mDE" firstAttribute="top" secondItem="yeu-am-S1t" secondAttribute="bottom" constant="29" id="q4G-3x-2T3"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="fnm-MS-6hU" secondAttribute="centerX" id="uxQ-q3-NOu"/>
+                            <constraint firstItem="yeu-am-S1t" firstAttribute="centerX" secondItem="hZX-sw-MdP" secondAttribute="centerX" id="yJs-az-eCJ"/>
+                            <constraint firstItem="4n8-Y6-ouK" firstAttribute="leading" secondItem="fnm-MS-6hU" secondAttribute="leading" id="zpx-0s-kdE"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="displayButton" destination="mii-Hd-t3u" id="V9o-cT-8Lw"/>
+                        <outlet property="initializeButton" destination="u0N-fn-mDE" id="tj9-Bk-6pP"/>
+                        <outlet property="loadButton" destination="hZX-sw-MdP" id="nab-gW-L2W"/>
+                        <outlet property="removeButton" destination="fnm-MS-6hU" id="dIg-5j-4vU"/>
+                        <outlet property="resetButton" destination="4n8-Y6-ouK" id="W1a-Ol-crQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="306" y="358"/>
+        </scene>
+    </scenes>
+</document>

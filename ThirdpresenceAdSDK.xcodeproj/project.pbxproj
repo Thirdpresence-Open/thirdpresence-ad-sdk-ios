@@ -1,0 +1,325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FB49787C1CC6346000F446A1 /* ThirdpresenceAdSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = FB49787B1CC6346000F446A1 /* ThirdpresenceAdSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB49788D1CC6383400F446A1 /* TPRWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FB49788B1CC6383400F446A1 /* TPRWebViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		FB49788E1CC6383400F446A1 /* TPRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB49788C1CC6383400F446A1 /* TPRWebViewController.m */; };
+		FB4978951CC7512300F446A1 /* TPRVideoInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = FB4978931CC7512300F446A1 /* TPRVideoInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB4978961CC7512300F446A1 /* TPRVideoInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978941CC7512300F446A1 /* TPRVideoInterstitial.m */; };
+		FB4978991CC7515600F446A1 /* TPRRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = FB4978971CC7515600F446A1 /* TPRRewardedVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB49789A1CC7515600F446A1 /* TPRRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978981CC7515600F446A1 /* TPRRewardedVideo.m */; };
+		FB49789D1CC7518400F446A1 /* TPRVideoAd.h in Headers */ = {isa = PBXBuildFile; fileRef = FB49789B1CC7518400F446A1 /* TPRVideoAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB49789E1CC7518400F446A1 /* TPRVideoAd.m in Sources */ = {isa = PBXBuildFile; fileRef = FB49789C1CC7518400F446A1 /* TPRVideoAd.m */; };
+		FBBFD3331CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FBBFD3311CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		FBBFD3341CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBFD3321CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FB4978781CC6346000F446A1 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdpresenceAdSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB49787B1CC6346000F446A1 /* ThirdpresenceAdSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdpresenceAdSDK.h; sourceTree = "<group>"; };
+		FB49787D1CC6346000F446A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB49788B1CC6383400F446A1 /* TPRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPRWebViewController.h; path = internal/TPRWebViewController.h; sourceTree = "<group>"; };
+		FB49788C1CC6383400F446A1 /* TPRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPRWebViewController.m; path = internal/TPRWebViewController.m; sourceTree = "<group>"; };
+		FB4978931CC7512300F446A1 /* TPRVideoInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoInterstitial.h; sourceTree = "<group>"; };
+		FB4978941CC7512300F446A1 /* TPRVideoInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoInterstitial.m; sourceTree = "<group>"; };
+		FB4978971CC7515600F446A1 /* TPRRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRRewardedVideo.h; sourceTree = "<group>"; };
+		FB4978981CC7515600F446A1 /* TPRRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRRewardedVideo.m; sourceTree = "<group>"; };
+		FB49789B1CC7518400F446A1 /* TPRVideoAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoAd.h; sourceTree = "<group>"; };
+		FB49789C1CC7518400F446A1 /* TPRVideoAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoAd.m; sourceTree = "<group>"; };
+		FBBFD3311CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPRVideoPlayerHandler.h; path = internal/TPRVideoPlayerHandler.h; sourceTree = "<group>"; };
+		FBBFD3321CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPRVideoPlayerHandler.m; path = internal/TPRVideoPlayerHandler.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB4978741CC6346000F446A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB49786E1CC6346000F446A1 = {
+			isa = PBXGroup;
+			children = (
+				FB49787A1CC6346000F446A1 /* ThirdpresenceAdSDK */,
+				FB4978791CC6346000F446A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB4978791CC6346000F446A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB4978781CC6346000F446A1 /* ThirdpresenceAdSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB49787A1CC6346000F446A1 /* ThirdpresenceAdSDK */ = {
+			isa = PBXGroup;
+			children = (
+				FB49787B1CC6346000F446A1 /* ThirdpresenceAdSDK.h */,
+				FB49787D1CC6346000F446A1 /* Info.plist */,
+				FB49788B1CC6383400F446A1 /* TPRWebViewController.h */,
+				FB49788C1CC6383400F446A1 /* TPRWebViewController.m */,
+				FB4978931CC7512300F446A1 /* TPRVideoInterstitial.h */,
+				FB4978941CC7512300F446A1 /* TPRVideoInterstitial.m */,
+				FB4978971CC7515600F446A1 /* TPRRewardedVideo.h */,
+				FB4978981CC7515600F446A1 /* TPRRewardedVideo.m */,
+				FB49789B1CC7518400F446A1 /* TPRVideoAd.h */,
+				FB49789C1CC7518400F446A1 /* TPRVideoAd.m */,
+				FBBFD3311CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.h */,
+				FBBFD3321CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.m */,
+			);
+			path = ThirdpresenceAdSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FB4978751CC6346000F446A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4978951CC7512300F446A1 /* TPRVideoInterstitial.h in Headers */,
+				FB49787C1CC6346000F446A1 /* ThirdpresenceAdSDK.h in Headers */,
+				FB49789D1CC7518400F446A1 /* TPRVideoAd.h in Headers */,
+				FB4978991CC7515600F446A1 /* TPRRewardedVideo.h in Headers */,
+				FBBFD3331CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.h in Headers */,
+				FB49788D1CC6383400F446A1 /* TPRWebViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FB4978771CC6346000F446A1 /* ThirdpresenceAdSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB4978801CC6346000F446A1 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDK" */;
+			buildPhases = (
+				FB4978731CC6346000F446A1 /* Sources */,
+				FB4978741CC6346000F446A1 /* Frameworks */,
+				FB4978751CC6346000F446A1 /* Headers */,
+				FB4978761CC6346000F446A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThirdpresenceAdSDK;
+			productName = ThirdpresenceAdSDK;
+			productReference = FB4978781CC6346000F446A1 /* ThirdpresenceAdSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB49786F1CC6346000F446A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Marko Okkonen";
+				TargetAttributes = {
+					FB4978771CC6346000F446A1 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = FB4978721CC6346000F446A1 /* Build configuration list for PBXProject "ThirdpresenceAdSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FB49786E1CC6346000F446A1;
+			productRefGroup = FB4978791CC6346000F446A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB4978771CC6346000F446A1 /* ThirdpresenceAdSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB4978761CC6346000F446A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB4978731CC6346000F446A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB49789A1CC7515600F446A1 /* TPRRewardedVideo.m in Sources */,
+				FB49789E1CC7518400F446A1 /* TPRVideoAd.m in Sources */,
+				FB4978961CC7512300F446A1 /* TPRVideoInterstitial.m in Sources */,
+				FBBFD3341CCDFAAE00A5EA8B /* TPRVideoPlayerHandler.m in Sources */,
+				FB49788E1CC6383400F446A1 /* TPRWebViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FB49787E1CC6346000F446A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FB49787F1CC6346000F446A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FB4978811CC6346000F446A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ThirdpresenceAdSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Thirdpresence.ThirdpresenceAdSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FB4978821CC6346000F446A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ThirdpresenceAdSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Thirdpresence.ThirdpresenceAdSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB4978721CC6346000F446A1 /* Build configuration list for PBXProject "ThirdpresenceAdSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB49787E1CC6346000F446A1 /* Debug */,
+				FB49787F1CC6346000F446A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB4978801CC6346000F446A1 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB4978811CC6346000F446A1 /* Debug */,
+				FB4978821CC6346000F446A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB49786F1CC6346000F446A1 /* Project object */;
+}

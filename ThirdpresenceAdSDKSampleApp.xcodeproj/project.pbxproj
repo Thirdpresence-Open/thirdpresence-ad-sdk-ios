@@ -1,0 +1,398 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FB4978E01CC7969000F446A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978DF1CC7969000F446A1 /* main.m */; };
+		FB4978E31CC7969000F446A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E21CC7969000F446A1 /* AppDelegate.m */; };
+		FB4978E61CC7969000F446A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E51CC7969000F446A1 /* ViewController.m */; };
+		FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978E71CC7969000F446A1 /* Main.storyboard */; };
+		FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EA1CC7969000F446A1 /* Assets.xcassets */; };
+		FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */; };
+		FB5801421CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */; };
+		FB5801431CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FB5801401CD20543004B9D5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FB4978781CC6346000F446A1;
+			remoteInfo = ThirdpresenceAdSDK;
+		};
+		FB5801441CD20652004B9D5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FB4978771CC6346000F446A1;
+			remoteInfo = ThirdpresenceAdSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FB5801461CD20652004B9D5E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FB5801431CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdpresenceAdSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB4978DF1CC7969000F446A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FB4978E11CC7969000F446A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FB4978E21CC7969000F446A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FB4978E41CC7969000F446A1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FB4978E51CC7969000F446A1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FB4978E81CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FB4978EA1CC7969000F446A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FB4978ED1CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FB4978EF1CC7969000F446A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB4979011CC79B0900F446A1 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThirdpresenceAdSDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/ThirdpresenceAdSDK-fksbooixllcrkwgxuocpatbvdpfw/Build/Products/Debug-iphoneos/ThirdpresenceAdSDK.framework"; sourceTree = "<group>"; };
+		FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThirdpresenceAdSDK.xcodeproj; sourceTree = "<group>"; };
+		FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ThirdpresenceAdSDKSampleApp.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB4978D81CC7969000F446A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB5801421CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB4978D21CC7969000F446A1 = {
+			isa = PBXGroup;
+			children = (
+				FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */,
+				FB4979011CC79B0900F446A1 /* ThirdpresenceAdSDK.framework */,
+				FB4978DD1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */,
+				FB4978DC1CC7969000F446A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB4978DC1CC7969000F446A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB4978DD1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */,
+				FB4978E11CC7969000F446A1 /* AppDelegate.h */,
+				FB4978E21CC7969000F446A1 /* AppDelegate.m */,
+				FB4978E41CC7969000F446A1 /* ViewController.h */,
+				FB4978E51CC7969000F446A1 /* ViewController.m */,
+				FB4978E71CC7969000F446A1 /* Main.storyboard */,
+				FB4978EA1CC7969000F446A1 /* Assets.xcassets */,
+				FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */,
+				FB4978EF1CC7969000F446A1 /* Info.plist */,
+				FB4978DE1CC7969000F446A1 /* Supporting Files */,
+			);
+			path = ThirdpresenceAdSDKSampleApp;
+			sourceTree = "<group>";
+		};
+		FB4978DE1CC7969000F446A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB4978DF1CC7969000F446A1 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB58013D1CD20543004B9D5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB4978DA1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB4978F21CC7969000F446A1 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDKSampleApp" */;
+			buildPhases = (
+				FB4978D71CC7969000F446A1 /* Sources */,
+				FB4978D81CC7969000F446A1 /* Frameworks */,
+				FB4978D91CC7969000F446A1 /* Resources */,
+				FB5801461CD20652004B9D5E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB5801451CD20652004B9D5E /* PBXTargetDependency */,
+			);
+			name = ThirdpresenceAdSDKSampleApp;
+			productName = ThirdpresenceAdSDKSampleApp;
+			productReference = FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB4978D31CC7969000F446A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Thirdpresence;
+				TargetAttributes = {
+					FB4978DA1CC7969000F446A1 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = H478BW6B43;
+						SystemCapabilities = {
+							com.apple.Wallet = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = FB4978D61CC7969000F446A1 /* Build configuration list for PBXProject "ThirdpresenceAdSDKSampleApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FB4978D21CC7969000F446A1;
+			productRefGroup = FB4978DC1CC7969000F446A1 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FB58013D1CD20543004B9D5E /* Products */;
+					ProjectRef = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				FB4978DA1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ThirdpresenceAdSDK.framework;
+			remoteRef = FB5801401CD20543004B9D5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB4978D91CC7969000F446A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */,
+				FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */,
+				FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB4978D71CC7969000F446A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4978E61CC7969000F446A1 /* ViewController.m in Sources */,
+				FB4978E31CC7969000F446A1 /* AppDelegate.m in Sources */,
+				FB4978E01CC7969000F446A1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB5801451CD20652004B9D5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ThirdpresenceAdSDK;
+			targetProxy = FB5801441CD20652004B9D5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FB4978E71CC7969000F446A1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB4978E81CC7969000F446A1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB4978ED1CC7969000F446A1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FB4978F01CC7969000F446A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB4978F11CC7969000F446A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FB4978F31CC7969000F446A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ThirdpresenceAdSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		FB4978F41CC7969000F446A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ThirdpresenceAdSDKSampleApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB4978D61CC7969000F446A1 /* Build configuration list for PBXProject "ThirdpresenceAdSDKSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB4978F01CC7969000F446A1 /* Debug */,
+				FB4978F11CC7969000F446A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB4978F21CC7969000F446A1 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDKSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB4978F31CC7969000F446A1 /* Debug */,
+				FB4978F41CC7969000F446A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB4978D31CC7969000F446A1 /* Project object */;
+}
