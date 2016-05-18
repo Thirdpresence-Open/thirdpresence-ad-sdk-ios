@@ -16,7 +16,7 @@ There are two options to integrate the SDK:
 1. Direct Integration
 2. Mediation with existing SDK (e.g. MoPub)
 
-Available mediation plugins:
+Available mediation adapters:
 
 - MoPub interstitial
 - MoPub rewarded video
@@ -44,7 +44,7 @@ Thirdpresence libraries are available in CocoaPods with following pods. Use one 
 
 #### Copying the source code
 
-- Clone this Github repository to your machine
+- Clone or download this Github repository to your machine
 - Open XCode project of your application
 
 - Drag and drop ThirdpresenceAdSDK folder to the Project Navigator in the XCode and add the source to required targets. Make sure to check 'Create groups' option.
@@ -59,7 +59,7 @@ Thirdpresence libraries are available in CocoaPods with following pods. Use one 
 
 ### Additional requirements
 
-By default iOS 9.0 requires apps to make network connections over SSL. Currently all the demand source do not support SSL and that will likely impact to fill rates. Allowing the player make non-SSL connections you shall add the following to your app plist file:
+By default iOS 9.0 requires apps to make network connections over SSL. Currently all demand sources do not support SSL, which will likely to have mojor impact to fill rates. Allowing the player make non-SSL connections you shall add the following to your app plist file:
 ```
 <key>NSAppTransportSecurity</key>
 <dict>
@@ -75,7 +75,7 @@ https://developer.apple.com/library/mac/releasenotes/ObjectiveC/RN-Transitioning
 
 ### Direct integration
 
-A quick guide to start showing ads on an application. Jump to If you are doing mediation
+A quick guide to start showing ads on an application. Continue reading from [Mediation section](#mediation) if you are doing mediation.
 
 Implement TPRVideoAdDelegate interface on the class that handles showing the ad:
 
@@ -165,10 +165,12 @@ Check out the Sample App for a reference.
 
 ### Mediation
 
-#### MoPub mediation
+Using mediation adapters do not require changes in your existing code. The mediating Ad SDK will detect the existence of a mediation adapter dynamically. Make sure that your app target embeds Thirdpresence Ad SDK and mediation adapter libraries and other requirements are met. See following instruction how to add Thirdpresence ad source to the waterfall of the ad unit.
+
+#### MoPub
 
 - Login to the MoPub console
-- Create a Fullscreen Ad or Rewarded Video Ad ad unit
+- Create a Fullscreen Ad or Rewarded Video Ad ad unit if not using existing one
 - Add new Custom Native Network
 - Set Custom Event Class and Custom Event Class Data for the ad unit with following values:
 
@@ -184,10 +186,10 @@ Check out the Sample App for a reference.
 - Enable the network you just created and set the CPM.
 - Test the integration with the MoPub sample app
 
-#### Admob mediation
+#### Admob
 
 - Login to the Admob console
-- Create new Interstitial ad unit for video if not exists
+- Create an Interstitial ad unit for video if not using existing one
 - In the ad units list, click "x ad source(s)" link on the Mediation column of the interstitial ad unit
 - Click New ad network button
 - Click "+ Custom event" button
