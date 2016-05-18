@@ -1,12 +1,13 @@
 //
-//  TPRInterstitialCustomEvent.m
-//  ThirdpresenceMopubMediation
+//  TPRAdmobCustomEventInterstitial.m
+//  ThirdpresenceAdmobMediation
 //
-//  Created by Marko Okkonen on 28/04/16.
-//  Copyright © 2016 thirdpresence. All rights reserved.
+//  Created by Marko Okkonen on 06/05/16.
+//  Copyright © 2016 Thirdpresence. All rights reserved.
 //
 
-#import "TPRInterstitialCustomEvent.h"
+#import "TPRAdmobCustomEventInterstitial.h"
+#import "TPRAdmobCustomEventHelper.h"
 
 #if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
 #import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
@@ -14,22 +15,26 @@
 #import "TPRVideoInterstitial.h"
 #endif
 
+#import <GoogleMobileAds/GoogleMobileAds.h>
+
 NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT = @"account";
 NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
 NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_LANDSCAPE = @"forcelandscape";
 NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
 
-@interface TPRInterstitialCustomEvent () <TPRVideoAdDelegate>
+@interface TPRAdmobCustomEventInterstitial () <TPRVideoAdDelegate, GADCustomEventInterstitial>
 
-- (void) loadAd;
-- (void) remove;
+- (void)loadAd;
+- (void)remove;
 
-@property (strong) TPRVideoInterstitial *interstitial;
-@property (assign) BOOL adLoaded;
+@property(nonatomic, strong) TPRVideoInterstitial *interstitial;
+@property(assign) BOOL adLoaded;
 
 @end
 
-@implementation TPRInterstitialCustomEvent
+@implementation TPRAdmobCustomEventInterstitial
+
+@synthesize delegate;
 
 - (instancetype)init {
     self = [super init];
@@ -40,10 +45,14 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
     [self remove];
 }
 
-- (void)requestInterstitialWithCustomEventInfo:(NSDictionary*)info {
-
-    NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:4];
-
+- (void)requestInterstitialAdWithParameter:(NSString *)serverParameter
+                                     label:(NSString *)serverLabel
+                                   request:(GADCustomEventRequest *)request {
+    
+    
+    NSDictionary* info = [TPRAdmobCustomEventHelper parseParamsString:serverParameter];
+    NSMutableDictionary* environment = [NSMutableDictionary dictionaryWithCapacity:4];
+    
     NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
     if (account) {
         [environment setValue:account forKey:TPR_ENVIRONMENT_KEY_ACCOUNT];
@@ -52,7 +61,7 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
                                          userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due an account not set" forKey:NSLocalizedDescriptionKey]];
         
-        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+         [self.delegate customEventInterstitial:self didFailAd:error];
     }
     
     NSString *placementId = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID];
@@ -63,32 +72,32 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
                                          userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due placement id not set" forKey:NSLocalizedDescriptionKey]];
         
-        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+        [self.delegate customEventInterstitial:self didFailAd:error];
     }
     
     NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     }
-
+    
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     }
     
+    NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];
+    
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment
-                                                                   params:info
+                                                                   params:playerParams
                                                                   timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
+
     self.interstitial.delegate = self;
 }
 
-- (void)showInterstitialFromRootViewController:(UIViewController*)rootViewController {
+- (void)presentFromRootViewController:(UIViewController *)rootViewController {
     if (_adLoaded) {
-        [self.delegate interstitialCustomEventWillAppear:self];
+        [self.delegate customEventInterstitialWillPresent:self];
         [self.interstitial displayAd];
-        [self.delegate interstitialCustomEventDidAppear:self];
-    } else {
-        [self.delegate interstitialCustomEventDidExpire:self];
     }
 }
 
@@ -106,30 +115,37 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
     if (videoAd == self.interstitial) {
         [self remove];
-        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+        [self.delegate customEventInterstitial:self didFailAd:error];
     }
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd eventOccured:(TPRPlayerEvent*)event {
-    if (videoAd == self.interstitial) {        
+    if (videoAd == self.interstitial) {
         NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
         
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
             [self loadAd];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
             _adLoaded = YES;
-            [self.delegate interstitialCustomEvent:self didLoadAd:nil];
+            [self.delegate customEventInterstitialDidReceiveAd:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
-            [self.delegate interstitialCustomEventDidExpire:self];
+            NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
+                                                 code:TPR_ERROR_NO_FILL
+                                             userInfo:[NSDictionary dictionaryWithObject:@"Failed to display an ad" forKey:NSLocalizedDescriptionKey]];
+            [self.delegate customEventInterstitial:self didFailAd:error];
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-            [self.delegate interstitialCustomEventWillDisappear:self];
+            [self.delegate customEventInterstitialWillDismiss:self];
             [self remove];
-            [self.delegate interstitialCustomEventDidDisappear:self];
+            [self.delegate customEventInterstitialDidDismiss:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
-            [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
+            [self.delegate customEventInterstitialWasClicked:self];
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LEFT_APPLICATION]) {
+            [self.delegate customEventInterstitialWasClicked:self];
         }
     }
 }
+
+
 
 @end

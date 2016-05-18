@@ -1,0 +1,12 @@
+PODS:
+  - mopub-ios-sdk (4.6.0):
+    - mopub-ios-sdk/MoPubSDK (= 4.6.0)
+  - mopub-ios-sdk/MoPubSDK (4.6.0)
+
+DEPENDENCIES:
+  - mopub-ios-sdk
+
+SPEC CHECKSUMS:
+  mopub-ios-sdk: 5e7193f1a0f9bfe6513816416117d9c28d8dcf19
+
+COCOAPODS: 0.39.0

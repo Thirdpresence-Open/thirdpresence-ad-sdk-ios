@@ -146,6 +146,9 @@ FOUNDATION_EXPORT NSString *const TPR_EVENT_NAME_AD_VIDEO_COMPLETE;
 // Fallback ad displayed
 FOUNDATION_EXPORT NSString *const TPR_EVENT_NAME_AD_FALLBACK_DISPLAYED;
 
+// Another application has been opened, e.g. browser when opening a landing page
+FOUNDATION_EXPORT NSString *const TPR_EVENT_NAME_AD_LEFT_APPLICATION;
+
 /**
  * Error codes
  */

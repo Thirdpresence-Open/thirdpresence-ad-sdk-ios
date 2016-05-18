@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ThirdpresenceAdSDK/TPRVideoAd.h>
-#import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
-#import <ThirdpresenceAdSDK/TPRRewardedVideo.h>
+#import "TPRVideoAd.h"
+#import "TPRVideoInterstitial.h"
+#import "TPRRewardedVideo.h"
 
 //! Project version number for ThirdpresenceAdSDK.
 FOUNDATION_EXPORT double ThirdpresenceAdSDKVersionNumber;

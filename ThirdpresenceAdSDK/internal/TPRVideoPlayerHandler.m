@@ -142,7 +142,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
     
     if (appName) {
         if (![params objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME]) {
-            [params setValue:appName forKey:TPR_PLAYER_PARAMETER_KEY_BUNDLE_ID];
+            [params setValue:appName forKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
         }
     
         if (![params objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_VERSION]) {
@@ -315,7 +315,6 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 - (BOOL)webViewController:(TPRWebViewController *)webViewController
 shouldStartLoadWithRequest:(NSURLRequest *)request
             navigationType:(UIWebViewNavigationType)navigationType {
-    
     NSString* scheme = request.URL.scheme;
     
     if ([scheme isEqualToString:PLAYER_EVENT_CUSTOM_SCHEME] && [request.URL.host isEqualToString:PLAYER_EVENT_HOST_NAME]) {
@@ -332,7 +331,10 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 #pragma mark - PrivateMethods
 
 - (void)openURL:(NSURL*)url {
-    [[UIApplication sharedApplication] openURL:url];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [self sendEvent:TPR_EVENT_NAME_AD_LEFT_APPLICATION arg1:url arg2:nil arg3:nil];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 - (void)handlePlayerEvent:(TPRPlayerEvent*)event {
@@ -403,7 +405,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)timeoutOccuredOn:(NSTimer*)timer {
     NSError* error;
-    
+
     if (timer == _playerTimeoutTimer) {
         error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                     code:TPR_ERROR_NETWORK_TIMEOUT

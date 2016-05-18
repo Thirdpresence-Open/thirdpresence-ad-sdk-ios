@@ -38,7 +38,7 @@
     
     // Environment dictionary must contain at least key TPR_ENVIRONMENT_KEY_ACCOUNT and TPR_ENVIRONMENT_KEY_PLACEMENT_ID
     // TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE allows to force player to landscape orientation
-    NSDictionary *environment = [NSDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         @"sdk-demo", TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         @"msusprtiz3", TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
                                         TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];

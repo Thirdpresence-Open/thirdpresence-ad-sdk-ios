@@ -14,6 +14,5 @@ FOUNDATION_EXPORT double ThirdpresenceMopubMediationVersionNumber;
 //! Project version string for ThirdpresenceMopubMediation.
 FOUNDATION_EXPORT const unsigned char ThirdpresenceMopubMediationVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <ThirdpresenceMopubMediation/PublicHeader.h>
 
 

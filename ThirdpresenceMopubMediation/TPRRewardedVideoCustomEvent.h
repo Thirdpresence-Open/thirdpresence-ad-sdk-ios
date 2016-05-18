@@ -6,12 +6,7 @@
 //  Copyright © 2016 thirdpresence. All rights reserved.
 //
 
-#if __has_include(<MoPub/MoPub.h>)
-#import <MoPub/MoPub.h>
-#else
-#import "MPRewardedVideoCustomEvent.h"
-#import "MPRewardedVideoReward.h"
-#endif
+#import "MoPub.h" 
 
 @interface TPRRewardedVideoCustomEvent : MPRewardedVideoCustomEvent
 

@@ -53,9 +53,7 @@
 }
 
 - (void)dealloc {
-    [_playerHandler resetState];
-    _playerHandler = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:TPR_PLAYER_NOTIFICATION];
+    [_playerHandler removePlayer];
 }
 
 - (void)loadAd {
@@ -94,6 +92,7 @@
 }
 
 - (void)removePlayer {
+    [[NSNotificationCenter defaultCenter] removeObserver:TPR_PLAYER_NOTIFICATION];
     self.ready = NO;
     [_playerHandler resetState];
     _playerHandler = nil;

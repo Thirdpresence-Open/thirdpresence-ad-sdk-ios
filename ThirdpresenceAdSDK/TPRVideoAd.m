@@ -73,6 +73,7 @@ NSString *const TPR_EVENT_NAME_AD_VIDEO_MIDPOINT = @"AdVideoMidpoint";
 NSString *const TPR_EVENT_NAME_AD_VIDEO_THIRD_QUARTILE = @"AdVideoThirdQuartile";
 NSString *const TPR_EVENT_NAME_AD_VIDEO_COMPLETE = @"AdVideoComplete";
 NSString *const TPR_EVENT_NAME_AD_FALLBACK_DISPLAYED = @"AdFallbackDisplayed";
+NSString *const TPR_EVENT_NAME_AD_LEFT_APPLICATION = @"AdLeftApplication";
 
 // Placement types
 NSString *const TPR_PLACEMENT_TYPE_UNKNOWN = @"unknown";

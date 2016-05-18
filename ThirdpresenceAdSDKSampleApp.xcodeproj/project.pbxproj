@@ -13,21 +13,22 @@
 		FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978E71CC7969000F446A1 /* Main.storyboard */; };
 		FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EA1CC7969000F446A1 /* Assets.xcassets */; };
 		FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */; };
-		FB5801421CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */; };
-		FB5801431CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FB5DD3191CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5DD3181CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist */; };
+		FB5DD3251CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */; };
+		FB5DD3261CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FB5801401CD20543004B9D5E /* PBXContainerItemProxy */ = {
+		FB5DD3231CEB09DA008C3A34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+			containerPortal = FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = FB4978781CC6346000F446A1;
 			remoteInfo = ThirdpresenceAdSDK;
 		};
-		FB5801441CD20652004B9D5E /* PBXContainerItemProxy */ = {
+		FB5DD3271CEB09EA008C3A34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+			containerPortal = FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = FB4978771CC6346000F446A1;
 			remoteInfo = ThirdpresenceAdSDK;
@@ -35,13 +36,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FB5801461CD20652004B9D5E /* Embed Frameworks */ = {
+		FB5DD31E1CEB0945008C3A34 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FB5801431CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Embed Frameworks */,
+				FB5DD3261CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,10 +59,9 @@
 		FB4978E81CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB4978EA1CC7969000F446A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB4978ED1CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FB4978EF1CC7969000F446A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB4979011CC79B0900F446A1 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThirdpresenceAdSDK.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/ThirdpresenceAdSDK-fksbooixllcrkwgxuocpatbvdpfw/Build/Products/Debug-iphoneos/ThirdpresenceAdSDK.framework"; sourceTree = "<group>"; };
-		FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThirdpresenceAdSDK.xcodeproj; sourceTree = "<group>"; };
 		FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ThirdpresenceAdSDKSampleApp.entitlements; sourceTree = "<group>"; };
+		FB5DD3181CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ThirdpresenceAdSDKSampleApp-Info.plist"; sourceTree = "<group>"; };
+		FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThirdpresenceAdSDK.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,20 +69,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5801421CD20652004B9D5E /* ThirdpresenceAdSDK.framework in Frameworks */,
+				FB5DD3251CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F137646906F861BF0E3DFF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FB4978D21CC7969000F446A1 = {
 			isa = PBXGroup;
 			children = (
-				FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */,
-				FB4979011CC79B0900F446A1 /* ThirdpresenceAdSDK.framework */,
+				FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */,
 				FB4978DD1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */,
 				FB4978DC1CC7969000F446A1 /* Products */,
+				7F137646906F861BF0E3DFF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +104,7 @@
 		FB4978DD1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				FB5DD3181CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist */,
 				FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */,
 				FB4978E11CC7969000F446A1 /* AppDelegate.h */,
 				FB4978E21CC7969000F446A1 /* AppDelegate.m */,
@@ -105,7 +113,6 @@
 				FB4978E71CC7969000F446A1 /* Main.storyboard */,
 				FB4978EA1CC7969000F446A1 /* Assets.xcassets */,
 				FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */,
-				FB4978EF1CC7969000F446A1 /* Info.plist */,
 				FB4978DE1CC7969000F446A1 /* Supporting Files */,
 			);
 			path = ThirdpresenceAdSDKSampleApp;
@@ -119,10 +126,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FB58013D1CD20543004B9D5E /* Products */ = {
+		FB5DD3201CEB09D9008C3A34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */,
+				FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,12 +144,12 @@
 				FB4978D71CC7969000F446A1 /* Sources */,
 				FB4978D81CC7969000F446A1 /* Frameworks */,
 				FB4978D91CC7969000F446A1 /* Resources */,
-				FB5801461CD20652004B9D5E /* Embed Frameworks */,
+				FB5DD31E1CEB0945008C3A34 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FB5801451CD20652004B9D5E /* PBXTargetDependency */,
+				FB5DD3281CEB09EA008C3A34 /* PBXTargetDependency */,
 			);
 			name = ThirdpresenceAdSDKSampleApp;
 			productName = ThirdpresenceAdSDKSampleApp;
@@ -182,8 +189,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = FB58013D1CD20543004B9D5E /* Products */;
-					ProjectRef = FB58013C1CD20543004B9D5E /* ThirdpresenceAdSDK.xcodeproj */;
+					ProductGroup = FB5DD3201CEB09D9008C3A34 /* Products */;
+					ProjectRef = FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -194,11 +201,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FB5801411CD20543004B9D5E /* ThirdpresenceAdSDK.framework */ = {
+		FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ThirdpresenceAdSDK.framework;
-			remoteRef = FB5801401CD20543004B9D5E /* PBXContainerItemProxy */;
+			remoteRef = FB5DD3231CEB09DA008C3A34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -211,6 +218,7 @@
 				FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */,
 				FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */,
 				FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */,
+				FB5DD3191CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,10 +238,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FB5801451CD20652004B9D5E /* PBXTargetDependency */ = {
+		FB5DD3281CEB09EA008C3A34 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ThirdpresenceAdSDK;
-			targetProxy = FB5801441CD20652004B9D5E /* PBXContainerItemProxy */;
+			targetProxy = FB5DD3271CEB09EA008C3A34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -347,7 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ThirdpresenceAdSDKSampleApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ThirdpresenceAdSDKSampleApp/ThirdpresenceAdSDKSampleApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
@@ -362,7 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ThirdpresenceAdSDKSampleApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ThirdpresenceAdSDKSampleApp/ThirdpresenceAdSDKSampleApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;

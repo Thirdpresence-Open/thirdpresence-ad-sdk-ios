@@ -7,7 +7,12 @@
 //
 
 #import "TPRRewardedVideoCustomEvent.h"
+
+#if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
 #import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
+#else
+#import "TPRVideoInterstitial.h"
+#endif
 
 @interface TPRRewardedVideoCustomEvent () <TPRVideoAdDelegate>
 - (void) loadAd;
