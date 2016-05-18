@@ -1,14 +1,14 @@
 Pod::Spec.new do |s|
   s.name             = "thirdpresence-ad-sdk-ios"
-  s.version          = "1.1.0"
+  s.version          = "1.1.1"
   s.summary          = "Thirdpresence Ad SDK for iOS apps"
   s.description      = <<-DESC
     Thirdpresence Ad SDK is a VPAID compatible ad SDK for apps. 
                        DESC
-  s.homepage         = "https://github.com/Thirdpresence/thirdpresence-ad-sdk-ios"
+  s.homepage         = "https://github.com/Thirdpresence-Open/thirdpresence-ad-sdk-ios"
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
   s.author           = { "okkonen" => "marko.okkonen@thirdpresence.com" }
-  s.source           = { :git => "https://github.com/Thirdpresence/thirdpresence-ad-sdk-ios.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/Thirdpresence-Open/thirdpresence-ad-sdk-ios.git", :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.platform         = :ios, '8.0'
   s.frameworks       = 'UIKit'
