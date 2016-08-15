@@ -1,0 +1,13 @@
+project.xcworkspace/
+xcuserdata/
+
+ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Assets/Plugins/iOS/
+ThirdpresenceUnityPlugin/unity-package/export/
+ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Assets/**/*.meta
+ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Temp
+ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Library
+ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Obj
+log.txt
+*.unityproj
+
+
