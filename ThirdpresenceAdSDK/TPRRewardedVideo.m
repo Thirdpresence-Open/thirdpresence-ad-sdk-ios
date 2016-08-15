@@ -16,6 +16,8 @@
                              params:(NSDictionary *)playerParams
                             timeout:(NSTimeInterval)secs {
     
+    TPRLog(@"[TPR] Initialising rewarded video");
+    
     self = [super initWithPlacementType:TPR_PLACEMENT_TYPE_REWARDED_VIDEO
                             environment:environment
                                  params:playerParams

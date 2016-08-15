@@ -28,7 +28,7 @@
 
 @implementation TPRVideoPlayerHandler
 
-NSString *const PLAYER_URL_BASE = @"http://d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&customization=%@";
+NSString *const PLAYER_URL_BASE = @"http://d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&customization=%@";
 
 NSString *const TPR_PLAYER_NOTIFICATION = @"TPRPlayerNotification";
 NSString *const PLAYER_EVENT_CUSTOM_SCHEME = @"thirdpresence";
@@ -111,6 +111,19 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         return;
     }
     
+    NSBundle* libBundle = [NSBundle bundleWithIdentifier:@"com.thirdpresence.ThirdpresenceAdSDK"];
+    
+    NSString *versionString = [libBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *extSdkName = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
+    if (extSdkName) {
+        NSString *extSdkVer = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
+        if (!extSdkVer) {
+            extSdkVer = @"";
+        }
+        versionString = [NSString stringWithFormat:@"%@,%@,%@", versionString, extSdkName, extSdkVer];
+
+    }
+    
     NSString *customization = nil;
     NSMutableDictionary *params;
     
@@ -134,10 +147,10 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         }
     }
     
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *appName = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    NSBundle *appBundle = [NSBundle mainBundle];
+    NSString *appName = [appBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     if (!appName) {
-        appName = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
+        appName = [appBundle objectForInfoDictionaryKey:@"CFBundleName"];
     }
     
     if (appName) {
@@ -146,7 +159,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         }
     
         if (![params objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_VERSION]) {
-            NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+            NSString *version = [appBundle objectForInfoDictionaryKey:@"CFBundleVersion"];
             if (version) {
                 [params setValue:version forKey:TPR_PLAYER_PARAMETER_KEY_APP_VERSION];
             }
@@ -177,6 +190,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
                      env,
                      account,
                      placementId,
+                     versionString,
                      customization ? [self encodeUrlString:customization] : @""
                      ];
     
@@ -259,8 +273,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 - (void)removePlayer {
     _playerLoaded = NO;
     
-    [[NSNotificationCenter defaultCenter] removeObserver:UIApplicationWillResignActiveNotification];
-    [[NSNotificationCenter defaultCenter] removeObserver:UIApplicationDidBecomeActiveNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     _webViewController.delegate = nil;
     _webViewController = nil;

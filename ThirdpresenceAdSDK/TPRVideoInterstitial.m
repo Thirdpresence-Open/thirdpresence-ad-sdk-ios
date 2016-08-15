@@ -45,6 +45,8 @@
                              params:(NSDictionary *)playerParams
                             timeout:(NSTimeInterval)secs {
     
+    TPRLog(@"[TPR] Initialising interstitial");
+
     self = [self initWithPlacementType:TPR_PLACEMENT_TYPE_INTERSTITIAL
                            environment:environment
                                 params:playerParams
@@ -57,9 +59,12 @@
 }
 
 - (void)loadAd {
+    TPRLog(@"[TPR] Loading an ad");
+
     if (_playerHandler) {
         [_playerHandler loadAd];
     } else {
+        TPRLog(@"[TPR] Failure: player not allocated");
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_INVALID_STATE
                                          userInfo:[NSDictionary dictionaryWithObject:@"Player not initialized" forKey:NSLocalizedDescriptionKey]];
@@ -68,9 +73,12 @@
 }
 
 - (void)displayAd {
+    TPRLog(@"[TPR] Trying to display an ad");
+
     if (_playerHandler) {
         [_playerHandler displayAd];
     } else {
+        TPRLog(@"[TPR] Failure: player not allocated");
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_INVALID_STATE
                                          userInfo:[NSDictionary dictionaryWithObject:@"Player not initialized" forKey:NSLocalizedDescriptionKey]];
@@ -79,11 +87,15 @@
 }
 
 - (void)reset {
+    TPRLog(@"[TPR] Resetting the player");
+
     self.ready = NO;
     if (_playerHandler) {
         [_playerHandler resetState];
         [_playerHandler loadPlayer];
     } else {
+        TPRLog(@"[TPR] Failure: player not allocated");
+
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_INVALID_STATE
                                          userInfo:[NSDictionary dictionaryWithObject:@"Player not initialized" forKey:NSLocalizedDescriptionKey]];
@@ -92,13 +104,16 @@
 }
 
 - (void)removePlayer {
-    [[NSNotificationCenter defaultCenter] removeObserver:TPR_PLAYER_NOTIFICATION];
+    TPRLog(@"[TPR] Removing the player");
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.ready = NO;
     [_playerHandler resetState];
     _playerHandler = nil;
 }
 
 - (void)handleNotification:(NSNotification*)note {
+    TPRLog(@"[TPR] Handling an event %@", note);
     if (_delegate) {
         NSString *eventName = [note.userInfo objectForKey:TPR_EVENT_KEY_NAME];
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {

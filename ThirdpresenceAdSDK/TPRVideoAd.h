@@ -36,6 +36,8 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT;
 // Production server
 FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_PRODUCTION;
 
+// Staging server
+FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_STAGING;
 
 /**
  * Server types to be used as a value for environment key TPR_ENVIRONMENT_KEY_SERVER
@@ -77,6 +79,9 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_BUNDLE_ID;
 
 // Advertising ID (automatically determined)
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_DEVICE_ID;
+
+// External VAST tag
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_VAST_URL;
 
 /**
  * Player event
@@ -202,6 +207,9 @@ FOUNDATION_EXPORT NSString *const TPR_PLACEMENT_TYPE_REWARDED_VIDEO;
  */
 FOUNDATION_EXPORT NSString *const TPR_VALUE_TRUE;
 FOUNDATION_EXPORT NSString *const TPR_VALUE_FALSE;
+
+
+FOUNDATION_EXPORT void TPRLog(NSString *format, ...);
 
 @class TPRVideoAd;
 

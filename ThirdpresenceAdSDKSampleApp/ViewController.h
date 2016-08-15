@@ -9,17 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
 
-@interface ViewController : UIViewController <TPRVideoAdDelegate>
+@interface ViewController : UIViewController <TPRVideoAdDelegate, UITextFieldDelegate>
 
 // Button outlets
 @property (weak) IBOutlet UIButton *initializeButton;
 @property (weak) IBOutlet UIButton *loadButton;
 @property (weak) IBOutlet UIButton *displayButton;
-@property (weak) IBOutlet UIButton *resetButton;
-@property (weak) IBOutlet UIButton *removeButton;
+@property (weak) IBOutlet UITextField *accountField;
+@property (weak) IBOutlet UITextField *placementField;
+@property (weak) IBOutlet UITextField *vastField;
 
-// UI message queue
+// UI alert message queue
 @property (strong) NSMutableArray *pendingMessages;
+@property (assign) BOOL showingAlert;
 
 // Thirdpresence interstitial ad
 @property (strong) TPRVideoInterstitial *interstitial;

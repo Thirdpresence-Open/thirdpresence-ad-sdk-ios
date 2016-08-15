@@ -119,7 +119,7 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
             _adLoaded = YES;
             [self.delegate interstitialCustomEvent:self didLoadAd:nil];
-        } else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
             [self.delegate interstitialCustomEventDidExpire:self];
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {

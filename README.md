@@ -1,8 +1,8 @@
 # Thirdpresence Ad SDK For iOS
 
-Thirdpresence Ad SDK is based on an UIWebView and the Thirdpresence HTML5 player.  
+Thirdpresence Ad SDK is based on a WebView and the Thirdpresence HTML5 player.  
 
-It provides a VideoInterstitial ad unit implementation
+It provides implementations for an interstitial video and rewarded video ad units.
 
 ## Minimum requirements
 
@@ -11,16 +11,12 @@ It provides a VideoInterstitial ad unit implementation
 
 ## Thirdpresence AdS DK integration
 
-There are two options to integrate the SDK:
+There are two different ways to integrate the SDK with your app:
 
 1. Direct Integration
-2. Mediation with existing SDK (e.g. MoPub)
+2. Plugin for Mopub or Admob mediation (rewarded video not yet available from Admob)
 
-Available mediation adapters:
-
-- MoPub interstitial
-- MoPub rewarded video
-- Admob interstitial
+In all cases, you will need to download the appropriate SDK/plugin, add it to your app project and compile a new version of the app.
 
 ### Adding library dependencies
 
@@ -35,12 +31,18 @@ CocoaPods is a widely used dependency manager for Swift and Objective-C Cocoa pr
 It allows easily to add third-party libraries for your project. 
 See more at https://cocoapods.org/
 
-Thirdpresence libraries are available in CocoaPods with following pods. Use one of them depending if your using SDK directly or if using via mediation.
+Thirdpresence libraries are available in CocoaPods with following pods. Get the base SDK and additionally one of the mediation plugins if needed.
 
-  pod 'thirdpresence-ad-sdk-ios'
-  pod 'thirdpresence-ad-sdk-ios/ThirdpresenceMopubMediation'
-  pod 'thirdpresence-ad-sdk-ios/ThirdpresenceAdAdmobMediation'
+```
+// Base SDK
+pod 'thirdpresence-ad-sdk-ios'
 
+// Mopub mediation plugin
+pod 'thirdpresence-ad-sdk-ios/ThirdpresenceMopubMediation'
+
+// Admob mediation plugin
+pod 'thirdpresence-ad-sdk-ios/ThirdpresenceAdAdmobMediation'
+```
 
 #### Copying the source code
 
@@ -161,17 +163,17 @@ Close the ad unit and clean up:
 	self.interstitial = nil;
 ```
 
-Check out the Sample App for a reference. 
+Check out the Sample App for a complete reference. 
 
 ### Mediation
 
-Using mediation adapters do not require changes in your existing code. The mediating Ad SDK will detect the existence of a mediation adapter dynamically. Make sure that your app target embeds Thirdpresence Ad SDK and mediation adapter libraries and other requirements are met. See following instruction how to add Thirdpresence ad source to the waterfall of the ad unit.
+When using mediation adapters it does not require changes in your existing code. The mediating Ad SDK will detect the existence of a mediation adapter dynamically. Make sure that your app target embeds Thirdpresence Ad SDK and mediation adapter libraries and other requirements are met. See following instruction how to add Thirdpresence ad source to the waterfall of the ad unit.
 
 #### MoPub
 
 - Login to the MoPub console
-- Create a Fullscreen Ad or Rewarded Video Ad ad unit if not using existing one
-- Add new Custom Native Network
+- Create a Fullscreen Ad or Rewarded Video Ad ad unit or use an existing ad unit in one of your apps
+- Create a new Custom Native Network (see detailed instructions here https://dev.twitter.com/mopub/ui-setup/network-setup-custom-native)
 - Set Custom Event Class and Custom Event Class Data for the ad unit with following values:
 
 | Ad Unit | Custom Event Class | Custom Event Class Data |
@@ -179,12 +181,14 @@ Using mediation adapters do not require changes in your existing code. The media
 | Fullscreen Ad | TPRInterstitialCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME"} |
 | Rewarded Video | TPRRewardedVideoCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME", "rewardtitle":"REPLACE_ME", "rewardamount":"REPLACE_ME"}  |
 
-**Replace REPLACE_ME placeholders with actual values!**
+**Replace all the REPLACE_ME placeholders with actual values!**
 
-- Go to Segments
-- Select the segment where you want to enable the network
-- Enable the network you just created and set the CPM.
-- Test the integration with the MoPub sample app
+The Custom Event Method field should be left blank.
+
+- Go to the Segments tab on the Mopub console
+- Select the segment where you want to enable the Thirdpresence custom native network
+- Enable the network for this segment and set the CPM
+- Test the integration with the MoPub sample app, remember to include the Thirdpresence plugin in your project
 
 #### Admob
 
@@ -206,3 +210,154 @@ Using mediation adapters do not require changes in your existing code. The media
 - Click Continue button
 - Give eCPM for the Thirdpresence ad network
 - Save changes and the integration is ready
+
+
+### Unity plugin
+
+The Thirdpresence Ad SDK Unity plugin is compatible with Unity 5 or newer.
+
+Get the Thirdpresence Ad SDK Unity plugin and import to your Unity project. 
+
+The plugin can be downloaded from:
+http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/ios_1.1.2/thirdpresence-ad-sdk-ios.unitypackage
+
+In order to start getting ads the ThirdpresenceAdsAndroid singleton object needs to be initialised in an Unity script:
+``` 
+#if UNITY_IPHONE
+using TPR = ThirdpresenceAdsIOS;
+#endif
+
+```
+The plugin supports interstitial and rewarded video ad units. 
+
+An example for loading and displaying an interstitial ad:
+``` 
+// Initialise ad unit as soon as the app is ready to load an ad
+private void initInterstitial() {
+
+    // Subscribe to ad events and implement needed event handler methods.
+    // See a list below for a full list of available events.
+    TPR.OnThirdpresenceInterstitialLoaded -= InterstitialLoaded;
+    TPR.OnThirdpresenceInterstitialLoaded += InterstitialLoaded;
+    TPR.OnThirdpresenceInterstitialFailed -= InterstitialFailed;
+    TPR.OnThirdpresenceInterstitialFailed += InterstitialFailed;
+
+    // Create dictionary objects that hold the data needed to initialise the ad unit and the player.
+    Dictionary<string, string> environment = new Dictionary<string, string>();
+    environment.Add ("account", "REPLACE_ME"); // For the testing purposes use account name "sdk-demo" 
+    environment.Add ("placementid", "REPLACE_ME"); // For the testing purposes use placement id "sa7nvltbrn". 
+    environment.Add ("sdk-name", "Unity" + Application.platform);
+    environment.Add ("sdk-version", Application.unityVersion);
+
+    Dictionary<string, string> playerParams = new Dictionary<string, string>();
+    playerParams.Add ("appname", Application.productName);
+    playerParams.Add ("appversion", Application.version);
+    playerParams.Add ("appstoreurl", "REPLACEME");
+    playerParams.Add ("bundleid", Application.bundleIdentifier);
+
+    long timeoutMs = 10000;
+
+    // Initialise the interstitial
+    TPR.initInterstitial (environment, playerParams, timeoutMs);
+}	
+
+// When an ad is loaded the event handler method is called
+private void InterstitialLoaded() {
+    adLoaded = true;
+}
+
+// When an ad load is failed the error handler method is called
+private void InterstitialFailed(int errorCode, string errorText) {
+    // failed to load interstitial ad
+}
+
+// Call showInterstitial when the ad shall be displayed 
+private void showAd() {
+    if (adLoaded) {
+        TPR.showInterstitial ();
+    }
+}
+```
+Following events are available for the interstitial ad unit:
+
+| Event | Description | 
+| --- | --- |
+| OnThirdpresenceInterstitialLoaded | Interstitial ad has been loaded |
+| OnThirdpresenceInterstitialShown | Interstitial ad has been displayed |
+| OnThirdpresenceInterstitialDismissed | Interstitial ad has been dismissed |
+| OnThirdpresenceInterstitialFailed | Interstitial ad has failed to load |
+| OnThirdpresenceInterstitialClicked | Interstitial ad has been clicked |
+
+An example for loading and displaying a rewarded video ad:
+``` 
+// Initialise ad unit as soon as the app is ready to load an ad
+private void initRewardedVideo() {
+
+    // Subscribe to ad events and implement needed event handler methods.
+    // See a list below for a full list of available events.
+    TPR.OnThirdpresenceRewardedVideoLoaded -= RewardedVideoLoaded;
+    TPR.OnThirdpresenceRewardedVideoLoaded += RewardedVideoLoaded;
+    TPR.OnThirdpresenceRewardedVideoFailed -= RewardedVideoFailed;
+    TPR.OnThirdpresenceRewardedVideoFailed += RewardedVideoFailed;
+    TPR.OnThirdpresenceRewardedVideoCompleted -= RewardedVideoCompleted;
+    TPR.OnThirdpresenceRewardedVideoCompleted += RewardedVideoCompleted;
+
+    // Create dictionary objects that hold the data needed to initialise the ad unit and the player.
+    Dictionary<string, string> environment = new Dictionary<string, string>();
+    environment.Add ("account", "REPLACE_ME"); // For the testing purposes use account name "sdk-demo" 
+    environment.Add ("placementid", "REPLACE_ME"); // For the testing purposes use placement id "sa7nvltbrn". 
+    environment.Add ("sdk-name", "Unity" + Application.platform);
+    environment.Add ("sdk-version", Application.unityVersion);
+
+    // rewardtitle can be used as a virtual currency name. rewardamount is the amount of currency gained.
+    environment.Add ("rewardtitle", "my-money");
+    environment.Add ("rewardamount", "100");
+
+    Dictionary<string, string> playerParams = new Dictionary<string, string>();
+    playerParams.Add ("appname", Application.productName);
+    playerParams.Add ("appversion", Application.version);
+    playerParams.Add ("appstoreurl", "REPLACEME");
+    playerParams.Add ("bundleid", Application.bundleIdentifier);
+
+    long timeoutMs = 10000;
+
+    // Initialise the interstitial
+    TPR.initInterstitial (environment, playerParams, timeoutMs);
+}	
+
+// When an ad is loaded the event handler method is called
+private void RewardedVideoLoaded() {
+    adLoaded = true;
+}
+
+// When the ad load is failed the error handler method is called
+private void RewardedVideoFailed(int errorCode, string errorText) {
+    // failed to load interstitial ad
+}
+
+// When the user has watched the video the completed handler is called
+private void RewardedVideoCompleted(string rewardTitle, int rewardAmount) {
+    // User has earned the reward
+}
+
+// Call TPR.showRewardedVideo when the ad shall be displayed 
+private void showAd() {
+    if (TPR.RewardedVideoLoaded) {
+        TPR.showRewardedVideo ();
+    }
+}
+```
+Following events are available for the rewarded video ad unit:
+
+| Event | Description | 
+| --- | --- |
+| OnThirdpresenceRewardedVideoLoaded | Rewarded video ad has been loaded |
+| OnThirdpresenceRewardedVideoShown | Rewarded video ad has been displayed |
+| OnThirdpresenceRewardedVideoDismissed | Rewarded video ad has been dismissed |
+| OnThirdpresenceRewardedVideoFailed | Rewarded video ad has failed to load |
+| OnThirdpresenceRewardedVideoClicked | Rewarded video ad has been clicked |
+| OnThirdpresenceRewardedVideoCompleted | Rewarded video ad has been completed  |
+| OnThirdpresenceRewardedVideoAdLeftApplication | Rewarded video ad has opened an another app |
+
+
+

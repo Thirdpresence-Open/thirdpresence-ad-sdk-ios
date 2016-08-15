@@ -34,6 +34,7 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
     [self.webView stopLoading];
     self.webView.delegate = nil;
     self.delegate = nil;
+    _webView = nil;
 }
 
 - (void)callJSFunction:(NSString*)function {
@@ -44,6 +45,9 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
 - (void)loadUrl:(NSString*)urlString {
     NSURL *url = [NSURL URLWithString:urlString];
     _request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:REQUEST_TIMEOUT];
+    
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:_request];
+
     [self.webView loadRequest:self.request];
 }
 
@@ -52,23 +56,6 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
 }
 
 #pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    _webView = nil;
-    [self.webView stopLoading];
-    self.webView.delegate = nil;
-    self.delegate = nil;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    [self.delegate webViewControllerDidReceiveMemoryWarning:self];
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

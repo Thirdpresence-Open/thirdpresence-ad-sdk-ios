@@ -141,7 +141,7 @@
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
             _adLoaded = YES;
             [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
-        } else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
             NSString* desc = [event objectForKey:TPR_EVENT_KEY_ARG1];
             NSDictionary* info = nil;
             if (desc) {

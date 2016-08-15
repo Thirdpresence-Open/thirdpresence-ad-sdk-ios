@@ -128,7 +128,7 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
             _adLoaded = YES;
             [self.delegate customEventInterstitialDidReceiveAd:self];
-        } else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
             NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                                  code:TPR_ERROR_NO_FILL
                                              userInfo:[NSDictionary dictionaryWithObject:@"Failed to display an ad" forKey:NSLocalizedDescriptionKey]];

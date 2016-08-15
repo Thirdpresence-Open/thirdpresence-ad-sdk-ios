@@ -28,9 +28,12 @@ NSString *const TPR_PLAYER_PARAMETER_KEY_AD_PLACEMENT = @"adplacement";
 NSString *const TPR_PLAYER_PARAMETER_KEY_PUBLISHER = @"publisher";
 NSString *const TPR_PLAYER_PARAMETER_KEY_BUNDLE_ID = @"bundleid";
 NSString *const TPR_PLAYER_PARAMETER_KEY_DEVICE_ID = @"deviceid";
+NSString *const TPR_PLAYER_PARAMETER_KEY_VAST_URL = @"vast_url";
 
 // Server types
 NSString *const TPR_SERVER_TYPE_PRODUCTION = @"production";
+NSString *const TPR_SERVER_TYPE_STAGING = @"staging";
+
 
 // Error domain
 NSString *const TPR_AD_SDK_ERROR_DOMAIN = @"com.thirdpresence.adsdk.ErrorDomain";
@@ -84,6 +87,15 @@ NSString *const TPR_PLACEMENT_TYPE_REWARDED_VIDEO = @"rewardedvideo";
 NSString *const TPR_VALUE_TRUE = @"true";
 NSString *const TPR_VALUE_FALSE = @"false";
 
+void TPRLog(NSString *format, ...) {
+#ifdef DEBUG
+    va_list arguments;
+    va_start(arguments, format);
+    NSLogv(format, arguments);
+    va_end(arguments);
+#endif
+}
+
 @implementation TPRVideoAd
 
 - (instancetype)initWithPlacementType:(TPRPlacementType*)placementType {
@@ -93,6 +105,7 @@ NSString *const TPR_VALUE_FALSE = @"false";
 }
 
 - (void)dealloc {
+    _placementType = nil;
     _ready = NO;
 }
 
