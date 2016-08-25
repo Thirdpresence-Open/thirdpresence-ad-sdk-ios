@@ -111,6 +111,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_notificationObserver];
     self.notificationObserver = nil;
     self.ready = NO;
+    [_playerHandler resetState];
     [_playerHandler removePlayer];
     _playerHandler = nil;
 }

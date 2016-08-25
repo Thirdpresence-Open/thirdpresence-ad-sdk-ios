@@ -204,7 +204,7 @@ FOUNDATION_EXPORT NSInteger const TPR_ERROR_AD_NOT_READY;
 // Method called on invalid state
 FOUNDATION_EXPORT NSInteger const TPR_ERROR_INVALID_STATE;
 
-// Method called when getting low memory warning
+// Low memory warning
 FOUNDATION_EXPORT NSInteger const TPR_ERROR_LOW_MEMORY;
 
 // Default value for player timeouts (10s)
