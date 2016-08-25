@@ -33,6 +33,15 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
     
     _placementField.text = DEFAULT_PLACEMENT_ID;
     _placementField.delegate = self;
+    
+    // Requests user's authorization to use location services
+    // This is required to get mored targeted ads and therefore better revenue
+    self.locationManager = [[CLLocationManager alloc] init];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -84,11 +93,21 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
                                         TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];
 
-    // Pass information about the application in playerParams dictionary.
+
+    // Pass information about the application and user in playerParams dictionary.
+    
+    // In order to get more targeted ads user gender and year of birth are recommended.
+    // You can get the data, for example, from Facebook Graph API if you have integrated with Facekbook.
+    // https://developers.facebook.com/docs/graph-api/reference/v2.6/user
+    NSString *userGender = @"male";
+    NSString *userYearOfBirth = @"1970";
+    
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          APP_NAME, TPR_PLAYER_PARAMETER_KEY_APP_NAME,
                                          APP_VERSION,TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
                                          APP_STORE_URL, TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
+                                         userGender, TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
+                                         userYearOfBirth, TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];
 
     if (vastTag.length > 0) {
@@ -108,8 +127,6 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
  */
 - (void) videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
     if (videoAd == self.interstitial) {
-        NSLog(@"Player failure: %@", error.localizedDescription);
-        
         [self queueMessage:error.localizedDescription];
     }
 }
@@ -122,9 +139,6 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
  */
 - (void) videoAd:(TPRVideoAd*)videoAd eventOccured:(TPRPlayerEvent*)event {
     if (videoAd == self.interstitial) {
-        
-        NSLog(@"Player event: %@", event);
-        
         NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
             [self queueMessage:@"The player is ready to load an ad"];
@@ -133,7 +147,7 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
             [self queueMessage:@"An ad is ready for display"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
             _adLoaded = NO;
-            [self queueMessage:@"Player failed to display the ad"];
+            [self queueMessage:[NSString stringWithFormat:@"Failure: %@", [event objectForKey:TPR_EVENT_KEY_ARG1]]];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
             _adLoaded = NO;
             [self.interstitial reset];
@@ -207,5 +221,6 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
     }
     [self showNextMessage];
 }
+
 
 @end

@@ -49,8 +49,10 @@
  *  Executes a JavaScript function in the loaded web page
  *
  *  @param function to be execeuted
+ *  @param arg1 first argument for the function
+ *  @param arg2 second argument for the function
  */
-- (void)callJSFunction:(NSString*)function;
+- (void)callJSFunction:(NSString*)function arg1:(NSString*)arg1 arg2:(NSString*)arg2;
 
 /**
  *  Stops loading the page

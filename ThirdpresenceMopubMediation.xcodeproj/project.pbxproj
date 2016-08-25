@@ -14,6 +14,8 @@
 		FB5801AE1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5801AC1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m */; };
 		FB5DD0311CEA0418008C3A34 /* ThirdpresenceAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5DD0301CEA0418008C3A34 /* ThirdpresenceAdSDK.framework */; };
 		FB5DD3141CEB0499008C3A34 /* ThirdpresenceMopubMediation-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5DD3131CEB0499008C3A34 /* ThirdpresenceMopubMediation-Info.plist */; };
+		FBC5A0BC1D6C7A6E002FBE23 /* TPRConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC5A0BA1D6C7A6E002FBE23 /* TPRConstants.h */; };
+		FBC5A0BD1D6C7A6E002FBE23 /* TPRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC5A0BB1D6C7A6E002FBE23 /* TPRConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		FB5801AC1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRRewardedVideoCustomEvent.m; sourceTree = "<group>"; };
 		FB5DD0301CEA0418008C3A34 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ThirdpresenceAdSDK.framework; path = "../../../Library/Developer/Xcode/DerivedData/MoPubSampleApp-cfffxpwjizqjyscgothkxltpqlqx/Build/Products/Debug-iphoneos/ThirdpresenceAdSDK.framework"; sourceTree = "<group>"; };
 		FB5DD3131CEB0499008C3A34 /* ThirdpresenceMopubMediation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ThirdpresenceMopubMediation-Info.plist"; sourceTree = "<group>"; };
+		FBC5A0BA1D6C7A6E002FBE23 /* TPRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRConstants.h; sourceTree = "<group>"; };
+		FBC5A0BB1D6C7A6E002FBE23 /* TPRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 				FB58019F1CD24156004B9D5E /* ThirdpresenceMopubMediation.h */,
 				FB5801AB1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.h */,
 				FB5801AC1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m */,
+				FBC5A0BA1D6C7A6E002FBE23 /* TPRConstants.h */,
+				FBC5A0BB1D6C7A6E002FBE23 /* TPRConstants.m */,
 			);
 			path = ThirdpresenceMopubMediation;
 			sourceTree = "<group>";
@@ -87,6 +93,7 @@
 				FB5801A01CD24156004B9D5E /* ThirdpresenceMopubMediation.h in Headers */,
 				FB5801A91CD24257004B9D5E /* TPRInterstitialCustomEvent.h in Headers */,
 				FB5801AD1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.h in Headers */,
+				FBC5A0BC1D6C7A6E002FBE23 /* TPRConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB5801AE1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m in Sources */,
+				FBC5A0BD1D6C7A6E002FBE23 /* TPRConstants.m in Sources */,
 				FB5801AA1CD24257004B9D5E /* TPRInterstitialCustomEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

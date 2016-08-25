@@ -16,6 +16,7 @@ NSString *const TPR_ENVIRONMENT_KEY_ACCOUNT = @"account";
 NSString *const TPR_ENVIRONMENT_KEY_PLACEMENT_ID = @"playerid";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE = @"forcelandscape";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT = @"forceportrait";
+NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP = @"forcehttps";
 
 // Player parameter keys
 NSString *const TPR_PLAYER_PARAMETER_KEY_APP_NAME = @"appname";
@@ -29,11 +30,17 @@ NSString *const TPR_PLAYER_PARAMETER_KEY_PUBLISHER = @"publisher";
 NSString *const TPR_PLAYER_PARAMETER_KEY_BUNDLE_ID = @"bundleid";
 NSString *const TPR_PLAYER_PARAMETER_KEY_DEVICE_ID = @"deviceid";
 NSString *const TPR_PLAYER_PARAMETER_KEY_VAST_URL = @"vast_url";
+NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_LAT = @"geo_lat";
+NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_LON = @"geo_lon";
+NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_COUNTRY = @"country";
+NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_REGION = @"region";
+NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_CITY = @"city";
+NSString *const TPR_PLAYER_PARAMETER_KEY_USER_GENDER = @"gender";
+NSString *const TPR_PLAYER_PARAMETER_KEY_USER_YOB = @"yob";
 
 // Server types
 NSString *const TPR_SERVER_TYPE_PRODUCTION = @"production";
 NSString *const TPR_SERVER_TYPE_STAGING = @"staging";
-
 
 // Error domain
 NSString *const TPR_AD_SDK_ERROR_DOMAIN = @"com.thirdpresence.adsdk.ErrorDomain";

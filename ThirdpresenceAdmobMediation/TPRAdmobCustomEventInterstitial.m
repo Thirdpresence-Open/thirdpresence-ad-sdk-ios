@@ -19,8 +19,6 @@
 
 NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT = @"account";
 NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
-NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_LANDSCAPE = @"forcelandscape";
-NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
 
 @interface TPRAdmobCustomEventInterstitial () <TPRVideoAdDelegate, GADCustomEventInterstitial>
 
@@ -83,6 +81,11 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    }
+    
+    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+    if (val) {
+        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     }
     
     NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];

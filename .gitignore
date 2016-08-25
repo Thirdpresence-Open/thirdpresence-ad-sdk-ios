@@ -1,5 +1,6 @@
 project.xcworkspace/
 xcuserdata/
+build/
 
 ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Assets/Plugins/iOS/
 ThirdpresenceUnityPlugin/unity-package/export/

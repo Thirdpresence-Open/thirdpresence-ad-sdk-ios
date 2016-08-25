@@ -12,6 +12,8 @@
 
 @interface TPRVideoInterstitial ()
 - (void)handleNotification:(NSNotification*)note;
+
+@property (strong) id <NSObject> notificationObserver;
 @end
 
 @implementation TPRVideoInterstitial
@@ -22,12 +24,12 @@
                               timeout:(NSTimeInterval)secs {
     self = [super initWithPlacementType:type];
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:TPR_PLAYER_NOTIFICATION
-                                                      object:_playerHandler
-                                                       queue: [NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      [self handleNotification:note];
-                                                  }];
+    _notificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:TPR_PLAYER_NOTIFICATION
+                                                                              object:_playerHandler
+                                                                               queue: [NSOperationQueue mainQueue]
+                                                                          usingBlock:^(NSNotification *note) {
+                                                                              [self handleNotification:note];
+                                                                          }];
     
     _playerHandler = [[TPRVideoPlayerHandler alloc] initWithEnvironment:environment params:playerParams];
     
@@ -106,9 +108,10 @@
 - (void)removePlayer {
     TPRLog(@"[TPR] Removing the player");
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:_notificationObserver];
+    self.notificationObserver = nil;
     self.ready = NO;
-    [_playerHandler resetState];
+    [_playerHandler removePlayer];
     _playerHandler = nil;
 }
 

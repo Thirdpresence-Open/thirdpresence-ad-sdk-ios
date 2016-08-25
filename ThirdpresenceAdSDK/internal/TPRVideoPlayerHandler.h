@@ -64,7 +64,10 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_NOTIFICATION;
 
 @property (strong, readonly) TPRWebViewController* webViewController;
 
+@property (readonly) BOOL playerLoading;
 @property (readonly) BOOL playerLoaded;
+@property (readonly) BOOL playerLocationUpdatePending;
+
 @property (readonly) BOOL adLoadPending;
 @property (readonly) BOOL adLoading;
 @property (readonly) BOOL adLoaded;
@@ -81,6 +84,7 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_NOTIFICATION;
 @property (assign) NSTimeInterval playerTimeout;
 @property (assign) NSTimeInterval loadAdTimeout;
 
+@property (readonly) NSDate* locationTimeStamp;
 
 // Not available
 - (instancetype)init NS_UNAVAILABLE;

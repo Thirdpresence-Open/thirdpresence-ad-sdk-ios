@@ -9,7 +9,7 @@
 #import "TPRVideoPlayerHandler.h"
 #import "ThirdpresenceAdSDK.h"
 #import <AdSupport/ASIdentifierManager.h>
-
+#import <CoreLocation/CLLocationManager.h>
 
 @interface TPRVideoPlayerHandler ()
 
@@ -24,15 +24,23 @@
 - (void)sendEvent:(TPRPlayerEvent*)event;
 - (void)checkOrientation;
 - (NSString*)getAdvertisingID;
+- (void)initLocationServices;
+- (CLLocation*)getLastKnownLocation;
+- (void)updateLocationToPlayer;
+
+@property (strong, readonly) CLLocationManager* locationManager;
 @end
 
 @implementation TPRVideoPlayerHandler
 
-NSString *const PLAYER_URL_BASE = @"http://d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&customization=%@";
+NSString *const PLAYER_URL_BASE = @"%@//d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&customization=%@";
 
 NSString *const TPR_PLAYER_NOTIFICATION = @"TPRPlayerNotification";
 NSString *const PLAYER_EVENT_CUSTOM_SCHEME = @"thirdpresence";
 NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
+
+NSInteger const LOCATION_DISTANCE_FILTER = 1000;
+NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
 
 - (instancetype)initWithEnvironment:(NSDictionary *)environment
                              params:(NSDictionary *)playerParams {
@@ -57,6 +65,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
     _webViewController = [[TPRWebViewController alloc] init];
     _webViewController.delegate = self;
 
+    [self initLocationServices];
     [self checkOrientation];
     
     _adPlaying = NO;
@@ -80,7 +89,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         _adPlayPending = NO;
         UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         if (root.presentedViewController == _webViewController) {
-            [_webViewController callJSFunction:@"startAd"];
+            [_webViewController callJSFunction:@"startAd" arg1:nil arg2:nil];
         }
     }
 }
@@ -170,6 +179,18 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         }
     }
     
+    CLLocation* location = [self getLastKnownLocation];
+    if (location) {
+        CLLocationDegrees latitude = location.coordinate.latitude;
+        CLLocationDegrees longitude = location.coordinate.longitude;
+        TPRLog(@"[TPR] Location available %f,%f", latitude, longitude);
+        
+        [params setValue:[NSString stringWithFormat:@"%f", latitude] forKey:TPR_PLAYER_PARAMETER_KEY_GEO_LAT];
+        [params setValue:[NSString stringWithFormat:@"%f", longitude] forKey:TPR_PLAYER_PARAMETER_KEY_GEO_LON];
+    } else {
+        TPRLog(@"[TPR] Location data not available");
+    }
+    
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
                                                        options:0
@@ -185,7 +206,11 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
     
     customization = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
+    NSString *useHTTPS = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+    NSString *protocol = [useHTTPS isEqualToString:TPR_VALUE_TRUE] ? @"https:" : @"http:";
+    
     NSString* url = [NSString stringWithFormat:PLAYER_URL_BASE,
+                     protocol,
                      env,
                      env,
                      account,
@@ -215,7 +240,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
         if (!_adLoading) {
             _adLoading = YES;
             _loadAdTimeoutTimer = [self startTimer:_loadAdTimeout target:@selector(timeoutOccuredOn:)];
-            [_webViewController callJSFunction:@"loadAd"];
+            [_webViewController callJSFunction:@"loadAd" arg1:nil arg2:nil];
         }
     } else {
         _adLoadPending = YES;
@@ -243,7 +268,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
             _webViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
             [root presentViewController:_webViewController animated:YES completion: nil];
             _adPlaying = YES;
-            [_webViewController callJSFunction:@"startAd"];
+            [_webViewController callJSFunction:@"startAd" arg1:nil arg2:nil];
         } else {
             NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                                  code:TPR_ERROR_INVALID_STATE
@@ -271,12 +296,18 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 }
 
 - (void)removePlayer {
+    _playerLoading = NO;
     _playerLoaded = NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     _webViewController.delegate = nil;
     _webViewController = nil;
+    
+    [_locationManager  stopMonitoringSignificantLocationChanges];
+    _locationManager.delegate = nil;
+    _locationManager = nil;
+    
     _playerParams = nil;
     _environment = nil;
 }
@@ -296,10 +327,6 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 }
 
 - (void)webViewControllerDidReceiveMemoryWarning:(TPRWebViewController*)webViewController {
-    NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
-                                         code:TPR_ERROR_LOW_MEMORY
-                                     userInfo:[NSDictionary dictionaryWithObject:@"Low memory warning received" forKey:NSLocalizedDescriptionKey]];
-    [self sendEvent:TPR_EVENT_NAME_PLAYER_ERROR arg1:error arg2:nil arg3:nil];
 }
 
 - (void)webViewControllerDidStartLoad:(TPRWebViewController*)webViewController  {
@@ -311,6 +338,7 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 - (void)webViewController:(TPRWebViewController*)webViewController
      didFailLoadWithError:(NSError*)error {
     if (!_playerLoaded) {
+        _playerLoading = NO;
         NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_NETWORK_FAILURE
                                          userInfo:[NSDictionary dictionaryWithObject:@"Network failure while loading the player" forKey:NSLocalizedDescriptionKey]];
@@ -341,6 +369,28 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     return NO;
 }
 
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation* location = [locations lastObject];
+    NSDate* eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (howRecent < LOCATION_EXPIRATION_LIMIT) {
+        TPRLog(@"Stop updating location");
+        [_locationManager stopUpdatingLocation];
+    }
+    
+    if (_locationTimeStamp == nil || [_locationTimeStamp compare:eventDate] == NSOrderedAscending) {
+        TPRLog(@"[TPR] Location updated %f,%f", location.coordinate.latitude, location.coordinate.longitude);
+        if (_playerLoading) {
+            _playerLocationUpdatePending = YES;
+        }
+        else if (_playerLoaded) {
+            [self updateLocationToPlayer];
+        }
+    }
+}
+
 #pragma mark - PrivateMethods
 
 - (void)openURL:(NSURL*)url {
@@ -353,9 +403,13 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 - (void)handlePlayerEvent:(TPRPlayerEvent*)event {
     NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
     if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
+        _playerLoading = NO;
         _playerLoaded = YES;
         [self cancelTimer:_playerTimeoutTimer];
         _playerTimeoutTimer = nil;
+        if (_playerLocationUpdatePending) {
+            [self updateLocationToPlayer];
+        }
         if (_adLoadPending) {
             [self loadAd];
         }
@@ -453,6 +507,45 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     value = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if ([value isEqualToString:TPR_VALUE_TRUE]) {
         _webViewController.orientationMask = UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+- (void)initLocationServices {
+    if ([CLLocationManager class] && [CLLocationManager authorizationStatus] >= kCLAuthorizationStatusAuthorizedAlways) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = (TPRVideoPlayerHandler<CLLocationManagerDelegate>*)self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+        _locationManager.distanceFilter = LOCATION_DISTANCE_FILTER;
+        CLLocation* location = [self getLastKnownLocation];
+        NSDate *expiration = [NSDate dateWithTimeIntervalSinceNow:-LOCATION_EXPIRATION_LIMIT];
+        if (location == nil || [location.timestamp compare:expiration] == NSOrderedAscending) {
+            // Start location updates if most recent update older than the expiration limit
+            TPRLog(@"Start to updating location");
+            [_locationManager startUpdatingLocation];
+        }
+    }
+}
+
+- (CLLocation*)getLastKnownLocation {
+    if ([CLLocationManager class]) {
+        CLLocation* lastKnownLocation = nil;
+        if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] >= kCLAuthorizationStatusAuthorizedAlways) {
+            lastKnownLocation = [_locationManager location];
+            _locationTimeStamp = lastKnownLocation.timestamp;
+        }
+        return lastKnownLocation;
+    }
+    return nil;
+}
+
+- (void)updateLocationToPlayer {
+    if ([CLLocationManager class]) {
+        CLLocation* location = [self getLastKnownLocation];
+        if (location) {
+            [_webViewController callJSFunction:@"updateLocation"
+                                          arg1:[NSString stringWithFormat:@"%f", location.coordinate.latitude]
+                                          arg2:[NSString stringWithFormat:@"%f", location.coordinate.longitude]];
+        }
     }
 }
 

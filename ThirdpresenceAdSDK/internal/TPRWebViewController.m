@@ -37,8 +37,8 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
     _webView = nil;
 }
 
-- (void)callJSFunction:(NSString*)function {
-    NSString* functiontring = [NSString stringWithFormat:@"javascript:%@()", function];
+- (void)callJSFunction:(NSString*)function arg1:(NSString*)arg1 arg2:(NSString*)arg2 {
+    NSString* functiontring = [NSString stringWithFormat:@"javascript:%@(%@,%@)", function, arg1, arg2];
     [self.webView stringByEvaluatingJavaScriptFromString:functiontring];
     
 }

@@ -13,9 +13,9 @@
 		FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978E71CC7969000F446A1 /* Main.storyboard */; };
 		FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EA1CC7969000F446A1 /* Assets.xcassets */; };
 		FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */; };
-		FB5DD3191CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5DD3181CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist */; };
 		FB5DD3251CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */; };
 		FB5DD3261CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB5DD3241CEB09DA008C3A34 /* ThirdpresenceAdSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FBC5A0C01D6D67A6002FBE23 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC5A0BF1D6D67A6002FBE23 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +62,7 @@
 		FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ThirdpresenceAdSDKSampleApp.entitlements; sourceTree = "<group>"; };
 		FB5DD3181CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ThirdpresenceAdSDKSampleApp-Info.plist"; sourceTree = "<group>"; };
 		FB5DD31F1CEB09D9008C3A34 /* ThirdpresenceAdSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThirdpresenceAdSDK.xcodeproj; sourceTree = "<group>"; };
+		FBC5A0BF1D6D67A6002FBE23 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBC5A0C01D6D67A6002FBE23 /* CoreLocation.framework in Frameworks */,
 				FB5DD3251CEB09EA008C3A34 /* ThirdpresenceAdSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +81,7 @@
 		7F137646906F861BF0E3DFF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBC5A0BF1D6D67A6002FBE23 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -218,7 +221,6 @@
 				FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */,
 				FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */,
 				FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */,
-				FB5DD3191CEB0562008C3A34 /* ThirdpresenceAdSDKSampleApp-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

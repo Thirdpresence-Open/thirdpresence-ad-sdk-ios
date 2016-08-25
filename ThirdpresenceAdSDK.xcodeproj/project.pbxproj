@@ -34,6 +34,7 @@
 		FB5DD3331CEB0DE5008C3A34 /* TPRVideoAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoAd.m; sourceTree = "<group>"; };
 		FB5DD3341CEB0DE5008C3A34 /* TPRVideoInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoInterstitial.h; sourceTree = "<group>"; };
 		FB5DD3351CEB0DE5008C3A34 /* TPRVideoInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoInterstitial.m; sourceTree = "<group>"; };
+		FBA1162C1D65EAA4004EE03A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 		FB49786E1CC6346000F446A1 = {
 			isa = PBXGroup;
 			children = (
+				FBA1162B1D65EA95004EE03A /* misc */,
 				FB49787A1CC6346000F446A1 /* ThirdpresenceAdSDK */,
 				FB4978791CC6346000F446A1 /* Products */,
 			);
@@ -88,6 +90,14 @@
 				FB5DD32E1CEB0DE5008C3A34 /* TPRWebViewController.m */,
 			);
 			path = internal;
+			sourceTree = "<group>";
+		};
+		FBA1162B1D65EA95004EE03A /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				FBA1162C1D65EAA4004EE03A /* README.md */,
+			);
+			name = misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

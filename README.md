@@ -55,11 +55,11 @@ pod 'thirdpresence-ad-sdk-ios/ThirdpresenceAdAdmobMediation'
     - ThirdpresenceMopubMediation (MoPub interstitial and rewarded video) 
     - ThirdpresenceAdmobMediation (Admob interstitial)
 
-- Add following frameworks to your application target:
-    - AdSupport.framework
-
-
 ### Additional requirements
+
+Enable following frameworks to your application target:
+- AdSupport.framework
+- CoreLocation.framework (optional, but highly recommended for enabling more targetted ads)
 
 By default iOS 9.0 requires apps to make network connections over SSL. Currently all demand sources do not support SSL, which will likely to have mojor impact to fill rates. Allowing the player make non-SSL connections you shall add the following to your app plist file:
 ```
@@ -73,6 +73,28 @@ By default iOS 9.0 requires apps to make network connections over SSL. Currently
 In case your application is not using ARC (Automatic Reference Counting), you must indicate to the compiler that Ad SDK files 
 are built with ARC. This is done using fobjc-arc compiler flag. See more details about ARC:
 https://developer.apple.com/library/mac/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW15
+
+It is recommended to enable Location Services for better ad targeting and higher revenue.
+Following keys shall be defined in the app's info.plist file.
+NSLocationUsageDescription and NSLocationWhenInUseUsageDescription describes the user reasoning why they shall grant permission for location services.
+```
+<key>UIRequiredDeviceCapabilities</key>
+<array>
+<string>location-services</string>
+</array>
+<key>NSLocationUsageDescription</key>
+<string>Location services are used for ads targeting</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Location services are used for ads targeting</string>
+```
+
+Before initialising Thirdpresence ad unit the application shall request user to enable location services:
+
+```
+self.locationManager = [[CLLocationManager alloc] init];
+[self.locationManager requestWhenInUseAuthorization];
+[self.locationManager startUpdatingLocation];
+```
 
 
 ### Direct integration
@@ -129,15 +151,26 @@ ViewController.m:
 Instantiate and setup the ad unit:
 ```
 
+    // The environment dictionary is mandatory to pass the SDK the account and placement id.
+    // For testing purposes you can use the account name "sdk-demo" and placementid "sa7nvltbrn".
+    // Contact to Thirdpresence get your own.
     NSDictionary *environment = [NSDictionary dictionaryWithObjectsAndKeys:
                                         @"<ACCOUNT_NAME>", TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         @"<PLACEMENT_ID>", TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
                                         TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];
 
+    // With the playerParams dictionary you can pass data about the application for advertisers.
+    // The application's bundle id is determined automatically.
+    // In order to get more targeted ads the user's gender and year of birth are recommended.
+    // You can get the data, for example, from Facebook Graph API if you have integrated with Facekbook.
+    // https://developers.facebook.com/docs/graph-api/reference/v2.6/user
+
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
                                          @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
                                          @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
+                                         @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
+                                         @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];
                                          
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment params:playerParams];
@@ -178,12 +211,14 @@ When using mediation adapters it does not require changes in your existing code.
 
 | Ad Unit | Custom Event Class | Custom Event Class Data |
 | --- | --- | --- |
-| Fullscreen Ad | TPRInterstitialCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME"} |
-| Rewarded Video | TPRRewardedVideoCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME", "rewardtitle":"REPLACE_ME", "rewardamount":"REPLACE_ME"}  |
+| Fullscreen Ad | TPRInterstitialCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME", "gender":"REPLACE_ME", "yob":"REPLACE_ME"} |
+| Rewarded Video | TPRRewardedVideoCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME", "rewardtitle":"REPLACE_ME", "rewardamount":"REPLACE_ME", "gender":"REPLACE_ME", "yob":"REPLACE_ME"}  |
 
 **Replace all the REPLACE_ME placeholders with actual values!**
 
 The Custom Event Method field should be left blank.
+For testing purposes you can use the account name "sdk-demo" and placementid "sa7nvltbrn".
+Provide user's gender and yob (year of birth) to get more targeted ads. Leave them empty if not available.
 
 - Go to the Segments tab on the Mopub console
 - Select the segment where you want to enable the Thirdpresence custom native network
@@ -203,9 +238,12 @@ The Custom Event Method field should be left blank.
 | --- | --- |
 | Class Name | TPRAdmobCustomEventInterstitial |
 | Label | Thirdpresence |
-| Parameter | account:REPLACE_ME,placementid:REPLACE_ME |
+| Parameter | account:REPLACE_ME,placementid:REPLACE_ME,gender:REPLACE_ME,yob:REPLACE_ME |
 
 **Replace REPLACE_ME placeholders with actual values!**
+
+For testing purposes you can use the account name "sdk-demo" and placementid "sa7nvltbrn".
+Provide user's gender and yob (year of birth) to get more targeted ads. Leave them empty if not available.
 
 - Click Continue button
 - Give eCPM for the Thirdpresence ad network
@@ -254,6 +292,10 @@ private void initInterstitial() {
     playerParams.Add ("appversion", Application.version);
     playerParams.Add ("appstoreurl", "REPLACEME");
     playerParams.Add ("bundleid", Application.bundleIdentifier);
+
+    // In order to get more targeted ads you shall provide user's gender and year of birth
+    playerParams.Add ("gender", "male");
+    playerParams.Add ("yob", "1975");
 
     long timeoutMs = 10000;
 
@@ -318,6 +360,11 @@ private void initRewardedVideo() {
     playerParams.Add ("appversion", Application.version);
     playerParams.Add ("appstoreurl", "REPLACEME");
     playerParams.Add ("bundleid", Application.bundleIdentifier);
+
+
+    // In order to get more targeted ads you shall provide user's gender and year of birth
+    playerParams.Add ("gender", "male");
+    playerParams.Add ("yob", "1975");
 
     long timeoutMs = 10000;
 

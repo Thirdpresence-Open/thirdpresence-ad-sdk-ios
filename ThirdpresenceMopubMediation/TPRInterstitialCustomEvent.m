@@ -7,17 +7,13 @@
 //
 
 #import "TPRInterstitialCustomEvent.h"
+#import "TPRConstants.h"
 
 #if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
 #import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
 #else
 #import "TPRVideoInterstitial.h"
 #endif
-
-NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT = @"account";
-NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
-NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_LANDSCAPE = @"forcelandscape";
-NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
 
 @interface TPRInterstitialCustomEvent () <TPRVideoAdDelegate>
 
@@ -74,6 +70,11 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    }
+    
+    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+    if (val) {
+        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     }
     
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment

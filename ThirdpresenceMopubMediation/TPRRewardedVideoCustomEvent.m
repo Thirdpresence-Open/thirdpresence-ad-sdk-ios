@@ -7,6 +7,7 @@
 //
 
 #import "TPRRewardedVideoCustomEvent.h"
+#import "TPRConstants.h"
 
 #if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
 #import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
@@ -74,8 +75,8 @@
     }
     
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        @"sdk-demo", TPR_ENVIRONMENT_KEY_ACCOUNT,
-                                        @"msusprtiz3", TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
+                                        account, TPR_ENVIRONMENT_KEY_ACCOUNT,
+                                        placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
     
     NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     if (val) {
@@ -85,6 +86,11 @@
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    }
+    
+    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+    if (val) {
+        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     }
     
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment

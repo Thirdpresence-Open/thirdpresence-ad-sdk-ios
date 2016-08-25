@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
+#import <CoreLocation/CLLocationManager.h>
 
 @interface ViewController : UIViewController <TPRVideoAdDelegate, UITextFieldDelegate>
 
@@ -18,6 +19,9 @@
 @property (weak) IBOutlet UITextField *accountField;
 @property (weak) IBOutlet UITextField *placementField;
 @property (weak) IBOutlet UITextField *vastField;
+
+// Location manager for providing location data for Ad SDK
+@property (strong) CLLocationManager* locationManager;
 
 // UI alert message queue
 @property (strong) NSMutableArray *pendingMessages;

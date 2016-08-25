@@ -33,11 +33,8 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE;
 // Force ad placement to portrait orientation. Use TPR_VALUE_TRUE to enable.
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT;
 
-// Production server
-FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_PRODUCTION;
-
-// Staging server
-FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_STAGING;
+// Force to use secure HTTP requests
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP;
 
 /**
  * Server types to be used as a value for environment key TPR_ENVIRONMENT_KEY_SERVER
@@ -45,6 +42,9 @@ FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_STAGING;
 
 // Production server
 FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_PRODUCTION;
+
+// Staging server
+FOUNDATION_EXPORT NSString *const TPR_SERVER_TYPE_STAGING;
 
 /**
  * Keys for environment dictionary
@@ -82,6 +82,28 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_DEVICE_ID;
 
 // External VAST tag
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_VAST_URL;
+
+// Location latitude coordinates
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_LAT;
+
+// Location longitude coordinates
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_LON;
+
+// Location country
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_COUNTRY;
+
+// Location region
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_REGION;
+
+// Location city
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_CITY;
+
+// User gender
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_USER_GENDER;
+
+// User year of birth
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_USER_YOB;
+
 
 /**
  * Player event
