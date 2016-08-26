@@ -257,7 +257,7 @@ The Thirdpresence Ad SDK Unity plugin is compatible with Unity 5 or newer.
 Get the Thirdpresence Ad SDK Unity plugin and import to your Unity project. 
 
 The plugin can be downloaded from:
-http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/ios_1.1.2/thirdpresence-ad-sdk-ios.unitypackage
+http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/ios_1.3.2/thirdpresence-ad-sdk-ios.unitypackage
 
 In order to start getting ads the ThirdpresenceAdsAndroid singleton object needs to be initialised in an Unity script:
 ``` 

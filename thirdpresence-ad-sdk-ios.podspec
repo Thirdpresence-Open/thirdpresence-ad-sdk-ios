@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "thirdpresence-ad-sdk-ios"
-  s.version          = "1.3.0"
+  s.version          = "1.3.2"
   s.summary          = "Thirdpresence Ad SDK for iOS apps"
   s.description      = <<-DESC
     Thirdpresence Ad SDK is a VPAID compatible ad SDK for apps. 
