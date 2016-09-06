@@ -27,6 +27,7 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
 
 @property(nonatomic, strong) TPRVideoInterstitial *interstitial;
 @property(assign) BOOL adLoaded;
+@property(assign) BOOL adDisplayed;
 
 @end
 
@@ -100,7 +101,14 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
 - (void)presentFromRootViewController:(UIViewController *)rootViewController {
     if (_adLoaded) {
         [self.delegate customEventInterstitialWillPresent:self];
+        _adDisplayed = YES;
         [self.interstitial displayAd];
+    } else {
+        NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
+                                             code:TPR_ERROR_AD_NOT_READY
+                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to display an ad" forKey:NSLocalizedDescriptionKey]];
+        [self.delegate customEventInterstitial:self didFailAd:error];
+        [self remove];
     }
 }
 
@@ -110,15 +118,21 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
 
 - (void)remove {
     _adLoaded = NO;
+    if (_adDisplayed) {
+        [self.delegate customEventInterstitialWillDismiss:self];
+    }
     [self.interstitial removePlayer];
     self.interstitial.delegate = nil;
     self.interstitial = nil;
+    if (_adDisplayed) {
+        [self.delegate customEventInterstitialDidDismiss:self];
+    }
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
     if (videoAd == self.interstitial) {
-        [self remove];
         [self.delegate customEventInterstitial:self didFailAd:error];
+        [self remove];
     }
 }
 
@@ -138,9 +152,7 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
             [self.delegate customEventInterstitial:self didFailAd:error];
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-            [self.delegate customEventInterstitialWillDismiss:self];
             [self remove];
-            [self.delegate customEventInterstitialDidDismiss:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self.delegate customEventInterstitialWasClicked:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LEFT_APPLICATION]) {

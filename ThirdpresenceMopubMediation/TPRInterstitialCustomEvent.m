@@ -22,7 +22,7 @@
 
 @property (strong) TPRVideoInterstitial *interstitial;
 @property (assign) BOOL adLoaded;
-
+@property (assign) BOOL adDisplayed;
 @end
 
 @implementation TPRInterstitialCustomEvent
@@ -88,8 +88,10 @@
         [self.delegate interstitialCustomEventWillAppear:self];
         [self.interstitial displayAd];
         [self.delegate interstitialCustomEventDidAppear:self];
+        _adDisplayed = YES;
     } else {
         [self.delegate interstitialCustomEventDidExpire:self];
+        [self remove];
     }
 }
 
@@ -99,15 +101,23 @@
 
 - (void)remove {
     _adLoaded = NO;
+    if (_adDisplayed) {
+        [self.delegate interstitialCustomEventWillDisappear:self];
+    }
     [self.interstitial removePlayer];
     self.interstitial.delegate = nil;
     self.interstitial = nil;
+    if (_adDisplayed) {
+        [self.delegate interstitialCustomEventDidDisappear:self];
+        _adDisplayed = YES;
+    }
+
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
     if (videoAd == self.interstitial) {
-        [self remove];
         [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+        [self remove];
     }
 }
 
@@ -121,12 +131,26 @@
             _adLoaded = YES;
             [self.delegate interstitialCustomEvent:self didLoadAd:nil];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
-            [self.delegate interstitialCustomEventDidExpire:self];
+            
+            NSString* desc = [event objectForKey:TPR_EVENT_KEY_ARG1];
+            NSDictionary* info = nil;
+            if (desc) {
+                info = [NSDictionary dictionaryWithObject:desc forKey:NSLocalizedDescriptionKey];
+            }
+            
+            NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
+                                                 code:TPR_ERROR_NO_FILL
+                                             userInfo:info];
+            
+            
+            if (_adDisplayed) {
+                [self.delegate interstitialCustomEventDidExpire:self];
+            } else {
+                [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
+            }
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-            [self.delegate interstitialCustomEventWillDisappear:self];
             [self remove];
-            [self.delegate interstitialCustomEventDidDisappear:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
         }

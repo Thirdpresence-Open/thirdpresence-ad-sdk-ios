@@ -9,6 +9,10 @@ It provides implementations for an interstitial video and rewarded video ad unit
 - XCode 7 or later
 - Deployment target iOS 8.0 or later
 
+## SDK Updates
+
+The SDK is updated in regular basis. Activate the watch function in the GitHub to get notified about updates and changes. 
+
 ## Thirdpresence AdS DK integration
 
 There are two different ways to integrate the SDK with your app:
@@ -257,7 +261,7 @@ The Thirdpresence Ad SDK Unity plugin is compatible with Unity 5 or newer.
 Get the Thirdpresence Ad SDK Unity plugin and import to your Unity project. 
 
 The plugin can be downloaded from:
-http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/ios_1.3.2/thirdpresence-ad-sdk-ios.unitypackage
+http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/ios_1.3.3/thirdpresence-ad-sdk-ios.unitypackage
 
 In order to start getting ads the ThirdpresenceAdsAndroid singleton object needs to be initialised in an Unity script:
 ``` 

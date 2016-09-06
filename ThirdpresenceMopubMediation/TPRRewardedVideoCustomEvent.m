@@ -21,6 +21,7 @@
 
 @property (strong) TPRVideoInterstitial *interstitial;
 @property (assign) BOOL adLoaded;
+@property (assign) BOOL adDisplayed;
 @property (strong) NSString* rewardTitle;
 @property (strong) NSNumber* rewardAmount;
 
@@ -39,7 +40,7 @@
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
     
-    NSString *account = [info objectForKey:TPR_ENVIRONMENT_KEY_ACCOUNT];
+    NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
     if (!account) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
@@ -47,7 +48,7 @@
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
     
-    NSString *placementId = [info objectForKey:TPR_ENVIRONMENT_KEY_PLACEMENT_ID];
+    NSString *placementId = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID];
     if (!placementId) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
@@ -108,11 +109,13 @@
         [self.delegate rewardedVideoWillAppearForCustomEvent:self];
         [self.interstitial displayAd];
         [self.delegate rewardedVideoDidAppearForCustomEvent:self];
+        _adDisplayed = YES;
     } else {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
                                          userInfo:[NSDictionary dictionaryWithObject:@"An ad is not loaded yet" forKey:NSLocalizedDescriptionKey]];
         [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+        [self remove];
     }
 }
 
@@ -126,15 +129,23 @@
 
 - (void)remove {
     _adLoaded = NO;
+    if (_adDisplayed) {
+        [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
+    }
     [self.interstitial removePlayer];
     self.interstitial.delegate = nil;
     self.interstitial = nil;
+    
+    if (_adDisplayed) {
+        [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
+        _adDisplayed = NO;
+    }
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
     if (videoAd == self.interstitial) {
-        [self remove];
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+        [self remove];
     }
 }
 
@@ -155,14 +166,17 @@
             }
             
             NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
-                                                 code:TPR_ERROR_PLAYER_INIT_FAILED
+                                                 code:TPR_ERROR_NO_FILL
                                              userInfo:info];
-            [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+            if (_adDisplayed) {
+                [self.delegate rewardedVideoDidFailToPlayForCustomEvent:self error:error];
+            }
+            else {
+                [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+            }
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-            [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
             [self remove];
-            [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {

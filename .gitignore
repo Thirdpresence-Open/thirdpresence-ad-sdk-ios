@@ -11,4 +11,4 @@ ThirdpresenceUnityPlugin/unity-package/ThirdpresenceAdSDK/Obj
 log.txt
 *.unityproj
 
-
+.DS_Store
