@@ -36,6 +36,9 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT;
 // Force to use secure HTTP requests
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP;
 
+// Enable MOAT tracker
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT;
+
 /**
  * Server types to be used as a value for environment key TPR_ENVIRONMENT_KEY_SERVER
  */

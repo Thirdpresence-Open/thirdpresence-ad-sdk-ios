@@ -74,20 +74,22 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
         [self.delegate customEventInterstitial:self didFailAd:error];
     }
     
-    NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
-    if (val) {
-        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
-    }
-    
-    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
-    if (val) {
+    NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    if (val && [val isEqualToString:TPR_VALUE_TRUE]) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    } else {
+        [environment setValue:TPR_VALUE_TRUE forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     }
     
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     }
+    
+    [environment setValue:@"admob" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
+    
+    NSString *version = [[NSString alloc]initWithCString:GoogleMobileAdsVersionString encoding:NSUTF8StringEncoding];
+    [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
     NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];
     

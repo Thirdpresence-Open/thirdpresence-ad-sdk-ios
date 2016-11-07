@@ -10,6 +10,8 @@
 #import "ThirdpresenceAdSDK.h"
 #import <AdSupport/ASIdentifierManager.h>
 #import <CoreLocation/CLLocationManager.h>
+// MOAT SDK Framework to be added
+//#import <TRDPMoatMobileAppKit/TRDPMoatMobileAppKit.h>
 
 @interface TPRVideoPlayerHandler ()
 
@@ -27,6 +29,7 @@
 - (void)initLocationServices;
 - (CLLocation*)getLastKnownLocation;
 - (void)updateLocationToPlayer;
+- (BOOL)initAdTracker;
 
 @property (strong, readonly) CLLocationManager* locationManager;
 @end
@@ -78,6 +81,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     [self removePlayer];
 }
 
+
 - (void)appWillResignActive:(NSNotification*)note {
     if (_adPlaying) {
         _adPlayPending = YES;
@@ -121,8 +125,15 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     }
     
     NSBundle* libBundle = [NSBundle bundleWithIdentifier:@"com.thirdpresence.ThirdpresenceAdSDK"];
-    
     NSString *versionString = [libBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    if (!versionString) {
+        // If CocoaPods used the plist file is in the main bundle
+        NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ThirdpresenceAdSDK-Info" ofType:@"plist"]];
+    
+        versionString = [dictionary objectForKey:@"CFBundleShortVersionString"];
+    }
+    
     NSString *extSdkName = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     if (extSdkName) {
         NSString *extSdkVer = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
@@ -130,7 +141,6 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
             extSdkVer = @"";
         }
         versionString = [NSString stringWithFormat:@"%@,%@,%@", versionString, extSdkName, extSdkVer];
-
     }
     
     NSString *customization = nil;
@@ -209,7 +219,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     NSString *useHTTPS = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     NSString *protocol = [useHTTPS isEqualToString:TPR_VALUE_TRUE] ? @"https:" : @"http:";
     
-    NSString* url = [NSString stringWithFormat:PLAYER_URL_BASE,
+    _playerPageURL = [NSString stringWithFormat:PLAYER_URL_BASE,
                      protocol,
                      env,
                      env,
@@ -221,7 +231,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     
     _playerTimeoutTimer = [self startTimer:_playerTimeout target:@selector(timeoutOccuredOn:)];
     
-    [_webViewController loadUrl:url];
+    [_webViewController loadUrl:_playerPageURL];
 }
 
 - (void)loadAd {
@@ -310,11 +320,15 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     
     _playerParams = nil;
     _environment = nil;
+    _playerPageURL = nil;
 }
 
 #pragma mark - WebViewControllerDelegate
+- (void)webViewControllerDidLoad:(TPRWebViewController*)webViewController {
+}
 
 - (void)webViewControllerWillAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
+    [self initAdTracker];
 }
 
 - (void)webViewControllerDidAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
@@ -357,14 +371,19 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
 shouldStartLoadWithRequest:(NSURLRequest *)request
             navigationType:(UIWebViewNavigationType)navigationType {
     NSString* scheme = request.URL.scheme;
-    
+
     if ([scheme isEqualToString:PLAYER_EVENT_CUSTOM_SCHEME] && [request.URL.host isEqualToString:PLAYER_EVENT_HOST_NAME]) {
         [self handlePlayerEvent:[self parseEvent:request.URL.query]];
-    } else if (navigationType != UIWebViewNavigationTypeOther || !_adLoaded) {
+    } else if ((navigationType != UIWebViewNavigationTypeOther && navigationType != UIWebViewNavigationTypeLinkClicked) || !_adLoaded) {
         return YES;
     }
-    else if ([scheme hasPrefix:@"http"]) {
-        [self openURL:request.URL];
+    else {
+        BOOL click = ![_playerPageURL isEqualToString:[request.mainDocumentURL absoluteString]];
+        if (click) {
+            if ([scheme hasPrefix:@"http"]) {
+                [self openURL:request.URL];
+            }
+        }
     }
     return NO;
 }
@@ -547,6 +566,25 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                           arg2:[NSString stringWithFormat:@"%f", location.coordinate.longitude]];
         }
     }
+}
+
+- (BOOL)initAdTracker {
+    BOOL success = YES;
+    
+    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_ENABLE_MOAT];
+    if (self.webViewController.webView && (enableMoat == nil || [enableMoat isEqualToString:TPR_VALUE_TRUE])) {
+        Class classObj = NSClassFromString(@"TRDPMoatBootstrap");
+        SEL selector = NSSelectorFromString(@"injectDelegateWrapper:");
+        if (classObj && [classObj respondsToSelector:selector]) {
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [classObj performSelector:selector withObject:self.webViewController.webView];
+            TPRLog(@"[TPR] MOAT ad tracker enabled");
+        } else {
+            TPRLog(@"[TPR] MOAT SDK not available");
+        }
+    }
+    
+    return success;
 }
 
 - (void)sendEvent:(NSString*)eventName arg1:(NSObject*)arg1 arg2:(NSObject*)arg2 arg3:(NSObject*)arg3  {

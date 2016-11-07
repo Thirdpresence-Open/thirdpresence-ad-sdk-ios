@@ -91,7 +91,8 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
-                                        TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];
+                                        TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE,
+                                        TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_ENABLE_MOAT, nil];
 
 
     // Pass information about the application and user in playerParams dictionary.

@@ -86,6 +86,8 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_NOTIFICATION;
 
 @property (readonly) NSDate* locationTimeStamp;
 
+@property (readonly) NSString* playerPageURL;
+
 // Not available
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -79,20 +79,20 @@
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
     
-    NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
-    if (val) {
-        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
-    }
-    
-    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
-    if (val) {
+    NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    if (val && [val isEqualToString:TPR_VALUE_TRUE]) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
+    } else {
+        [environment setValue:TPR_VALUE_TRUE forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     }
     
     val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     if (val) {
         [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
     }
+    
+    [environment setValue:@"mopub" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
+    [environment setValue:[MoPub sharedInstance].version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment
                                                                    params:info

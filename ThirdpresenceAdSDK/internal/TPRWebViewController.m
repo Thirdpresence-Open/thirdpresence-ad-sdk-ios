@@ -57,6 +57,11 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
 
 #pragma mark - UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.delegate webViewControllerDidLoad:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.delegate webViewControllerWillAppear:self animated:animated];

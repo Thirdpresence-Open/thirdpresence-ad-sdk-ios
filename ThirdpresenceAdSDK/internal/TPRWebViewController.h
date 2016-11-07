@@ -14,6 +14,7 @@
  *  Delegate protocol for TPRWebViewController
  */
 @protocol TPRWebViewControllerDelegate <NSObject>
+- (void)webViewControllerDidLoad:(TPRWebViewController*)webViewController;
 - (void)webViewControllerWillAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated;
 - (void)webViewControllerDidAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated;
 - (void)webViewControllerWillDisappear:(TPRWebViewController*)webViewController animated:(BOOL)animated;
