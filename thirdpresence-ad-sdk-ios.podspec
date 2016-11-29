@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/Thirdpresence-Open/thirdpresence-ad-sdk-ios"
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
   s.author           = { "okkonen" => "marko.okkonen@thirdpresence.com" }
-  s.source           = { :git => "https//:github.com/Thirdpresence-Open/thirdpresence-ad-sdk-ios.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/Thirdpresence-Open/thirdpresence-ad-sdk-ios.git", :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.platform         = :ios, '8.0'
   s.frameworks       = 'UIKit'
