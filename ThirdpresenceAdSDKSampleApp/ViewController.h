@@ -19,6 +19,7 @@
 @property (weak) IBOutlet UITextField *accountField;
 @property (weak) IBOutlet UITextField *placementField;
 @property (weak) IBOutlet UITextField *vastField;
+@property (weak) IBOutlet UITextField *statusField;
 
 // Location manager for providing location data for Ad SDK
 @property (strong) CLLocationManager* locationManager;

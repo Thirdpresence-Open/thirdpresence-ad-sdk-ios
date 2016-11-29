@@ -25,7 +25,7 @@
  *     TPR_ENVIRONMENT_KEY_PLACEMENT_ID
  *
  *  @param playerParams is a dictionary containing customization parameters for the player
- *  @param timeout for initializing the player and loading an ad. 
+ *  @param secs for initializing the player and loading an ad.
  *     Use TPR_PLAYER_DEFAULT_TIMEOUT as a default.
  *
  *  An event TPR_EVENT_NAME_PLAYER_READY is fired when the player is ready for taking further commands

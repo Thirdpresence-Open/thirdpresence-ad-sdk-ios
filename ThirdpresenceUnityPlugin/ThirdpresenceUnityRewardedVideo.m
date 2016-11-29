@@ -33,11 +33,19 @@
 - (void) setupPlayerWithEnvironment:(NSDictionary*)env params:(NSDictionary*)params timeout:(NSTimeInterval)timeout {
     [self removePlayer];
     
-    _rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:[self convertEnvironment:env] params:params timeout:timeout];
-    _rewardedVideo.delegate = self;
-    
     _rewardTitle = [env valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE];
     _rewardAmount = [env valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT];
+
+    if (!_rewardTitle) {
+        [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"Environment data does not contain reward title"];
+    }
+    else if (!_rewardAmount) {
+        [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"Environment data does not contain reward amount"];
+    }
+    else {
+        _rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:[self convertEnvironment:env] params:params timeout:timeout];
+        _rewardedVideo.delegate = self;
+    }
 }
 
 - (void) displayAd {

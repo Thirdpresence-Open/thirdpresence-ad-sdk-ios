@@ -33,8 +33,16 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE;
 // Force ad placement to portrait orientation. Use TPR_VALUE_TRUE to enable.
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT;
 
-// Force to use secure HTTP requests
+// Force to use secure HTTP requests.
+// From January 2017 Apple requires App Transport Security (ATS) to be used, which
+// requires secure HTTP to be used for network requests. Therefore the value of this
+// setting is now true by default.
+// Use TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP to turn off Secure HTTP.
+// @deprecated
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP;
+
+// Use insecure HTTP requests
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP;
 
 // Enable MOAT tracker
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT;

@@ -49,14 +49,7 @@ Enable the frameworks below to your application target:
 - AdSupport.framework
 - CoreLocation.framework (optional, but highly recommended for enabling more targeted ads)
 
-By default, iOS 9.0 requires apps to establish network connections over SSL. Currently, all demand sources do not support SSL, which is likely to have a major impact to fill rates. To allow the player to establish non-SSL connections, add the following to your app plist file:
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-<key>NSAllowsArbitraryLoads</key>
-<true/>
-</dict>
-```
+From January 2017 Apple App Review requires App Transport Security (ATS) to be used. Therefore Thirdpresence SDK uses Secure HTTP by default (since version 1.4.1). 
 
 If your application does not use ARC (Automatic Reference Counting), you must indicate to the compiler that the Ad SDK files 
 are built with ARC. This is done by using the fobjc-arc compiler flag. For more details on the ARC, see

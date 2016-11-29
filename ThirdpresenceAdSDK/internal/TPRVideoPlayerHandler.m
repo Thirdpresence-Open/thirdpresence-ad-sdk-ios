@@ -216,8 +216,8 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     
     customization = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSString *useHTTPS = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
-    NSString *protocol = [useHTTPS isEqualToString:TPR_VALUE_TRUE] ? @"https:" : @"http:";
+    NSString *useHTTP = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP];
+    NSString *protocol = [useHTTP isEqualToString:TPR_VALUE_TRUE] ? @"http:" : @"https:";
     
     _playerPageURL = [NSString stringWithFormat:PLAYER_URL_BASE,
                      protocol,

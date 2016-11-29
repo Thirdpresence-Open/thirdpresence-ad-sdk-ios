@@ -103,8 +103,8 @@ public class ThirdpresenceAdsIOS : MonoBehaviour
 		if( Application.platform != RuntimePlatform.IPhonePlayer )
 			return;
 
-		Assert.IsNotNull (environment);
-		Assert.IsNotNull (playerParams);
+		Assert.IsNotNull (environment, "environment argument is null");
+		Assert.IsNotNull (playerParams,  "playerParams argument is null");
 
 		_initInterstitial (
 			ConvertDictionaryToJSON (environment), 
@@ -219,8 +219,8 @@ public class ThirdpresenceAdsIOS : MonoBehaviour
 		if( Application.platform != RuntimePlatform.IPhonePlayer )
 			return;
 
-		Assert.IsNotNull (environment);
-		Assert.IsNotNull (playerParams);
+		Assert.IsNotNull (environment, "environment argument is null");
+		Assert.IsNotNull (playerParams,  "playerParams argument is null");
 
 		_initRewardedVideo (
 			ConvertDictionaryToJSON (environment), 

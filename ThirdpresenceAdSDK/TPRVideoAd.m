@@ -17,6 +17,7 @@ NSString *const TPR_ENVIRONMENT_KEY_PLACEMENT_ID = @"playerid";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE = @"forcelandscape";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT = @"forceportrait";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP = @"forcehttps";
+NSString *const TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP = @"usehttp";
 NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT = @"enablemoat";
 
 // Player parameter keys

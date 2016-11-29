@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB0149FB1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0149FA1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m */; };
 		FB4978E01CC7969000F446A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978DF1CC7969000F446A1 /* main.m */; };
 		FB4978E31CC7969000F446A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E21CC7969000F446A1 /* AppDelegate.m */; };
 		FB4978E61CC7969000F446A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E51CC7969000F446A1 /* ViewController.m */; };
@@ -18,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FB0149FD1DD49C8B00216F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB4978D31CC7969000F446A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB4978DA1CC7969000F446A1;
+			remoteInfo = ThirdpresenceAdSDKSampleApp;
+		};
 		FB9F39791D90FB4600B26119 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FBC5050C1D8A779A00663B37 /* ThirdpresenceAdSDK.xcodeproj */;
@@ -49,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB0149F81DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThirdpresenceAdSDKSampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB0149FA1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdpresenceAdSDKSampleAppUITests.m; sourceTree = "<group>"; };
+		FB0149FC1DD49C8B00216F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdpresenceAdSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB4978DF1CC7969000F446A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB4978E11CC7969000F446A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FB0149F51DD49C8B00216F08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4978D81CC7969000F446A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -84,11 +102,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FB0149F91DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FB0149FA1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m */,
+				FB0149FC1DD49C8B00216F08 /* Info.plist */,
+			);
+			path = ThirdpresenceAdSDKSampleAppUITests;
+			sourceTree = "<group>";
+		};
 		FB4978D21CC7969000F446A1 = {
 			isa = PBXGroup;
 			children = (
 				FBC5050C1D8A779A00663B37 /* ThirdpresenceAdSDK.xcodeproj */,
 				FB4978DD1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */,
+				FB0149F91DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests */,
 				FB4978DC1CC7969000F446A1 /* Products */,
 				7F137646906F861BF0E3DFF3 /* Frameworks */,
 			);
@@ -98,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */,
+				FB0149F81DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,6 +167,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FB0149F71DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB014A011DD49C8B00216F08 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDKSampleAppUITests" */;
+			buildPhases = (
+				FB0149F41DD49C8B00216F08 /* Sources */,
+				FB0149F51DD49C8B00216F08 /* Frameworks */,
+				FB0149F61DD49C8B00216F08 /* Resources */,
+				FB014A0D1DD5FC9C00216F08 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB0149FE1DD49C8B00216F08 /* PBXTargetDependency */,
+			);
+			name = ThirdpresenceAdSDKSampleAppUITests;
+			productName = ThirdpresenceAdSDKSampleAppUITests;
+			productReference = FB0149F81DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		FB4978DA1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB4978F21CC7969000F446A1 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDKSampleApp" */;
@@ -166,9 +214,15 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Thirdpresence;
 				TargetAttributes = {
+					FB0149F71DD49C8B00216F08 = {
+						DevelopmentTeam = H478BW6B43;
+						ProvisioningStyle = Manual;
+						TestTargetID = FB4978DA1CC7969000F446A1;
+					};
 					FB4978DA1CC7969000F446A1 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = H478BW6B43;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Wallet = {
 								enabled = 0;
@@ -197,6 +251,7 @@
 			projectRoot = "";
 			targets = (
 				FB4978DA1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */,
+				FB0149F71DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +267,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FB0149F61DD49C8B00216F08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4978D91CC7969000F446A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,7 +286,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FB014A0D1DD5FC9C00216F08 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export TESTAPP_BUILD_DIR=./build/ThirdpresenceAdSDKSampleAppUITests-Runner/\n\nmkdir -p ${TESTAPP_BUILD_DIR}/Payload\n\ncp -rf ${BUILT_PRODUCTS_DIR}/ThirdpresenceAdSDKSampleAppUITests-Runner.app ${TESTAPP_BUILD_DIR}/Payload\n\ncd ${TESTAPP_BUILD_DIR}\n\nzip -r ../ThirdpresenceAdSDKSampleAppUITests-Runner.ipa Payload\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		FB0149F41DD49C8B00216F08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB0149FB1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB4978D71CC7969000F446A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,6 +324,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FB0149FE1DD49C8B00216F08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB4978DA1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp */;
+			targetProxy = FB0149FD1DD49C8B00216F08 /* PBXContainerItemProxy */;
+		};
 		FB9F397A1D90FB4600B26119 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ThirdpresenceAdSDK;
@@ -265,6 +356,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FB0149FF1DD49C8B00216F08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H478BW6B43;
+				INFOPLIST_FILE = ThirdpresenceAdSDKSampleAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "44f616f8-d4c2-456f-ac51-4a93673a571c";
+				PROVISIONING_PROFILE_SPECIFIER = "Thirdpresence apps";
+				TEST_TARGET_NAME = ThirdpresenceAdSDKSampleApp;
+			};
+			name = Debug;
+		};
+		FB014A001DD49C8B00216F08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = H478BW6B43;
+				INFOPLIST_FILE = ThirdpresenceAdSDKSampleAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "44f616f8-d4c2-456f-ac51-4a93673a571c";
+				PROVISIONING_PROFILE_SPECIFIER = "Thirdpresence apps";
+				TEST_TARGET_NAME = ThirdpresenceAdSDKSampleApp;
+			};
+			name = Release;
+		};
 		FB4978F01CC7969000F446A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -279,10 +407,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -324,10 +455,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -354,7 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H478BW6B43;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../build/$(CONFIGURATION)-iphoneos",
 					"$(inherited)",
@@ -363,9 +497,11 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ThirdpresenceAdSDKSampleApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9dcd0a07-45ca-49a0-af7a-bcf10cb3d703";
+				PROVISIONING_PROFILE_SPECIFIER = "com.thirdpresence.ThirdpresenceAdSDKSampleApp Development";
 			};
 			name = Debug;
 		};
@@ -374,7 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H478BW6B43;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../build/$(CONFIGURATION)-iphoneos",
 					"$(inherited)",
@@ -383,15 +519,26 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ThirdpresenceAdSDKSampleApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9dcd0a07-45ca-49a0-af7a-bcf10cb3d703";
+				PROVISIONING_PROFILE_SPECIFIER = "com.thirdpresence.ThirdpresenceAdSDKSampleApp Development";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FB014A011DD49C8B00216F08 /* Build configuration list for PBXNativeTarget "ThirdpresenceAdSDKSampleAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB0149FF1DD49C8B00216F08 /* Debug */,
+				FB014A001DD49C8B00216F08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FB4978D61CC7969000F446A1 /* Build configuration list for PBXProject "ThirdpresenceAdSDKSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

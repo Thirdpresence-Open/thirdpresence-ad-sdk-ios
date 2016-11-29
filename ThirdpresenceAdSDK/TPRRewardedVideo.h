@@ -26,7 +26,7 @@
  *      TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE
  *      TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT
  *
- *  @param timeout for initializing the player and loading an ad. 
+ *  @param secs for initializing the player and loading an ad.
  *    Use TPR_PLAYER_DEFAULT_TIMEOUT as a default.
  *
  *  @return TPRRewardedVideo object
