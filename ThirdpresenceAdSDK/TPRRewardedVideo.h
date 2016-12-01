@@ -20,11 +20,12 @@
  *    @see TPRVideoAd for available keys. Values for following keys are mandatory:
  *     TPR_ENVIRONMENT_KEY_ACCOUNT
  *     TPR_ENVIRONMENT_KEY_PLACEMENT_ID
+ *     TPR_ENVIRONMENT_KEY_REWARD_TITLE
+ *     TPR_ENVIRONMENT_KEY_REWARD_AMOUNT
  *
  *  @param playerParams is a dictionary containing customization parameters for the player
- *    @see TPRVideoAd for available keys. Values for following keys are mandatory:
- *      TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE
- *      TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT
+ *    @see TPRVideoAd for available keys.
+
  *
  *  @param secs for initializing the player and loading an ad.
  *    Use TPR_PLAYER_DEFAULT_TIMEOUT as a default.

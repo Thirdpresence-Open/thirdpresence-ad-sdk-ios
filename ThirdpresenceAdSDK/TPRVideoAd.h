@@ -47,6 +47,13 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP;
 // Enable MOAT tracker
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT;
 
+// Title of the reward to be earned
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_REWARD_TITLE;
+
+// Amount of the reward to be earned
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_REWARD_AMOUNT;
+
+
 /**
  * Server types to be used as a value for environment key TPR_ENVIRONMENT_KEY_SERVER
  */
@@ -71,9 +78,11 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_APP_VERSION;
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL;
 
 // Title of the reward to be earned
+// DEPRACATED: in version 1.4.2 - Use {@link TPR_ENVIRONMENT_KEY_REWARD_TITLE} instead
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE;
 
 // Amount of the reward to be earned
+// DEPRACATED: in version 1.4.2 - Use {@link TPR_ENVIRONMENT_KEY_REWARD_AMOUNT} instead
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT;
 
 // Skip offset in seconds

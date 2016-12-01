@@ -33,8 +33,8 @@
 - (void) setupPlayerWithEnvironment:(NSDictionary*)env params:(NSDictionary*)params timeout:(NSTimeInterval)timeout {
     [self removePlayer];
     
-    _rewardTitle = [env valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE];
-    _rewardAmount = [env valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT];
+    _rewardTitle = [env valueForKey:TPR_ENVIRONMENT_KEY_REWARD_TITLE];
+    _rewardAmount = [env valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT];
 
     if (!_rewardTitle) {
         [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"Environment data does not contain reward title"];

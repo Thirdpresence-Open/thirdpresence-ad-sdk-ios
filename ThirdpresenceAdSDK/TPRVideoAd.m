@@ -19,13 +19,18 @@ NSString *const TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT = @"forceportrait";
 NSString *const TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP = @"forcehttps";
 NSString *const TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP = @"usehttp";
 NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT = @"enablemoat";
+NSString *const TPR_ENVIRONMENT_KEY_REWARD_TITLE = @"rewardtitle";
+NSString *const TPR_ENVIRONMENT_KEY_REWARD_AMOUNT = @"rewardamount";
 
 // Player parameter keys
 NSString *const TPR_PLAYER_PARAMETER_KEY_APP_NAME = @"appname";
 NSString *const TPR_PLAYER_PARAMETER_KEY_APP_VERSION = @"appversion";
 NSString *const TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL = @"appstoreurl";
+
+// Depraceted: to be removed in later versions
 NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE = @"rewardtitle";
 NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT = @"rewardamount";
+
 NSString *const TPR_PLAYER_PARAMETER_KEY_SKIP_OFFSET = @"closedelaymax";
 NSString *const TPR_PLAYER_PARAMETER_KEY_AD_PLACEMENT = @"adplacement";
 NSString *const TPR_PLAYER_PARAMETER_KEY_PUBLISHER = @"publisher";

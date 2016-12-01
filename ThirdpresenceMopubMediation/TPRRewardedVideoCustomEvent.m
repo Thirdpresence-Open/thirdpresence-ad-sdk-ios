@@ -77,7 +77,10 @@
     
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
-                                        placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
+                                        placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
+                                        _rewardTitle, TPR_ENVIRONMENT_KEY_REWARD_TITLE,
+                                        _rewardAmount, TPR_ENVIRONMENT_KEY_REWARD_AMOUNT,
+                                        nil];
     
     NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
     if (val && [val isEqualToString:TPR_VALUE_TRUE]) {

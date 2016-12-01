@@ -18,9 +18,9 @@
     
     TPRLog(@"[TPR] Initialising rewarded video");
    
-    NSAssert([environment valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE] != nil, @"Environment does not contain reward title key");
+    NSAssert([environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_TITLE] != nil, @"Environment does not contain reward title key");
 
-    NSAssert([environment valueForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT] != nil, @"Environment does not contain reward amount key");
+    NSAssert([environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT] != nil, @"Environment does not contain reward amount key");
 
     self = [super initWithPlacementType:TPR_PLACEMENT_TYPE_REWARDED_VIDEO
                             environment:environment
