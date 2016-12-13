@@ -9,6 +9,7 @@
 #import "TPRVideoAd.h"
 
 // Environment keys
+NSString *const TPR_ENVIRONMENT_KEY_SDK_VERSION = @"version";
 NSString *const TPR_ENVIRONMENT_KEY_EXT_SDK = @"sdk";
 NSString *const TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION = @"sdk_version";
 NSString *const TPR_ENVIRONMENT_KEY_SERVER = @"server";
@@ -32,7 +33,6 @@ NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE = @"rewardtitle";
 NSString *const TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT = @"rewardamount";
 
 NSString *const TPR_PLAYER_PARAMETER_KEY_SKIP_OFFSET = @"closedelaymax";
-NSString *const TPR_PLAYER_PARAMETER_KEY_AD_PLACEMENT = @"adplacement";
 NSString *const TPR_PLAYER_PARAMETER_KEY_PUBLISHER = @"publisher";
 NSString *const TPR_PLAYER_PARAMETER_KEY_BUNDLE_ID = @"bundleid";
 NSString *const TPR_PLAYER_PARAMETER_KEY_DEVICE_ID = @"deviceid";
@@ -96,6 +96,7 @@ NSString *const TPR_EVENT_NAME_AD_LEFT_APPLICATION = @"AdLeftApplication";
 NSString *const TPR_PLACEMENT_TYPE_UNKNOWN = @"unknown";
 NSString *const TPR_PLACEMENT_TYPE_INTERSTITIAL = @"interstitial";
 NSString *const TPR_PLACEMENT_TYPE_REWARDED_VIDEO = @"rewardedvideo";
+NSString *const TPR_PLACEMENT_TYPE_BANNER = @"banner";
 
 // Boolean values
 NSString *const TPR_VALUE_TRUE = @"true";

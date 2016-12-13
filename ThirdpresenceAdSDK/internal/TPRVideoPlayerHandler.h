@@ -1,68 +1,70 @@
-//
-//  TPRVideoPlayerHandler.h
-//  ThirdpresenceAdSDK
-//
-//  Created by Marko Okkonen on 25/04/16.
-//  Copyright © 2016 Marko Okkonen. All rights reserved.
-//
+/*!
+ 
+ @header TPRVideoPlayerHandler.h
+ 
+ This file contains TPRVideoPlayerHandler class declaration
+ 
+ @author Marko Okkonen
+ 
+ @copyright 2016 Thirdpresence
+ 
+ */
 
 #import <Foundation/Foundation.h>
-#import "TPRWebViewController.h"
+#import "TPRPlayerViewController.h"
 #import "TPRVideoAd.h"
 
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_NOTIFICATION;
 
-/**
- * Class that wraps WebView that contains the HTML5 player
+/*!
+ @brief Class wraps Web View that contains the Thirdpresence HTML5 video player
+ @discussion Ad placement implementations use this class initialise and display the video player
  */
-@interface TPRVideoPlayerHandler : NSObject <TPRWebViewControllerDelegate>
-/**
- *  Inits the player
- *
- *  @param environment dictionary. @see TPRVideoAd for available keys. Values for TPR_ENVIRONMENT_KEY_ACCOUNT and TPR_ENVIRONMENT_KEY_PLACEMENT_ID are mandatory
- *
- *  @param playerParams contains customization parameters for player
- *
- *  @return TPRVideoInterstitial object
+@interface TPRVideoPlayerHandler : NSObject <UIWebViewDelegate>
+/*!
+  @brief Inits the player
+  @param webView the webview that contains the player
+  @param environment dictionary. See @link TPRVideoAd @/link for available keys. Values for @link TPR_ENVIRONMENT_KEY_ACCOUNT @/link and @link TPR_ENVIRONMENT_KEY_PLACEMENT_ID @/link are mandatory
+  @param playerParams contains customization parameters for player. See @link TPRVideoAd @/link for available keys.
+  @param placementType the type of the placement. See @link TPRVideoAd @/link for placement types.
+  @return TPRVideoPlayerHandler object
  */
-- (instancetype)initWithEnvironment:(NSDictionary*)environment
-                             params:(NSDictionary*)playerParams;
+- (instancetype)initWithPlayer:(TPRWebView*)webView
+                   environment:(NSDictionary *)environment
+                        params:(NSDictionary *)playerParams
+                 placementType:(TPRPlacementType*)placementType;
 
-/**
- *  loads the player
- *
- *  An event TPR_EVENT_NAME_PLAYER_READY is fired when the player is ready for taking further commands
- *
+/*!
+  @brief Loads the player
+  @discussion An event with event name @link TPR_EVENT_NAME_PLAYER_READY @/link is fired when the player is ready for taking further commands
  */
 - (void)loadPlayer;
 
-/**
- *  Loads an ad
- *
- *  An event TPR_EVENT_NAME_AD_LOADED is fired when the player has loaded an ad
- *
+/*!
+  @brief Loads an ad
+  @discussion An event with event name @link TPR_EVENT_NAME_AD_LOADED @/link is fired when the player has loaded an ad
  */
 - (void)loadAd;
 
-/**
- *  Displays the ad
- *
- *  An event TPR_EVENT_NAME_AD_STOPPED when the player is stopped displaing an ad.
- *
+/*!
+  @brief Displays the ad
+  @discussion An event with event name @link TPR_EVENT_NAME_AD_STOPPED @/link when the player is stopped displaing an ad.
  */
 - (void)displayAd;
 
-/**
- *  Resets the player and dismissed the web view controller. loadAd can be called to load another ad.
+/*!
+  @brief Resets the player and dismissed the web view controller.
+  @discussion LoadAd can be called to load another ad.
  */
 - (void)resetState;
 
-/**
- *  Removes the player and releases resources. The player needs to be re-initialized to load another ad.
+/*!
+  @brief Removes the player and releases resources. The player needs to be re-initialized to load another ad.
  */
 - (void)removePlayer;
 
-@property (strong, readonly) TPRWebViewController* webViewController;
+@property (strong, readonly) TPRWebView* webView;
+
 
 @property (readonly) BOOL playerLoading;
 @property (readonly) BOOL playerLoaded;

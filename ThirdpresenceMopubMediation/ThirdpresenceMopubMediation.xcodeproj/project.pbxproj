@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB2A1F741DF97DD800B08088 /* TPRBannerCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = FB2A1F721DF97DD800B08088 /* TPRBannerCustomEvent.h */; };
+		FB2A1F751DF97DD800B08088 /* TPRBannerCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2A1F731DF97DD800B08088 /* TPRBannerCustomEvent.m */; };
 		FB5801A01CD24156004B9D5E /* ThirdpresenceMopubMediation.h in Headers */ = {isa = PBXBuildFile; fileRef = FB58019F1CD24156004B9D5E /* ThirdpresenceMopubMediation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB5801A91CD24257004B9D5E /* TPRInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5801A71CD24257004B9D5E /* TPRInterstitialCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB5801AA1CD24257004B9D5E /* TPRInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5801A81CD24257004B9D5E /* TPRInterstitialCustomEvent.m */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB2A1F721DF97DD800B08088 /* TPRBannerCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRBannerCustomEvent.h; sourceTree = SOURCE_ROOT; };
+		FB2A1F731DF97DD800B08088 /* TPRBannerCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRBannerCustomEvent.m; sourceTree = SOURCE_ROOT; };
 		FB58019C1CD24156004B9D5E /* ThirdpresenceMopubMediation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdpresenceMopubMediation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB58019F1CD24156004B9D5E /* ThirdpresenceMopubMediation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdpresenceMopubMediation.h; sourceTree = "<group>"; };
 		FB5801A71CD24257004B9D5E /* TPRInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRInterstitialCustomEvent.h; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				FB58019F1CD24156004B9D5E /* ThirdpresenceMopubMediation.h */,
 				FB5801AB1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.h */,
 				FB5801AC1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m */,
+				FB2A1F721DF97DD800B08088 /* TPRBannerCustomEvent.h */,
+				FB2A1F731DF97DD800B08088 /* TPRBannerCustomEvent.m */,
 				FBC5A0BA1D6C7A6E002FBE23 /* TPRConstants.h */,
 				FBC5A0BB1D6C7A6E002FBE23 /* TPRConstants.m */,
 			);
@@ -91,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB5801A01CD24156004B9D5E /* ThirdpresenceMopubMediation.h in Headers */,
+				FB2A1F741DF97DD800B08088 /* TPRBannerCustomEvent.h in Headers */,
 				FB5801A91CD24257004B9D5E /* TPRInterstitialCustomEvent.h in Headers */,
 				FB5801AD1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.h in Headers */,
 				FBC5A0BC1D6C7A6E002FBE23 /* TPRConstants.h in Headers */,
@@ -167,6 +174,7 @@
 			files = (
 				FB5801AE1CD2446D004B9D5E /* TPRRewardedVideoCustomEvent.m in Sources */,
 				FBC5A0BD1D6C7A6E002FBE23 /* TPRConstants.m in Sources */,
+				FB2A1F751DF97DD800B08088 /* TPRBannerCustomEvent.m in Sources */,
 				FB5801AA1CD24257004B9D5E /* TPRInterstitialCustomEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

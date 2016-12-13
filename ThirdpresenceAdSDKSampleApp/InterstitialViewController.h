@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  InterstitialViewController.h
 //  AdSDKSampleApp
 //
 //  Created by Marko Okkonen on 20/04/16.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
-#import <CoreLocation/CLLocationManager.h>
+#import "BaseViewController.h"
 
-@interface ViewController : UIViewController <TPRVideoAdDelegate, UITextFieldDelegate>
+@interface InterstitialViewController : BaseViewController <TPRVideoAdDelegate, UITextFieldDelegate>
 
 // Button outlets
 @property (weak) IBOutlet UIButton *initializeButton;
@@ -21,18 +21,8 @@
 @property (weak) IBOutlet UITextField *vastField;
 @property (weak) IBOutlet UITextField *statusField;
 
-// Location manager for providing location data for Ad SDK
-@property (strong) CLLocationManager* locationManager;
-
-// UI alert message queue
-@property (strong) NSMutableArray *pendingMessages;
-@property (assign) BOOL showingAlert;
-
-// Thirdpresence interstitial ad
 @property (strong) TPRVideoInterstitial *interstitial;
 
-// Ad loaded property
-@property (assign) BOOL adLoaded;
 
 @end
 

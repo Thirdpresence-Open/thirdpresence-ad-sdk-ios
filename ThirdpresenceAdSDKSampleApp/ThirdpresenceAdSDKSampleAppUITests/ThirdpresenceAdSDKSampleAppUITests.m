@@ -8,7 +8,6 @@
 
 #import <XCTest/XCTest.h>
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 NSTimeInterval const INIT_TIMEOUT = 5.0;
 NSTimeInterval const LOAD_TIMEOUT = 10.0;
@@ -66,8 +65,9 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
     [super tearDown];
 }
 
-- (void)testDisplayAd {
-
+- (void)testInterstitialAd {
+    [app.tables.staticTexts[@"Interstitial"] tap];
+    
     sleep(1);
     
     [[[app.buttons containingPredicate:
@@ -108,6 +108,78 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
             }];
         }
     }];
+
+}
+
+
+- (void)testRewardedAd {
+    
+    [app.tables.staticTexts[@"Rewarded video"] tap];
+    
+    sleep(1);
+    
+    [[[app.buttons containingPredicate:
+       [NSPredicate predicateWithFormat:@"identifier MATCHES 'init_button'"]] element] tap];
+    
+    XCUIElement *statusField = [[app.textFields containingPredicate:
+                                 [NSPredicate predicateWithFormat:@"identifier MATCHES 'status_field'"]] element];
+    
+    [self expectationForPredicate:[NSPredicate predicateWithFormat:@"value MATCHES 'READY'"] evaluatedWithObject: statusField handler:nil];
+    
+    [self waitForExpectationsWithTimeout:INIT_TIMEOUT handler: ^(NSError * __nullable error) {
+        if (error) {
+            XCTFail(@"Timeout while initializing");
+        }
+        else {
+            [[[app.buttons containingPredicate:
+               [NSPredicate predicateWithFormat:@"identifier MATCHES 'load_button'"]] element] tap];
+            
+            [self expectationForPredicate:[NSPredicate predicateWithFormat:@"value MATCHES 'LOADED'"] evaluatedWithObject: statusField handler:nil];
+            
+            [self waitForExpectationsWithTimeout:LOAD_TIMEOUT handler: ^(NSError * __nullable error) {
+                if (error) {
+                    XCTFail(@"Timeout while loading");
+                }
+                else {
+                    [[[app.buttons containingPredicate:
+                       [NSPredicate predicateWithFormat:@"identifier MATCHES 'display_button'"]] element] tap];
+                    
+                    [self expectationForPredicate:[NSPredicate predicateWithFormat:@"value IN {'COMPLETED', 'READY'}"] evaluatedWithObject: statusField handler:nil];
+                    
+                    [self waitForExpectationsWithTimeout:DISPLAY_TIMEOUT handler: ^(NSError * __nullable error) {
+                        if (error) {
+                            XCTFail(@"Timeout while displaying");
+                        }
+                        
+                        XCUIElement *rewardField = [[app.textFields containingPredicate:
+                                                     [NSPredicate predicateWithFormat:@"identifier MATCHES 'reward_field'"]] element];
+                        NSString *value = rewardField.value;
+                        XCTAssert([value isEqualToString:@"10 diamonds"], @"Reward not equal with expected");
+                        
+                    }];
+                }
+            }];
+        }
+    }];
+    
+}
+
+- (void)testBannerAd {
+    [app.tables.staticTexts[@"Banner"] tap];
+    
+    sleep(1);
+    
+    XCUIElement *statusField = [[app.textFields containingPredicate:
+                                 [NSPredicate predicateWithFormat:@"identifier MATCHES 'status_field'"]] element];
+    
+    [self expectationForPredicate:[NSPredicate predicateWithFormat:@"value MATCHES 'DISPLAYING'"] evaluatedWithObject: statusField handler:nil];
+    
+    [self waitForExpectationsWithTimeout:LOAD_TIMEOUT handler: ^(NSError * __nullable error) {
+        if (error) {
+            XCTFail(@"Timeout while displaying");
+        }
+    }];
+    
 
 }
 

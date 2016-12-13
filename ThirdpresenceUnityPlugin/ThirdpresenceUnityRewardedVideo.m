@@ -43,7 +43,13 @@
         [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"Environment data does not contain reward amount"];
     }
     else {
-        _rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:[self convertEnvironment:env] params:params timeout:timeout];
+        NSMutableDictionary* environment = [self convertEnvironment:env];
+        [environment setValue:@"unity" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
+        
+        NSString *version = [NSString stringWithUTF8String:TPR_SDK_VERSION];
+        [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_SDK_VERSION];
+        
+        _rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:environment params:params timeout:timeout];
         _rewardedVideo.delegate = self;
     }
 }

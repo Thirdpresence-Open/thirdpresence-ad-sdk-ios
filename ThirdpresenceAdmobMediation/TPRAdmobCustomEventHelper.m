@@ -10,6 +10,14 @@
 
 @implementation TPRAdmobCustomEventHelper
 
+NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT = @"account";
+NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
+NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_LANDSCAPE = @"forcelandscape";
+NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_PORTRAIT = @"forceportrait";
+NSString *const TPR_PUBLISHER_PARAM_REWARD_TITLE = @"rewardtitle";
+NSString *const TPR_PUBLISHER_PARAM_REWARD_AMOUNT = @"rewardamount";
+NSString *const TPR_PUBLISHER_PARAM_USE_INSECURE_HTTP = @"usehttp";
+
 + (NSDictionary*)parseParamsString:(NSString*)paramsString {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
     if (paramsString) {

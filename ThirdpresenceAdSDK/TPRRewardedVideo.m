@@ -18,16 +18,22 @@
     
     TPRLog(@"[TPR] Initialising rewarded video");
    
-    NSAssert([environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_TITLE] != nil, @"Environment does not contain reward title key");
+    NSString *rewardTitle = [environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_TITLE];
+    NSAssert(rewardTitle != nil, @"Environment does not contain reward title key");
 
-    NSAssert([environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT] != nil, @"Environment does not contain reward amount key");
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *rewardAmount = [f numberFromString:[environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT]];
+    
+    NSAssert(rewardAmount != nil, @"Environment does not contain reward amount key");
 
     self = [super initWithPlacementType:TPR_PLACEMENT_TYPE_REWARDED_VIDEO
                             environment:environment
                                  params:playerParams
                                 timeout:secs];
     
-
+    _rewardTitle = rewardTitle;
+    _rewardAmount = rewardAmount;
     return self;
 }
 

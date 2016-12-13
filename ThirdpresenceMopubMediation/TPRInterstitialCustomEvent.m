@@ -38,7 +38,7 @@
 
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary*)info {
 
-    NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:6];
 
     NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
     if (account) {

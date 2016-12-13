@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB16118D1DF04A3500B8D0E3 /* TPRVideoBanner.h in Headers */ = {isa = PBXBuildFile; fileRef = FB16118B1DF04A3500B8D0E3 /* TPRVideoBanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB16118E1DF04A3500B8D0E3 /* TPRVideoBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FB16118C1DF04A3500B8D0E3 /* TPRVideoBanner.m */; };
+		FB1611911DF04CB500B8D0E3 /* TPRBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = FB16118F1DF04CB500B8D0E3 /* TPRBannerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB1611921DF04CB500B8D0E3 /* TPRBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611901DF04CB500B8D0E3 /* TPRBannerView.m */; };
+		FB1611A41DF166E000B8D0E3 /* TPRWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = FB1611A21DF166E000B8D0E3 /* TPRWebView.h */; };
+		FB1611A51DF166E000B8D0E3 /* TPRWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611A31DF166E000B8D0E3 /* TPRWebView.m */; };
 		FB5DD3361CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32B1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h */; };
 		FB5DD3371CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD32C1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m */; };
-		FB5DD3381CEB0DE5008C3A34 /* TPRWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32D1CEB0DE5008C3A34 /* TPRWebViewController.h */; };
-		FB5DD3391CEB0DE5008C3A34 /* TPRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD32E1CEB0DE5008C3A34 /* TPRWebViewController.m */; };
+		FB5DD3381CEB0DE5008C3A34 /* TPRPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32D1CEB0DE5008C3A34 /* TPRPlayerViewController.h */; };
+		FB5DD3391CEB0DE5008C3A34 /* TPRPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD32E1CEB0DE5008C3A34 /* TPRPlayerViewController.m */; };
 		FB5DD33A1CEB0DE5008C3A34 /* ThirdpresenceAdSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32F1CEB0DE5008C3A34 /* ThirdpresenceAdSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB5DD33B1CEB0DE5008C3A34 /* TPRRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD3301CEB0DE5008C3A34 /* TPRRewardedVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB5DD33C1CEB0DE5008C3A34 /* TPRRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD3311CEB0DE5008C3A34 /* TPRRewardedVideo.m */; };
@@ -34,12 +40,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB16118B1DF04A3500B8D0E3 /* TPRVideoBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoBanner.h; sourceTree = "<group>"; };
+		FB16118C1DF04A3500B8D0E3 /* TPRVideoBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoBanner.m; sourceTree = "<group>"; };
+		FB16118F1DF04CB500B8D0E3 /* TPRBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRBannerView.h; sourceTree = "<group>"; };
+		FB1611901DF04CB500B8D0E3 /* TPRBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRBannerView.m; sourceTree = "<group>"; };
+		FB1611A21DF166E000B8D0E3 /* TPRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRWebView.h; sourceTree = "<group>"; };
+		FB1611A31DF166E000B8D0E3 /* TPRWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRWebView.m; sourceTree = "<group>"; };
 		FB4978781CC6346000F446A1 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdpresenceAdSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB49787D1CC6346000F446A1 /* ThirdpresenceAdSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ThirdpresenceAdSDK-Info.plist"; sourceTree = "<group>"; };
 		FB5DD32B1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoPlayerHandler.h; sourceTree = "<group>"; };
 		FB5DD32C1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoPlayerHandler.m; sourceTree = "<group>"; };
-		FB5DD32D1CEB0DE5008C3A34 /* TPRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRWebViewController.h; sourceTree = "<group>"; };
-		FB5DD32E1CEB0DE5008C3A34 /* TPRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRWebViewController.m; sourceTree = "<group>"; };
+		FB5DD32D1CEB0DE5008C3A34 /* TPRPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRPlayerViewController.h; sourceTree = "<group>"; };
+		FB5DD32E1CEB0DE5008C3A34 /* TPRPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRPlayerViewController.m; sourceTree = "<group>"; };
 		FB5DD32F1CEB0DE5008C3A34 /* ThirdpresenceAdSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdpresenceAdSDK.h; sourceTree = "<group>"; };
 		FB5DD3301CEB0DE5008C3A34 /* TPRRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRRewardedVideo.h; sourceTree = "<group>"; };
 		FB5DD3311CEB0DE5008C3A34 /* TPRRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRRewardedVideo.m; sourceTree = "<group>"; };
@@ -90,6 +102,10 @@
 				FB5DD3331CEB0DE5008C3A34 /* TPRVideoAd.m */,
 				FB5DD3341CEB0DE5008C3A34 /* TPRVideoInterstitial.h */,
 				FB5DD3351CEB0DE5008C3A34 /* TPRVideoInterstitial.m */,
+				FB16118B1DF04A3500B8D0E3 /* TPRVideoBanner.h */,
+				FB16118C1DF04A3500B8D0E3 /* TPRVideoBanner.m */,
+				FB16118F1DF04CB500B8D0E3 /* TPRBannerView.h */,
+				FB1611901DF04CB500B8D0E3 /* TPRBannerView.m */,
 			);
 			path = ThirdpresenceAdSDK;
 			sourceTree = SOURCE_ROOT;
@@ -99,8 +115,10 @@
 			children = (
 				FB5DD32B1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h */,
 				FB5DD32C1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m */,
-				FB5DD32D1CEB0DE5008C3A34 /* TPRWebViewController.h */,
-				FB5DD32E1CEB0DE5008C3A34 /* TPRWebViewController.m */,
+				FB5DD32D1CEB0DE5008C3A34 /* TPRPlayerViewController.h */,
+				FB5DD32E1CEB0DE5008C3A34 /* TPRPlayerViewController.m */,
+				FB1611A21DF166E000B8D0E3 /* TPRWebView.h */,
+				FB1611A31DF166E000B8D0E3 /* TPRWebView.m */,
 			);
 			path = internal;
 			sourceTree = "<group>";
@@ -124,8 +142,11 @@
 				FB5DD33B1CEB0DE5008C3A34 /* TPRRewardedVideo.h in Headers */,
 				FB5DD33F1CEB0DE5008C3A34 /* TPRVideoInterstitial.h in Headers */,
 				FB5DD33D1CEB0DE5008C3A34 /* TPRVideoAd.h in Headers */,
+				FB16118D1DF04A3500B8D0E3 /* TPRVideoBanner.h in Headers */,
+				FB1611911DF04CB500B8D0E3 /* TPRBannerView.h in Headers */,
 				FB5DD3361CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h in Headers */,
-				FB5DD3381CEB0DE5008C3A34 /* TPRWebViewController.h in Headers */,
+				FB5DD3381CEB0DE5008C3A34 /* TPRPlayerViewController.h in Headers */,
+				FB1611A41DF166E000B8D0E3 /* TPRWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,10 +220,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5DD3391CEB0DE5008C3A34 /* TPRWebViewController.m in Sources */,
+				FB16118E1DF04A3500B8D0E3 /* TPRVideoBanner.m in Sources */,
+				FB5DD3391CEB0DE5008C3A34 /* TPRPlayerViewController.m in Sources */,
+				FB1611921DF04CB500B8D0E3 /* TPRBannerView.m in Sources */,
 				FB5DD33E1CEB0DE5008C3A34 /* TPRVideoAd.m in Sources */,
 				FB5DD3401CEB0DE5008C3A34 /* TPRVideoInterstitial.m in Sources */,
 				FB5DD33C1CEB0DE5008C3A34 /* TPRRewardedVideo.m in Sources */,
+				FB1611A51DF166E000B8D0E3 /* TPRWebView.m in Sources */,
 				FB5DD3371CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +335,7 @@
 		FB4978811CC6346000F446A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -336,6 +361,7 @@
 		FB4978821CC6346000F446A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;

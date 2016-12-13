@@ -1,26 +1,27 @@
 /*!
  
- @header TPRVideoInterstitial.h
+ @header TPRVideoBanner.h
  
- This file contains TPRRewardedVideo class declaration.
+ This file contains TPRVideoBanner class declaration
  
  @author Marko Okkonen
  @copyright 2016 Thirdpresence
  
  */
 
-#import <UIKit/UIKit.h>
 #import "TPRVideoAd.h"
+#import "TPRBannerView.h"
 
 @class TPRVideoPlayerHandler;
 
 /*!
- @brief TPRVideoInterstitial implements a video interstitial ad placement
+ @brief TPRVideoBanner implements a video banner ad placement
  */
-@interface TPRVideoInterstitial : TPRVideoAd
+@interface TPRVideoBanner : TPRVideoAd
 
 /*!
- @brief Inits the rewarded video placement
+ @brief Inits the banner placement
+ @param bannerView the view that contains the ad
  @param environment a dictionary containing environment parameters
  @param playerParams a dictionary containing customization parameters for the player
  @param secs timeout in seconds for initializing the player and loading an ad
@@ -34,18 +35,13 @@
     Use @link TPR_PLAYER_DEFAULT_TIMEOUT @/link as a default timeout.
  
     An event with the name @link TPR_EVENT_NAME_PLAYER_READY @/link event is fired when the player is ready to load an ad
-
- @return TPRVideoInterstitial object
+ 
+ @return TPRVideoBanner object
  */
-- (instancetype)initWithEnvironment:(NSDictionary*)environment
-                              params:(NSDictionary*)playerParams
-                             timeout:(NSTimeInterval)secs;
-
-// Intended to be used from derived classed only
-- (instancetype)initWithPlacementType:(TPRPlacementType*)type
-                           environment:(NSDictionary*)environment
-                                params:(NSDictionary*)playerParams
-                               timeout:(NSTimeInterval)secs;
+- (instancetype)initWithBannerView:(TPRBannerView*)bannerView
+                       environment:(NSDictionary*)environment
+                            params:(NSDictionary*)playerParams
+                        timeout:(NSTimeInterval)secs;
 
 /*!
  @brief Loads an ad
@@ -53,21 +49,23 @@
  */
 - (void)loadAd;
 
+
 /*!
  @brief Displays the ad
- @discussion An event with the name @link TPR_EVENT_NAME_AD_STOPPED @/link is fired when the player is stopped displaing an ad.
+ @discussion By default the ad is displayed automatically right after the ad is loaded. Set @link  disableAutoDisplay @/link to true in order to disable the default behaviour.
  */
 - (void)displayAd;
 
+
 /*!
- @brief Resets the ad placement and closes the ad view
- @discussion Method @link //apple_ref/occ/instm/TPRVideoInterstitial/loadAd @/link can be called to load another ad.
+ @brief Resets the ad placement
+ @discussion Method @link //apple_ref/occ/instm/TPRVideoBanner/loadAd @/link can be called to load another ad.
  */
 - (void)reset;
 
 /*!
  @brief Removes the player and releases resources
- @discussion Method @link //apple_ref/occ/instm/TPRVideoInterstitial/initWithEnvironment:params:timeout: @/link must be called before loading a new ad.
+ @discussion Method @link //apple_ref/occ/instm/TPRVideoBanner/initWithBannerView:environment:params:timeout: @/link must be called before loading a new ad.
  */
 - (void)removePlayer;
 
@@ -76,10 +74,16 @@
  */
 @property (nonatomic, weak) id<TPRVideoAdDelegate> delegate;
 
+/*!
+ @brief Disables the auto display behaviour
+ */
+@property (assign) BOOL disableAutoDisplay;
+
 // Internal
 @property (readonly, strong) TPRVideoPlayerHandler* playerHandler;
 
 // Not available
 - (instancetype) init NS_UNAVAILABLE;
+
 
 @end

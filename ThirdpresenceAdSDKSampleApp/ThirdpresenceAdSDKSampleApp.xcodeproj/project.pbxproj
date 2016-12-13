@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		FB0149FB1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0149FA1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m */; };
+		FB1611981DF0593500B8D0E3 /* RewardedVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611971DF0593500B8D0E3 /* RewardedVideoViewController.m */; };
+		FB16119B1DF063A100B8D0E3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = FB16119A1DF063A100B8D0E3 /* Constants.m */; };
+		FB16119E1DF14D4400B8D0E3 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB16119D1DF14D4400B8D0E3 /* BannerViewController.m */; };
+		FB1611A11DF14E2F00B8D0E3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611A01DF14E2F00B8D0E3 /* BaseViewController.m */; };
 		FB4978E01CC7969000F446A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978DF1CC7969000F446A1 /* main.m */; };
 		FB4978E31CC7969000F446A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E21CC7969000F446A1 /* AppDelegate.m */; };
-		FB4978E61CC7969000F446A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E51CC7969000F446A1 /* ViewController.m */; };
+		FB4978E61CC7969000F446A1 /* InterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4978E51CC7969000F446A1 /* InterstitialViewController.m */; };
 		FB4978E91CC7969000F446A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978E71CC7969000F446A1 /* Main.storyboard */; };
 		FB4978EB1CC7969000F446A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EA1CC7969000F446A1 /* Assets.xcassets */; };
 		FB4978EE1CC7969000F446A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */; };
@@ -60,12 +64,20 @@
 		FB0149F81DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThirdpresenceAdSDKSampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0149FA1DD49C8B00216F08 /* ThirdpresenceAdSDKSampleAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdpresenceAdSDKSampleAppUITests.m; sourceTree = "<group>"; };
 		FB0149FC1DD49C8B00216F08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB1611961DF0593500B8D0E3 /* RewardedVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardedVideoViewController.h; sourceTree = "<group>"; };
+		FB1611971DF0593500B8D0E3 /* RewardedVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardedVideoViewController.m; sourceTree = "<group>"; };
+		FB1611991DF062E600B8D0E3 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		FB16119A1DF063A100B8D0E3 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		FB16119C1DF14D4400B8D0E3 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
+		FB16119D1DF14D4400B8D0E3 /* BannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerViewController.m; sourceTree = "<group>"; };
+		FB16119F1DF14E2F00B8D0E3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		FB1611A01DF14E2F00B8D0E3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		FB4978DB1CC7969000F446A1 /* ThirdpresenceAdSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdpresenceAdSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB4978DF1CC7969000F446A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB4978E11CC7969000F446A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB4978E21CC7969000F446A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FB4978E41CC7969000F446A1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FB4978E51CC7969000F446A1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FB4978E41CC7969000F446A1 /* InterstitialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterstitialViewController.h; sourceTree = "<group>"; };
+		FB4978E51CC7969000F446A1 /* InterstitialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterstitialViewController.m; sourceTree = "<group>"; };
 		FB4978E81CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB4978EA1CC7969000F446A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB4978ED1CC7969000F446A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -138,8 +150,16 @@
 				FB5801491CD209ED004B9D5E /* ThirdpresenceAdSDKSampleApp.entitlements */,
 				FB4978E11CC7969000F446A1 /* AppDelegate.h */,
 				FB4978E21CC7969000F446A1 /* AppDelegate.m */,
-				FB4978E41CC7969000F446A1 /* ViewController.h */,
-				FB4978E51CC7969000F446A1 /* ViewController.m */,
+				FB1611991DF062E600B8D0E3 /* Constants.h */,
+				FB16119A1DF063A100B8D0E3 /* Constants.m */,
+				FB16119F1DF14E2F00B8D0E3 /* BaseViewController.h */,
+				FB1611A01DF14E2F00B8D0E3 /* BaseViewController.m */,
+				FB4978E41CC7969000F446A1 /* InterstitialViewController.h */,
+				FB4978E51CC7969000F446A1 /* InterstitialViewController.m */,
+				FB1611961DF0593500B8D0E3 /* RewardedVideoViewController.h */,
+				FB1611971DF0593500B8D0E3 /* RewardedVideoViewController.m */,
+				FB16119C1DF14D4400B8D0E3 /* BannerViewController.h */,
+				FB16119D1DF14D4400B8D0E3 /* BannerViewController.m */,
 				FB4978E71CC7969000F446A1 /* Main.storyboard */,
 				FB4978EA1CC7969000F446A1 /* Assets.xcassets */,
 				FB4978EC1CC7969000F446A1 /* LaunchScreen.storyboard */,
@@ -315,8 +335,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB4978E61CC7969000F446A1 /* ViewController.m in Sources */,
+				FB16119B1DF063A100B8D0E3 /* Constants.m in Sources */,
+				FB1611981DF0593500B8D0E3 /* RewardedVideoViewController.m in Sources */,
+				FB16119E1DF14D4400B8D0E3 /* BannerViewController.m in Sources */,
+				FB4978E61CC7969000F446A1 /* InterstitialViewController.m in Sources */,
 				FB4978E31CC7969000F446A1 /* AppDelegate.m in Sources */,
+				FB1611A11DF14E2F00B8D0E3 /* BaseViewController.m in Sources */,
 				FB4978E01CC7969000F446A1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

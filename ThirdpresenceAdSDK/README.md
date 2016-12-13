@@ -1,6 +1,6 @@
 # Thirdpresence Ad SDK For iOS
 
-Thirdpresence Ad SDK provides an API to display interstitial and rewarded video ads in an application.
+Thirdpresence Ad SDK provides an API to display video banner, interstitial and rewarded video ads in an application.
 
 ## Minimum requirements
 
@@ -69,7 +69,7 @@ NSLocationUsageDescription and NSLocationWhenInUseUsageDescription describe the 
 <string>Location services are used for ads targeting</string>
 ```
 
-Before initialising Thirdpresence ad unit, the application shall request the user to enable location services:
+Before initialising Thirdpresence ad placement, the application shall request the user to enable location services:
 
 ```
 self.locationManager = [[CLLocationManager alloc] init];
@@ -80,6 +80,12 @@ self.locationManager = [[CLLocationManager alloc] init];
 ### Integration
 
 With these instructions, you can start displaying ads on an application without using mediation plugins. 
+
+Check out the Sample App for a complete reference. 
+
+#### Intersitial 
+
+There are three methods to be called in order to display interstitial ad: initWithEnvironment, loadAd and displayAd. The ad placement is closed by calling reset or completely removed by calling removePlayer.
 
 Implement the TPRVideoAdDelegate interface on the class that handles displaying the ad:
 
@@ -120,7 +126,7 @@ ViewController.m:
 			} else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
 				// Failed displaying the loaded ad
 			} else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-				// Displaying ad stopped
+				// Displaying the ad stopped
 				// Close and reset the interstitial
 				[self.interstitial reset];
 			}
@@ -128,16 +134,15 @@ ViewController.m:
 	}
 ```
 
-Instantiate and setup the ad unit:
+Instantiate and setup the ad placement:
 ```
 
     // The environment dictionary is mandatory to pass the SDK the account and placement id.
-    // For testing purposes you can use the account name "sdk-demo" and placementid "sa7nvltbrn".
+    // For testing purposes you can use the account name "sdk-demo" and placementid "nhdfxqclej".
     // Contact to Thirdpresence get your own.
     NSDictionary *environment = [NSDictionary dictionaryWithObjectsAndKeys:
                                         @"<ACCOUNT_NAME>", TPR_ENVIRONMENT_KEY_ACCOUNT,
-                                        @"<PLACEMENT_ID>", TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
-                                        TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];
+                                        @"<PLACEMENT_ID>", TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
 
     // With the playerParams dictionary you can pass data about the application for advertisers.
     // The application's bundle id is determined automatically.
@@ -153,7 +158,9 @@ Instantiate and setup the ad unit:
                                          @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];
                                          
-    self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment params:playerParams];
+    self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment 
+                                                                   params:playerParams
+                                                                  timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
     self.interstitial.delegate = self;                                     
                                          
 ```        
@@ -169,12 +176,194 @@ Display the ad:
          [self.interstitial displayAd];
     }
 ```
-Close the ad unit and clean up:
+Close the ad placement and clean up:
 ```
 	[self.interstitial removePlayer];
 	self.interstitial.delegate = nil;
 	self.interstitial = nil;
 ```
 
-Check out the Sample App for a complete reference. 
+#### Rewarded video
 
+There are three methods to be called in order to display interstitial ad: initWithEnvironment, loadAd and displayAd. The ad placement is closed by calling reset or completely removed by calling removePlayer.
+
+Implement the TPRVideoAdDelegate interface on the class that handles displaying the ad:
+
+ViewController.h:
+
+```
+#import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
+
+@interface ViewController : UIViewController <TPRVideoAdDelegate>
+
+...
+
+@property (strong) TPRRewardedVideo *rewardedVideo;
+
+@end
+```
+
+ViewController.m:
+```
+    - (void) videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
+        if (videoAd == self.rewardedVideo) {
+            NSLog(@"VideoAd failed: %@", error.localizedDescription);
+            // Handle the error
+        }
+    }
+
+
+    - (void) videoAd:(TPRVideoAd*)videoAd eventOccured:(TPRPlayerEvent*)event {
+        if (videoAd == self.rewardedVideo) {
+            NSLog(@"VideoAd event: %@", event);
+
+            NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
+            if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
+                // The player is ready for loading ads
+            } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
+                // An ad is loaded
+                _adLoaded = YES;
+            } else if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_ERROR]) {
+                // Failed displaying the loaded ad
+            } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
+                // Displaying the ad stopped
+                // Close and reset the interstitial
+                [self.rewardedVideo reset];
+            } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {
+                // Reward based on video complete
+                NSLog(@"Reward: %@ %@", self.rewardedVideo.rewardAmount, self.rewardedVideo.rewardTitle);
+            }
+        }
+    }
+```
+
+Instantiate and setup the ad placement:
+```
+
+    // The environment dictionary is mandatory to pass the SDK the account and placement id.
+    // For testing purposes you can use the account name "sdk-demo" and placementid "sa7nvltbrn".
+    // Contact to Thirdpresence get your own.
+    //
+    // It is also mandotory to set values for TPR_ENVIRONMENT_KEY_REWARD_TITLE and
+    // TPR_ENVIRONMENT_KEY_REWARD_AMOUNT keys.
+    NSDictionary *environment = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"<ACCOUNT_NAME>", TPR_ENVIRONMENT_KEY_ACCOUNT,
+                                    @"<PLACEMENT_ID>", TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
+                                    @"my-money", TPR_ENVIRONMENT_KEY_REWARD_TITLE,
+                                    @"10", TPR_ENVIRONMENT_KEY_REWARD_AMOUNT, nil];
+
+    // With the playerParams dictionary you can pass data about the application for advertisers.
+    // The application's bundle id is determined automatically.
+    // In order to get more targeted ads the user's gender and year of birth are recommended.
+    // You can get the data, for example, from Facebook Graph API if you have integrated with Facekbook.
+    // https://developers.facebook.com/docs/graph-api/reference/v2.6/user
+
+    NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
+                                    @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
+                                    @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
+                                    @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
+                                    @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB, nil];
+
+    self.rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:environment 
+                                                                params:playerParams
+                                                               timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
+    self.rewardedVideo.delegate = self;                                     
+
+```        
+Load an ad:
+```        
+    if (self.rewardedVideo.ready) {
+        [self.rewardedVideo loadAd];
+    } 
+```
+Display the ad:
+```
+    if (_adLoaded) {
+        [self.rewardedVideo displayAd];
+    }
+```
+Close the ad placement and clean up:
+```
+    [self.rewardedVideo removePlayer];
+    self.rewardedVideo.delegate = nil;
+    self.rewardedVideo = nil;
+```
+
+
+#### Video banner
+
+Following steps are required in order to display a video banner. This example assumes the TPRBannerView is instantiated from XIB. Alternatively it can be done programatically. 
+
+In the Interface Builder, drag a View type of object from the Object Library to your View Controller to the position where the banner is going to be displayed. Type the class name TPRBannerView to the Class field in the Identity Inspector. Set size of the view according the desired size of the banner.
+
+Add an outlet for the banner view in header file of the view controller and connect the outlet to the banner view in the Interface Builder.
+
+ViewController.h:
+
+```
+#import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
+
+@interface ViewController : UIViewController
+
+...
+
+@property(weak) IBOutlet TPRBannerView *bannerView;
+@property(strong) TPRVideoBanner *banner;
+
+```
+
+Instantiate and setup the banner placement:
+
+ViewController.m:
+```
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Your own setup code here
+
+    // The video banner setup
+
+    // The environment dictionary is mandatory to pass the SDK the account and placement id.
+    // For testing purposes you can use the account name "sdk-demo" and placementid "zhlwlm9280".
+    // Contact to Thirdpresence get your own.
+    NSDictionary *environment = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        @"<ACCOUNT_NAME>", TPR_ENVIRONMENT_KEY_ACCOUNT,
+                                        @"<PLACEMENT_ID>", TPR_ENVIRONMENT_KEY_PLACEMENT_ID, nil];
+
+    // With the playerParams dictionary you can pass data about the application for advertisers.
+    // The application's bundle id is determined automatically.
+    // In order to get more targeted ads the user's gender and year of birth are recommended.
+    // You can get the data, for example, from Facebook Graph API if you have integrated with Facekbook.
+    // https://developers.facebook.com/docs/graph-api/reference/v2.6/user
+
+    NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
+                                        @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
+                                        @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
+                                        @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
+                                        @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB,nil];
+
+    self.banner = [[TPRVideoBanner alloc] initWithBannerView:self.bannerView
+                                                 environment:environment 
+                                                      params:playerParams
+                                                     timeout:TPR_PLAYER_DEFAULT_TIMEOUT];           
+
+    [self.banner loadAd];
+
+```        
+
+Finally clean up when the view controller is deallocated.
+```
+    - (void)dealloc {
+        [self.banner removePlayer];
+        self.banner = nil;
+        self.bannerView = nil
+    }
+```
+
+
+### API reference
+
+See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.0/index.html)

@@ -17,9 +17,6 @@
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
-NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT = @"account";
-NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
-
 @interface TPRAdmobCustomEventInterstitial () <TPRVideoAdDelegate, GADCustomEventInterstitial>
 
 - (void)loadAd;
@@ -48,9 +45,8 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
                                      label:(NSString *)serverLabel
                                    request:(GADCustomEventRequest *)request {
     
-    
     NSDictionary* info = [TPRAdmobCustomEventHelper parseParamsString:serverParameter];
-    NSMutableDictionary* environment = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary* environment = [NSMutableDictionary dictionaryWithCapacity:6];
     
     NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
     if (account) {
@@ -81,9 +77,9 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
         [environment setValue:TPR_VALUE_TRUE forKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
     }
     
-    val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+    val = [info objectForKey:TPR_PUBLISHER_PARAM_USE_INSECURE_HTTP];
     if (val) {
-        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_FORCE_SECURE_HTTP];
+        [environment setValue:val forKey:TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP];
     }
     
     [environment setValue:@"admob" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
@@ -158,11 +154,9 @@ NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID = @"placementid";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self.delegate customEventInterstitialWasClicked:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LEFT_APPLICATION]) {
-            [self.delegate customEventInterstitialWasClicked:self];
+            [self.delegate customEventInterstitialWillLeaveApplication:self];
         }
     }
 }
-
-
 
 @end

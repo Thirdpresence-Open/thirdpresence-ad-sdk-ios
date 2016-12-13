@@ -33,7 +33,13 @@
 - (void) setupPlayerWithEnvironment:(NSDictionary*)env params:(NSDictionary*)params timeout:(NSTimeInterval)timeout {
     [self removePlayer];
     
-    _interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:[self convertEnvironment:env] params:params timeout:timeout];
+    NSMutableDictionary* environment = [self convertEnvironment:env];
+    [environment setValue:@"unity" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
+    
+    NSString *version = [NSString stringWithUTF8String:TPR_SDK_VERSION];
+    [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_SDK_VERSION];
+    
+    _interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment params:params timeout:timeout];
     _interstitial.delegate = self;
 }
 

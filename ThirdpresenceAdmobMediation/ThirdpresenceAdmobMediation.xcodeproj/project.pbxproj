@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB4ADBE61DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.h in Headers */ = {isa = PBXBuildFile; fileRef = FB4ADBE41DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.h */; };
+		FB4ADBE71DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4ADBE51DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.m */; };
+		FB4ADBEA1DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = FB4ADBE81DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.h */; };
+		FB4ADBEB1DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4ADBE91DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.m */; };
 		FB5DD3161CEB0506008C3A34 /* ThirdpresenceAdmobMediation-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5DD3151CEB0506008C3A34 /* ThirdpresenceAdmobMediation-Info.plist */; };
 		FBDC28E61CDC7DE1002B8A46 /* ThirdpresenceAdmobMediation.h in Headers */ = {isa = PBXBuildFile; fileRef = FBDC28E51CDC7DE1002B8A46 /* ThirdpresenceAdmobMediation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBDC29131CDC897F002B8A46 /* TPRAdmobCustomEventInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = FBDC29111CDC897F002B8A46 /* TPRAdmobCustomEventInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,6 +23,10 @@
 		82327A430309A61DF33DABDE /* Pods-ThirdpresenceAdmobMediation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdpresenceAdmobMediation.release.xcconfig"; path = "ThirdpresenceAdmobMediation/Pods/Target Support Files/Pods-ThirdpresenceAdmobMediation/Pods-ThirdpresenceAdmobMediation.release.xcconfig"; sourceTree = "<group>"; };
 		C7E8F57F162223AEF96025BB /* libPods-ThirdpresenceAdmobMediation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThirdpresenceAdmobMediation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7565F71F98A55E4385456FF /* Pods-ThirdpresenceAdmobMediation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdpresenceAdmobMediation.debug.xcconfig"; path = "ThirdpresenceAdmobMediation/Pods/Target Support Files/Pods-ThirdpresenceAdmobMediation/Pods-ThirdpresenceAdmobMediation.debug.xcconfig"; sourceTree = "<group>"; };
+		FB4ADBE41DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRAdmobCustomEventBanner.h; sourceTree = SOURCE_ROOT; };
+		FB4ADBE51DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRAdmobCustomEventBanner.m; sourceTree = SOURCE_ROOT; };
+		FB4ADBE81DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRAdmobCustomEventRewardedVideo.h; sourceTree = SOURCE_ROOT; };
+		FB4ADBE91DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRAdmobCustomEventRewardedVideo.m; sourceTree = SOURCE_ROOT; };
 		FB5DD3151CEB0506008C3A34 /* ThirdpresenceAdmobMediation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ThirdpresenceAdmobMediation-Info.plist"; sourceTree = SOURCE_ROOT; };
 		FBDC28E21CDC7DE1002B8A46 /* ThirdpresenceAdmobMediation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdpresenceAdmobMediation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBDC28E51CDC7DE1002B8A46 /* ThirdpresenceAdmobMediation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdpresenceAdmobMediation.h; sourceTree = "<group>"; };
@@ -117,6 +125,10 @@
 				FBDC29121CDC897F002B8A46 /* TPRAdmobCustomEventInterstitial.m */,
 				FBDC29821CE097EC002B8A46 /* TPRAdmobCustomEventHelper.h */,
 				FBDC29831CE097EC002B8A46 /* TPRAdmobCustomEventHelper.m */,
+				FB4ADBE41DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.h */,
+				FB4ADBE51DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.m */,
+				FB4ADBE81DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.h */,
+				FB4ADBE91DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.m */,
 			);
 			path = ThirdpresenceAdmobMediation;
 			sourceTree = "<group>";
@@ -129,8 +141,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBDC29841CE097EC002B8A46 /* TPRAdmobCustomEventHelper.h in Headers */,
+				FB4ADBE61DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.h in Headers */,
 				FBDC28E61CDC7DE1002B8A46 /* ThirdpresenceAdmobMediation.h in Headers */,
 				FBDC29131CDC897F002B8A46 /* TPRAdmobCustomEventInterstitial.h in Headers */,
+				FB4ADBEA1DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +251,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB4ADBEB1DFA9FA1006D1F7C /* TPRAdmobCustomEventRewardedVideo.m in Sources */,
+				FB4ADBE71DFA9F43006D1F7C /* TPRAdmobCustomEventBanner.m in Sources */,
 				FBDC29851CE097EC002B8A46 /* TPRAdmobCustomEventHelper.m in Sources */,
 				FBDC29141CDC897F002B8A46 /* TPRAdmobCustomEventInterstitial.m in Sources */,
 			);

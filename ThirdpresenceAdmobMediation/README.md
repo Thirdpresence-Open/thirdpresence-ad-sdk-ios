@@ -25,22 +25,34 @@ For common additional requirements, see [Thirdpresence Ad SDK - Additional requi
 ## Creating an ad unit
 
 - Login to the Admob console
-- Create an Interstitial ad unit for video, if one does not exist
+- Create a new ad unit for video, if one does not exist. Following ad units are supported:
+    - Banner (Automatic refresh shall be "no refresh" or min. 60 seconds)
+    - Interstitial
+    - Rewarded interstitial
 - In the ad units list, click the "x ad source(s)" link on the Mediation column of the interstitial ad unit
 - Click New ad network button
 - Click the "+ Custom event" button
 - Fill in the form:
 
-| Field | Value |
+| Ad Unit | Class Name | Parameter |
+| --- | --- | --- |
+| Banner | TPRAdmobCustomEventBanner | account:REPLACE_ME,placementid:REPLACE_ME |
+| Interstitial | TPRAdmobCustomEventInterstitial | account:REPLACE_ME,placementid:REPLACE_ME |
+| Rewarded interstitial | TPRAdmobCustomEventRewardedVideo | account:REPLACE_ME,placementid:REPLACE_ME,rewardtitle:REPLACE_ME,rewardamount:REPLACE_ME |
+
+Give a descriptive name for the network in the Label field, e.g. "Thirdpresence Banner"
+
+**Replace all the REPLACE_ME placeholders with actual values!**
+
+For the rewarded video the reward title and reward amount values are mandatory.
+
+For testing purposes, use account name "sdk-demo" and following placement ids:
+
+|  Ad Unit | Placement Id | 
 | --- | --- |
-| Class Name | TPRAdmobCustomEventInterstitial |
-| Label | Thirdpresence |
-| Parameter | account:REPLACE_ME,placementid:REPLACE_ME,gender:REPLACE_ME,yob:REPLACE_ME |
-
-**Replace REPLACE_ME placeholders with actual values!**
-
-For testing purposes, use account name "sdk-demo" and placementid "sa7nvltbrn".
-Provide the user's gender and yob (year of birth) to get more targeted ads. Leave them empty if the information is not available.
+| Medium ad | zhlwlm9280 | 
+| Interstitial | sa7nvltbrn |
+| Rewarded video | nhdfxqclej |
 
 - Click the Continue button
 - Give eCPM for the Thirdpresence ad network

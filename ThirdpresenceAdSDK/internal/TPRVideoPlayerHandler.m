@@ -10,8 +10,6 @@
 #import "ThirdpresenceAdSDK.h"
 #import <AdSupport/ASIdentifierManager.h>
 #import <CoreLocation/CLLocationManager.h>
-// MOAT SDK Framework to be added
-//#import <TRDPMoatMobileAppKit/TRDPMoatMobileAppKit.h>
 
 @interface TPRVideoPlayerHandler ()
 
@@ -24,19 +22,18 @@
 - (void)timeoutOccuredOn:(NSTimer*)timer;
 - (void)sendEvent:(NSString*)eventName arg1:(NSObject*)arg1 arg2:(NSObject*)arg2 arg3:(NSObject*)arg3;
 - (void)sendEvent:(TPRPlayerEvent*)event;
-- (void)checkOrientation;
 - (NSString*)getAdvertisingID;
 - (void)initLocationServices;
 - (CLLocation*)getLastKnownLocation;
 - (void)updateLocationToPlayer;
-- (BOOL)initAdTracker;
 
 @property (strong, readonly) CLLocationManager* locationManager;
+@property (strong) TPRPlacementType* placementType;
 @end
 
 @implementation TPRVideoPlayerHandler
 
-NSString *const PLAYER_URL_BASE = @"%@//d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&customization=%@";
+NSString *const PLAYER_URL_BASE = @"%@//d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&type=%@&customization=%@";
 
 NSString *const TPR_PLAYER_NOTIFICATION = @"TPRPlayerNotification";
 NSString *const PLAYER_EVENT_CUSTOM_SCHEME = @"thirdpresence";
@@ -45,12 +42,16 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 NSInteger const LOCATION_DISTANCE_FILTER = 1000;
 NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
 
-- (instancetype)initWithEnvironment:(NSDictionary *)environment
-                             params:(NSDictionary *)playerParams {
+- (instancetype)initWithPlayer:(TPRWebView *)webView
+                   environment:(NSDictionary *)environment
+                        params:(NSDictionary *)playerParams
+                 placementType:(TPRPlacementType*)placementType{
     self = [super init];
 
+    _webView = webView;
     _environment = environment;
     _playerParams = playerParams;
+    _placementType = placementType;
     
     _playerTimeout = TPR_PLAYER_DEFAULT_TIMEOUT;
     _loadAdTimeout = TPR_PLAYER_DEFAULT_TIMEOUT;
@@ -65,12 +66,15 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
-    _webViewController = [[TPRWebViewController alloc] init];
-    _webViewController.delegate = self;
-
-    [self initLocationServices];
-    [self checkOrientation];
+    _webView.delegate = self;
     
+    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_ENABLE_MOAT];
+    if ([enableMoat isEqualToString:TPR_VALUE_TRUE]) {
+        [_webView enableAdTracker];
+    }
+    
+    [self initLocationServices];
+
     _adPlaying = NO;
     
     return self;
@@ -81,7 +85,6 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     [self removePlayer];
 }
 
-
 - (void)appWillResignActive:(NSNotification*)note {
     if (_adPlaying) {
         _adPlayPending = YES;
@@ -91,10 +94,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
 - (void)appDidBecomeActive:(NSNotification*)note {
     if (_adPlayPending) {
         _adPlayPending = NO;
-        UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        if (root.presentedViewController == _webViewController) {
-            [_webViewController callJSFunction:@"startAd" arg1:nil arg2:nil];
-        }
+        [_webView startAd];
     }
 }
 
@@ -124,8 +124,12 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
         return;
     }
     
-    NSBundle* libBundle = [NSBundle bundleWithIdentifier:@"com.thirdpresence.ThirdpresenceAdSDK"];
-    NSString *versionString = [libBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString* versionString = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_SDK_VERSION];
+    
+    if (!versionString) {
+        NSBundle* libBundle = [NSBundle bundleWithIdentifier:@"com.thirdpresence.ThirdpresenceAdSDK"];
+        versionString = [libBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    }
     
     if (!versionString) {
         // If CocoaPods used the plist file is in the main bundle
@@ -226,12 +230,16 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
                      account,
                      placementId,
                      versionString,
+                     _placementType,
                      customization ? [self encodeUrlString:customization] : @""
                      ];
     
     _playerTimeoutTimer = [self startTimer:_playerTimeout target:@selector(timeoutOccuredOn:)];
     
-    [_webViewController loadUrl:_playerPageURL];
+    TPRLog(@"Loading player from URL: %@", _playerPageURL);
+    
+    [_webView prepare:_playerPageURL];
+    
 }
 
 - (void)loadAd {
@@ -250,7 +258,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
         if (!_adLoading) {
             _adLoading = YES;
             _loadAdTimeoutTimer = [self startTimer:_loadAdTimeout target:@selector(timeoutOccuredOn:)];
-            [_webViewController callJSFunction:@"loadAd" arg1:nil arg2:nil];
+            [_webView loadAd];
         }
     } else {
         _adLoadPending = YES;
@@ -273,30 +281,18 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
         [self sendEvent:TPR_EVENT_NAME_PLAYER_ERROR arg1:error arg2:nil arg3:nil];
     }
     else {
-        UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        if (!root.presentingViewController.presentedViewController) {
-            _webViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            [root presentViewController:_webViewController animated:YES completion: nil];
-            _adPlaying = YES;
-            [_webViewController callJSFunction:@"startAd" arg1:nil arg2:nil];
-        } else {
-            NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
-                                                 code:TPR_ERROR_INVALID_STATE
-                                             userInfo:[NSDictionary dictionaryWithObject:@"Cannot display ad while modal view controller is presented" forKey:NSLocalizedDescriptionKey]];
-            [self sendEvent:TPR_EVENT_NAME_PLAYER_ERROR arg1:error arg2:nil arg3:nil];
-        }
+        [_webView startAd];
+        _adPlaying = YES;
     }
 }
 
 - (void)resetState {
-    [_webViewController stopLoading];
+    [_webView reset];
     
     [self cancelTimer:_playerTimeoutTimer];
     _playerTimeoutTimer = nil;
     [self cancelTimer:_loadAdTimeoutTimer];
     _loadAdTimeoutTimer = nil;
-    
-    [_webViewController dismissViewControllerAnimated:YES completion:nil];
     
     _adLoadPending = NO;
     _adLoaded = NO;
@@ -310,9 +306,9 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     _playerLoaded = NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    _webViewController.delegate = nil;
-    _webViewController = nil;
+    
+    _webView.delegate = nil;
+    _webView = nil;
     
     [_locationManager  stopMonitoringSignificantLocationChanges];
     _locationManager.delegate = nil;
@@ -321,36 +317,18 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     _playerParams = nil;
     _environment = nil;
     _playerPageURL = nil;
+    _placementType = nil;
 }
 
-#pragma mark - WebViewControllerDelegate
-- (void)webViewControllerDidLoad:(TPRWebViewController*)webViewController {
+#pragma mark - UIWebViewDelegate
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
 }
 
-- (void)webViewControllerWillAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
-    [self initAdTracker];
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
 }
 
-- (void)webViewControllerDidAppear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
-}
-
-- (void)webViewControllerWillDisappear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
-}
-
-- (void)webViewControllerDidDisappear:(TPRWebViewController*)webViewController animated:(BOOL)animated {
-}
-
-- (void)webViewControllerDidReceiveMemoryWarning:(TPRWebViewController*)webViewController {
-}
-
-- (void)webViewControllerDidStartLoad:(TPRWebViewController*)webViewController  {
-}
-
-- (void)webViewControllerDidFinishLoad:(TPRWebViewController*)webViewController  {
-}
-
-- (void)webViewController:(TPRWebViewController*)webViewController
-     didFailLoadWithError:(NSError*)error {
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     if (!_playerLoaded) {
         _playerLoading = NO;
         NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
@@ -367,11 +345,9 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     }
 }
 
-- (BOOL)webViewController:(TPRWebViewController *)webViewController
-shouldStartLoadWithRequest:(NSURLRequest *)request
-            navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString* scheme = request.URL.scheme;
-
+    
     if ([scheme isEqualToString:PLAYER_EVENT_CUSTOM_SCHEME] && [request.URL.host isEqualToString:PLAYER_EVENT_HOST_NAME]) {
         [self handlePlayerEvent:[self parseEvent:request.URL.query]];
     } else if ((navigationType != UIWebViewNavigationTypeOther && navigationType != UIWebViewNavigationTypeLinkClicked) || !_adLoaded) {
@@ -516,19 +492,6 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     return nil;
 }
 
-- (void)checkOrientation {
-    NSString* value = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE];
-    if ([value isEqualToString:TPR_VALUE_TRUE]) {
-        _webViewController.orientationMask = UIInterfaceOrientationMaskLandscape;
-        return;
-    }
-    
-    value = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
-    if ([value isEqualToString:TPR_VALUE_TRUE]) {
-        _webViewController.orientationMask = UIInterfaceOrientationMaskPortrait;
-    }
-}
-
 - (void)initLocationServices {
     if ([CLLocationManager class] && [CLLocationManager authorizationStatus] >= kCLAuthorizationStatusAuthorizedAlways) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -561,31 +524,12 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     if ([CLLocationManager class]) {
         CLLocation* location = [self getLastKnownLocation];
         if (location) {
-            [_webViewController callJSFunction:@"updateLocation"
-                                          arg1:[NSString stringWithFormat:@"%f", location.coordinate.latitude]
-                                          arg2:[NSString stringWithFormat:@"%f", location.coordinate.longitude]];
+            [_webView updateLocationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
         }
     }
 }
 
-- (BOOL)initAdTracker {
-    BOOL success = YES;
-    
-    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_ENABLE_MOAT];
-    if (self.webViewController.webView && (enableMoat == nil || [enableMoat isEqualToString:TPR_VALUE_TRUE])) {
-        Class classObj = NSClassFromString(@"TRDPMoatBootstrap");
-        SEL selector = NSSelectorFromString(@"injectDelegateWrapper:");
-        if (classObj && [classObj respondsToSelector:selector]) {
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [classObj performSelector:selector withObject:self.webViewController.webView];
-            TPRLog(@"[TPR] MOAT ad tracker enabled");
-        } else {
-            TPRLog(@"[TPR] MOAT SDK not available");
-        }
-    }
-    
-    return success;
-}
+
 
 - (void)sendEvent:(NSString*)eventName arg1:(NSObject*)arg1 arg2:(NSObject*)arg2 arg3:(NSObject*)arg3  {
     TPRPlayerEvent *event = [NSMutableDictionary dictionaryWithCapacity:4];

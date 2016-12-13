@@ -44,7 +44,7 @@
     if (!account) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due an account not set" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due an account not set" forKey:NSLocalizedDescriptionKey]];
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
     
@@ -52,7 +52,7 @@
     if (!placementId) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due placement id not set" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due placement id not set" forKey:NSLocalizedDescriptionKey]];
         
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
@@ -61,7 +61,7 @@
     if (!_rewardTitle) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due reward title is not set" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due reward title is not set" forKey:NSLocalizedDescriptionKey]];
         
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
@@ -70,7 +70,7 @@
     if (!_rewardAmount) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize interstitial due reward amount is not set" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due reward amount is not set" forKey:NSLocalizedDescriptionKey]];
         
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }

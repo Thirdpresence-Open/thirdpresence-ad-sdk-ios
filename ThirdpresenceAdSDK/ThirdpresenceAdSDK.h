@@ -10,6 +10,8 @@
 #import "TPRVideoAd.h"
 #import "TPRVideoInterstitial.h"
 #import "TPRRewardedVideo.h"
+#import "TPRVideoBanner.h"
+#import "TPRBannerView.h"
 
 //! Project version number for ThirdpresenceAdSDK.
 FOUNDATION_EXPORT double ThirdpresenceAdSDKVersionNumber;

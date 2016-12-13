@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "thirdpresence-ad-sdk-ios"
-  s.version          = "1.4.2"
+  s.version          = "1.5.0"
   s.summary          = "Thirdpresence Ad SDK for iOS apps"
   s.description      = <<-DESC
     Thirdpresence Ad SDK is a VPAID compatible ad SDK for apps. 
@@ -35,7 +35,8 @@ Pod::Spec.new do |s|
  	ss3.public_header_files = 'ThirdpresenceAdmobMediation/*.h'
   	ss3.frameworks          = 'UIKit', 'GoogleMobileAds','SafariServices', 'CoreBluetooth'
 	ss3.dependency 'thirdpresence-ad-sdk-ios/ThirdpresenceAdSDK'
- 	ss3.dependency 'Google-Mobile-Ads-SDK', '7.8.0'
+ 	ss3.dependency 'Firebase/Core'
+ 	ss3.dependency 'Firebase/AdMob'
  	ss3.resource = "ThirdpresenceAdmobMediation/ThirdpresenceAdmobMediation-Info.plist"
   end  
 

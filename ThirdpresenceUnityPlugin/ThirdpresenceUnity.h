@@ -9,6 +9,8 @@
 #ifndef ThirdpresenceUnity_h
 #define ThirdpresenceUnity_h
 
+extern const char * TPR_SDK_VERSION;
+
 extern const char * UNITY_HANDLER_OBJECT;
 
 extern void UnitySendMessage(const char *, const char *, const char *);

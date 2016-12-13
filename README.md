@@ -1,6 +1,6 @@
 # Thirdpresence Ad SDK for iOS
 
-Thirdpresence Ad SDK is based on a WebView and the Thirdpresence HTML5 player. The SDK provides implementations for an interstitial video and rewarded video ad units. 
+Thirdpresence Ad SDK is based on a WebView and the Thirdpresence HTML5 player. The SDK provides implementations for video banner, interstitial video and rewarded video ad units. 
 
 ## Integration to an application
 
@@ -15,6 +15,6 @@ For details of a specific integration method, click one of the options above.
 
 ## SDK updates
 
-The current SDK version is 1.4.2.
+The current SDK version is 1.5.0.
 
 The SDK is updated on regular basis. Activate the watch function in GitHub to get notified about updates and changes. 

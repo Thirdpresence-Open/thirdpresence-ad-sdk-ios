@@ -1,58 +1,32 @@
 //
-//  ViewController.m
+//  RewardedVideoViewController.m
 //  AdSDKSampleApp
 //
 //  Created by Marko Okkonen on 20/04/16.
 //  Copyright © 2016 Thirdpresence. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RewardedVideoViewController.h"
+#import "Constants.h"
 
-NSString *const DEFAULT_ACCOUNT = @"sdk-demo";
-NSString *const DEFAULT_PLACEMENT_ID = @"sa7nvltbrn";
-
-NSString *const APP_NAME = @"Ad SDK Sample App";
-NSString *const APP_VERSION = @"1.0";
-NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp/id999999999?mt=8";
-
-@interface ViewController ()
-- (void) initInterstitial;
-- (void) showNextMessage;
-- (void) queueMessage:(NSString*)message;
+@interface RewardedVideoViewController ()
+- (void) initRewardedVideo;
 @end
 
-@implementation ViewController
+@implementation RewardedVideoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _pendingMessages = [NSMutableArray arrayWithCapacity:10];
-    
     _accountField.text = DEFAULT_ACCOUNT;
     _accountField.delegate = self;
     
-    _placementField.text = DEFAULT_PLACEMENT_ID;
+    _placementField.text = DEFAULT_REWARDED_VIDEO_PLACEMENT_ID;
     _placementField.delegate = self;
     
+    _rewardField.text = @"";
+
     _statusField.text = @"IDLE";
-    
-    // Requests user's authorization to use location services
-    // This is required to get mored targeted ads and therefore better revenue
-    self.locationManager = [[CLLocationManager alloc] init];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    [self.locationManager startUpdatingLocation];
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [self showNextMessage];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -64,21 +38,36 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
     return YES;
 }
 
+- (void)dealloc {
+    if (self.rewardedVideo) {
+        [self.rewardedVideo removePlayer];
+        self.rewardedVideo.delegate = nil;
+        self.rewardedVideo = nil;
+    }
+    
+    self.initializeButton = nil;
+    self.loadButton = nil;
+    self.displayButton = nil;
+    self.accountField = nil;
+    self.placementField = nil;
+    self.rewardField = nil;
+    self.statusField = nil;
+}
+
 /**
- *  This method demonstrates how to create and initialize TPRVideoInterstitial
+ *  This method demonstrates how to create and initialize TPRRewardedVideo
  */
-- (void) initInterstitial {
+- (void) initRewardedVideo {
     
     // Release any earlier interstitial
-    if (self.interstitial) {
-        [self.interstitial removePlayer];
-        self.interstitial.delegate = nil;
-        self.interstitial = nil;
+    if (self.rewardedVideo) {
+        [self.rewardedVideo removePlayer];
+        self.rewardedVideo.delegate = nil;
+        self.rewardedVideo = nil;
     }
     
     NSString *account = self.accountField.text;
     NSString *placementId = self.placementField.text;
-    NSString *vastTag = self.vastField.text;
     
     if (account.length < 1) {
         [self queueMessage:@"Account name not set"];
@@ -88,14 +77,19 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
         [self queueMessage:@"Placement id not set"];
     }
     
-    // Environment dictionary must contain at least key TPR_ENVIRONMENT_KEY_ACCOUNT and TPR_ENVIRONMENT_KEY_PLACEMENT_ID
+    NSString *rewardTitle = @"diamonds";
+    NSString *rewardAmount = @"10";
+
+    // Environment dictionary must contain at least key TPR_ENVIRONMENT_KEY_ACCOUNT and
+    // TPR_ENVIRONMENT_KEY_PLACEMENT_ID, TPR_ENVIRONMENT_KEY_REWARD_TITLE and TPR_ENVIRONMENT_KEY_REWARD_AMOUNT
     // TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE allows to force player to landscape orientation
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
-                                        TPR_VALUE_TRUE, TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE, nil];
-
-
+                                        rewardTitle, TPR_ENVIRONMENT_KEY_REWARD_TITLE,
+                                        rewardAmount, TPR_ENVIRONMENT_KEY_REWARD_AMOUNT, nil];
+    
+    
     // Pass information about the application and user in playerParams dictionary.
     
     // In order to get more targeted ads user gender and year of birth are recommended.
@@ -111,17 +105,13 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
                                          userGender, TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
                                          userYearOfBirth, TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];
-
-    if (vastTag.length > 0) {
-        [playerParams setValue:vastTag forKey:TPR_PLAYER_PARAMETER_KEY_VAST_URL];
-    }
-
-    // Initialize the interstitial
-    self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment params:playerParams timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
     
-    self.interstitial.delegate = self;
+    // Initialize the rewarded video
+    self.rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:environment params:playerParams timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
+    
+    self.rewardedVideo.delegate = self;
     _statusField.text = @"INITIALIZING";
-
+    
 }
 
 /**
@@ -131,7 +121,7 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
  *  @param error   NSError object
  */
 - (void) videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
-    if (videoAd == self.interstitial) {
+    if (videoAd == self.rewardedVideo) {
         _statusField.text = @"ERROR";
         [self queueMessage:error.localizedDescription];
     }
@@ -144,21 +134,24 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
  *  @param event   event object
  */
 - (void) videoAd:(TPRVideoAd*)videoAd eventOccured:(TPRPlayerEvent*)event {
-    if (videoAd == self.interstitial) {
+    if (videoAd == self.rewardedVideo) {
         NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
             _statusField.text = @"READY";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
-            _adLoaded = YES;
+            self.adLoaded = YES;
             _statusField.text = @"LOADED";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
-            _adLoaded = NO;
+            self.adLoaded = NO;
             _statusField.text = @"ERROR";
             [self queueMessage:[NSString stringWithFormat:@"Failure: %@", [event objectForKey:TPR_EVENT_KEY_ARG1]]];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
             _statusField.text = @"COMPLETED";
-            _adLoaded = NO;
-            [self.interstitial reset];
+            self.adLoaded = NO;
+            [self.rewardedVideo reset];
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {
+            NSString* reward = [NSString stringWithFormat:@"%@ %@", _rewardedVideo.rewardAmount, _rewardedVideo.rewardTitle];
+            _rewardField.text = reward;
         }
     }
 }
@@ -170,65 +163,27 @@ NSString *const APP_STORE_URL = @"https://itunes.apple.com/us/app/adsdksampleapp
  */
 - (IBAction) onButtonPressed:(id)sender {
     if (sender == self.initializeButton) {
-        [self initInterstitial];
+        [self initRewardedVideo];
     }
     else if (sender == self.loadButton) {
-        if (self.interstitial.ready) {
-            [self.interstitial loadAd];
+        _rewardField.text = @"";
+
+        if (self.rewardedVideo.ready) {
+            [self.rewardedVideo loadAd];
         } else {
             [self queueMessage:@"The player is not initialized yet"];
         }
     }
     else if (sender == self.displayButton) {
-        if (_adLoaded) {
-            [self.interstitial displayAd];
+        if (self.adLoaded) {
+            [self.rewardedVideo displayAd];
         } else {
             [self queueMessage:@"No ad loaded yet"];
         }
     }
-
-}
-
-/**
- *  Show next queued message
- */
-- (void) showNextMessage {
-    if (!_showingAlert && !self.presentedViewController && [_pendingMessages count] > 0) {
-
-        NSString *msgToShow = [_pendingMessages objectAtIndex:0];
-        [_pendingMessages removeObjectAtIndex:0];
-        
-        _showingAlert = YES;
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:msgToShow
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-
-        [self presentViewController:alert animated:YES completion:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [alert dismissViewControllerAnimated:YES completion:^{
-                    _showingAlert = NO;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showNextMessage];
-                    });
-                }];
-            });
-            
-        }];
-    }
     
 }
 
-/**
- *  Queues a message for displaying
- *
- *  @param message to display
- */
-- (void) queueMessage:(NSString*)message {
-    if (message) {
-        [_pendingMessages addObject:message];
-    }
-    [self showNextMessage];
-}
 
 
 @end
