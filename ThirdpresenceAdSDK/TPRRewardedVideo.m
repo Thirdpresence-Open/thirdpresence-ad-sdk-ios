@@ -23,7 +23,9 @@
 
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *rewardAmount = [f numberFromString:[environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT]];
+    f.decimalSeparator = @".";
+    NSString *stringValue = [environment valueForKey:TPR_ENVIRONMENT_KEY_REWARD_AMOUNT];
+    NSNumber *rewardAmount = [f numberFromString:stringValue];
     
     NSAssert(rewardAmount != nil, @"Environment does not contain reward amount key");
 

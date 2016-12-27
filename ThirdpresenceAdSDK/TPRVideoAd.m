@@ -44,10 +44,15 @@ NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_REGION = @"region";
 NSString *const TPR_PLAYER_PARAMETER_KEY_GEO_CITY = @"city";
 NSString *const TPR_PLAYER_PARAMETER_KEY_USER_GENDER = @"gender";
 NSString *const TPR_PLAYER_PARAMETER_KEY_USER_YOB = @"yob";
+NSString *const TPR_PLAYER_PARAMETER_KEY_KEYWORDS = @"keywords";
 
 // Server types
 NSString *const TPR_SERVER_TYPE_PRODUCTION = @"production";
 NSString *const TPR_SERVER_TYPE_STAGING = @"staging";
+
+// User genders
+NSString *const TPR_USER_GENDER_MALE = @"male";
+NSString *const TPR_USER_GENDER_FEMALE = @"female";
 
 // Error domain
 NSString *const TPR_AD_SDK_ERROR_DOMAIN = @"com.thirdpresence.adsdk.ErrorDomain";

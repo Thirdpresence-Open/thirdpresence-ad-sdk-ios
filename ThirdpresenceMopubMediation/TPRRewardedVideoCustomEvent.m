@@ -7,23 +7,21 @@
 //
 
 #import "TPRRewardedVideoCustomEvent.h"
-#import "TPRConstants.h"
+#import "TPRDataManager.h"
 
-#if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
-#import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
+#if __has_include(<ThirdpresenceAdSDK/TPRRewardedVideo.h>)
+#import <ThirdpresenceAdSDK/TPRRewardedVideo.h>
 #else
-#import "TPRVideoInterstitial.h"
+#import "TPRRewardedVideo.h"
 #endif
 
 @interface TPRRewardedVideoCustomEvent () <TPRVideoAdDelegate>
 - (void) loadAd;
 - (void) remove;
 
-@property (strong) TPRVideoInterstitial *interstitial;
+@property (strong) TPRRewardedVideo *rewardedVideo;
 @property (assign) BOOL adLoaded;
 @property (assign) BOOL adDisplayed;
-@property (strong) NSString* rewardTitle;
-@property (strong) NSNumber* rewardAmount;
 
 @end
 
@@ -40,7 +38,7 @@
 
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
     
-    NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
+    NSString *account = [info objectForKey:TPR_MP_PUB_PARAM_ACCOUNT];
     if (!account) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
@@ -48,7 +46,7 @@
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
     
-    NSString *placementId = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID];
+    NSString *placementId = [info objectForKey:TPR_MP_PUB_PARAM_PLACEMENT_ID];
     if (!placementId) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
@@ -57,8 +55,8 @@
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
 
-    self.rewardTitle = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE];
-    if (!_rewardTitle) {
+    NSString *rewardTitle = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_TITLE];
+    if (!rewardTitle) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
                                          userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due reward title is not set" forKey:NSLocalizedDescriptionKey]];
@@ -66,8 +64,8 @@
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
     }
     
-    self.rewardAmount = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT];
-    if (!_rewardAmount) {
+    NSString *rewardAmount = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_REWARD_AMOUNT];
+    if (!rewardAmount) {
         NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                              code:TPR_ERROR_PLAYER_INIT_FAILED
                                          userInfo:[NSDictionary dictionaryWithObject:@"Failed to initialize rewarded video due reward amount is not set" forKey:NSLocalizedDescriptionKey]];
@@ -78,8 +76,8 @@
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
-                                        _rewardTitle, TPR_ENVIRONMENT_KEY_REWARD_TITLE,
-                                        _rewardAmount, TPR_ENVIRONMENT_KEY_REWARD_AMOUNT,
+                                        rewardTitle, TPR_ENVIRONMENT_KEY_REWARD_TITLE,
+                                        rewardAmount, TPR_ENVIRONMENT_KEY_REWARD_AMOUNT,
                                         nil];
     
     NSString* val = [info objectForKey:TPR_ENVIRONMENT_KEY_FORCE_PORTRAIT];
@@ -97,10 +95,17 @@
     [environment setValue:@"mopub" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     [environment setValue:[MoPub sharedInstance].version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
-    self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment
-                                                                   params:info
-                                                                  timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
-    self.interstitial.delegate = self;
+    NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] initWithDictionary:[[TPRDataManager sharedManager] targeting] copyItems:YES];
+    
+    NSString *appName = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    if ([appName length] > 0) {
+        [playerParams setValue:appName forKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    }
+    
+    self.rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:environment
+                                                                params:playerParams
+                                                               timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
+    self.rewardedVideo.delegate = self;
 }
 
 - (BOOL)hasAdAvailable {
@@ -110,7 +115,7 @@
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
     if (_adLoaded) {
         [self.delegate rewardedVideoWillAppearForCustomEvent:self];
-        [self.interstitial displayAd];
+        [self.rewardedVideo displayAd];
         [self.delegate rewardedVideoDidAppearForCustomEvent:self];
         _adDisplayed = YES;
     } else {
@@ -127,7 +132,7 @@
 }
 
 - (void)loadAd {
-    [self.interstitial loadAd];
+    [self.rewardedVideo loadAd];
 }
 
 - (void)remove {
@@ -135,9 +140,11 @@
     if (_adDisplayed) {
         [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
     }
-    [self.interstitial removePlayer];
-    self.interstitial.delegate = nil;
-    self.interstitial = nil;
+    if (self.rewardedVideo) {
+        [self.rewardedVideo removePlayer];
+        self.rewardedVideo.delegate = nil;
+        self.rewardedVideo = nil;
+    }
     
     if (_adDisplayed) {
         [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
@@ -146,14 +153,14 @@
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
-    if (videoAd == self.interstitial) {
+    if (videoAd == self.rewardedVideo) {
         [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
         [self remove];
     }
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd eventOccured:(TPRPlayerEvent*)event {
-    if (videoAd == self.interstitial) {
+    if (videoAd == self.rewardedVideo) {
         NSString* eventName = [event objectForKey:TPR_EVENT_KEY_NAME];
         
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
@@ -167,7 +174,6 @@
             if (desc) {
                 info = [NSDictionary dictionaryWithObject:desc forKey:NSLocalizedDescriptionKey];
             }
-            
             NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                                  code:TPR_ERROR_NO_FILL
                                              userInfo:info];
@@ -183,8 +189,9 @@
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {
-            MPRewardedVideoReward* reward = [[MPRewardedVideoReward alloc] initWithCurrencyType:_rewardTitle
-                                                                                 amount:_rewardAmount];
+            MPRewardedVideoReward* reward =
+                [[MPRewardedVideoReward alloc] initWithCurrencyType:self.rewardedVideo.rewardTitle
+                                                             amount:self.rewardedVideo.rewardAmount];
             [self.delegate rewardedVideoShouldRewardUserForCustomEvent:self reward:reward];
         }
     }

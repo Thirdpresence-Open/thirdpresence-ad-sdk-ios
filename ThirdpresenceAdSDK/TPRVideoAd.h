@@ -189,6 +189,23 @@ FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_USER_GENDER;
 FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_USER_YOB;
 
 /*!
+ @brief Player parameter dictionary key for keywords (targeting)
+ */
+FOUNDATION_EXPORT NSString *const TPR_PLAYER_PARAMETER_KEY_KEYWORDS;
+
+
+/*!
+ @brief Value for user gender
+ */
+FOUNDATION_EXPORT NSString *const TPR_USER_GENDER_MALE;
+
+/*!
+ @brief Value for user gender
+ */
+FOUNDATION_EXPORT NSString *const TPR_USER_GENDER_FEMALE;
+
+
+/*!
  @brief Player event 
  @discussion Player event is a dictionary that contains following keys: @link TPR_EVENT_KEY_NAME @/link, @link TPR_EVENT_KEY_ARG1 @/link, @link TPR_EVENT_KEY_ARG2 @/link and @link TPR_EVENT_KEY_ARG3 @/link
  */

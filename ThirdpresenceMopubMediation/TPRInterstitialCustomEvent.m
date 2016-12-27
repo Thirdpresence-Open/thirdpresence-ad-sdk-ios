@@ -7,7 +7,7 @@
 //
 
 #import "TPRInterstitialCustomEvent.h"
-#import "TPRConstants.h"
+#import "TPRDataManager.h"
 
 #if __has_include(<ThirdpresenceAdSDK/TPRVideoInterstitial.h>)
 #import <ThirdpresenceAdSDK/TPRVideoInterstitial.h>
@@ -40,7 +40,7 @@
 
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:6];
 
-    NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
+    NSString *account = [info objectForKey:TPR_MP_PUB_PARAM_ACCOUNT];
     if (account) {
         [environment setValue:account forKey:TPR_ENVIRONMENT_KEY_ACCOUNT];
     } else {
@@ -51,7 +51,7 @@
         [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:error];
     }
     
-    NSString *placementId = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID];
+    NSString *placementId = [info objectForKey:TPR_MP_PUB_PARAM_PLACEMENT_ID];
     if (placementId) {
         [environment setValue:placementId forKey:TPR_ENVIRONMENT_KEY_PLACEMENT_ID];
     } else {
@@ -77,8 +77,15 @@
     [environment setValue:@"mopub" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     [environment setValue:[MoPub sharedInstance].version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
+    NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] initWithDictionary:[[TPRDataManager sharedManager] targeting] copyItems:YES];
+    
+    NSString *appName = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    if ([appName length] > 0) {
+        [playerParams setValue:appName forKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    }
+    
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment
-                                                                   params:info
+                                                                   params:playerParams
                                                                   timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
     self.interstitial.delegate = self;
 }

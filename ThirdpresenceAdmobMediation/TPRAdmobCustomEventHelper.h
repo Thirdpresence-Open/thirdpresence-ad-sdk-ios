@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class GADCustomEventRequest;
+
 FOUNDATION_EXPORT NSString *const TPR_PUBLISHER_PARAM_KEY_ACCOUNT;
 FOUNDATION_EXPORT NSString *const TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID;
 FOUNDATION_EXPORT NSString *const TPR_PUBLISHER_PARAM_KEY_FORCE_LANDSCAPE;
@@ -19,5 +21,6 @@ FOUNDATION_EXPORT NSString *const TPR_PUBLISHER_PARAM_USE_INSECURE_HTTP;
 @interface TPRAdmobCustomEventHelper : NSObject
 
 + (NSDictionary*)parseParamsString:(NSString*)paramsString;
++ (NSDictionary*)createPlayerParams:(NSObject*)request;
 
 @end

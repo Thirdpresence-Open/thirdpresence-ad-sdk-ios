@@ -13,6 +13,9 @@
 - (void) loadBanner;
 @end
 
+NSInteger const MIN_BANNER_HEIGHT = 50;
+NSInteger const MIN_BANNER_WIDTH = 50;
+
 @implementation BannerViewController
 
 - (void)viewDidLoad {
@@ -25,6 +28,8 @@
     _placementField.delegate = self;
     
     _statusField.text = @"IDLE";
+
+    _scrollView.delegate = self;
     
     [self loadBanner];
 }
@@ -49,6 +54,8 @@
     self.accountField = nil;
     self.placementField = nil;
     self.statusField = nil;
+    self.scrollView.delegate = nil;
+    self.scrollView = nil;
     self.bannerView = nil;
 }
 
@@ -106,6 +113,11 @@
     
     // Optional delegate for player events
     self.videoBanner.delegate = self;
+    // Set disableAutoDisplay = YES when you want to control the actual startup of the ad.
+    // For example if having the view in the scroll view, you want to start the ad when
+    // the banner view is visible.
+    self.videoBanner.disableAutoDisplay = YES;
+    
     _statusField.text = @"INITIALIZING";
  
     [self.videoBanner loadAd];
@@ -136,12 +148,19 @@
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
             _statusField.text = @"READY";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
+            self.adLoaded = YES;
             _statusField.text = @"LOADED";
+            if ([self isBannerViewVisible]) {
+                 [self.videoBanner displayAd];
+            }
         }  else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STARTED]) {
             _statusField.text = @"DISPLAYING";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
+            self.adLoaded = NO;
             _statusField.text = @"ERROR";
             [self queueMessage:[NSString stringWithFormat:@"Failure: %@", [event objectForKey:TPR_EVENT_KEY_ARG1]]];
+        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
+            self.adLoaded = NO;
         }
     }
 }
@@ -154,6 +173,46 @@
 - (IBAction) onButtonPressed:(id)sender {
     if (sender == self.reloadButton) {
         [self loadBanner];
+    }
+}
+
+/**
+ *  Helper function to check if banner view is visible
+ *
+ *  @return true if visible
+ */
+- (BOOL)isBannerViewVisible {
+    CGSize bannerSize = self.bannerView.bounds.size;
+    if (self.bannerView.window != nil &&
+        !self.bannerView.hidden &&
+        self.bannerView.alpha > 0 &&
+        bannerSize.height >= MIN_BANNER_HEIGHT &&
+        bannerSize.width >= MIN_BANNER_WIDTH) {
+        
+        CGRect bannerRect = [self.bannerView convertRect:self.bannerView.bounds
+                                                   toView:self.scrollView];
+        
+        CGRect intersection = CGRectIntersection(bannerRect, self.scrollView.bounds);
+        
+        // Consider visible when half of the banner is visible
+        if (intersection.size.height >= bannerSize.height * 0.5 &&
+            intersection.size.width >= bannerSize.width * 0.5) {
+            return YES;
+        }
+    }
+    return NO;
+    
+}
+
+/**
+ *  UIScrollView delegate method
+ *
+ *  @param scrollView
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // Start playing the ad if it is loaded and visible
+    if (self.adLoaded && [self isBannerViewVisible]) {
+        [self.videoBanner displayAd];
     }
 }
 

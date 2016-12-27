@@ -10,15 +10,16 @@
 #import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
 #import "BaseViewController.h"
 
-@interface BannerViewController : BaseViewController <TPRVideoAdDelegate, UITextFieldDelegate>
+@interface BannerViewController : BaseViewController <TPRVideoAdDelegate, UITextFieldDelegate,UIScrollViewDelegate>
 
 // Button outlets
 @property (weak) IBOutlet UIButton *reloadButton;
 @property (weak) IBOutlet UITextField *accountField;
 @property (weak) IBOutlet UITextField *placementField;
 @property (weak) IBOutlet UITextField *statusField;
+@property (weak) IBOutlet UIScrollView *scrollView;
+
 @property (weak) IBOutlet TPRBannerView *bannerView;
 
 @property (strong) TPRVideoBanner *videoBanner;
-
 @end

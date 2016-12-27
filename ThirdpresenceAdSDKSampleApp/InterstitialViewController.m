@@ -70,10 +70,12 @@
     
     if (account.length < 1) {
         [self queueMessage:@"Account name not set"];
+        _statusField.text = @"ERROR";
         return;
     }
     else if (placementId.length < 1) {
         [self queueMessage:@"Placement id not set"];
+        _statusField.text = @"ERROR";
     }
     
     // Environment dictionary must contain at least key TPR_ENVIRONMENT_KEY_ACCOUNT and
@@ -103,6 +105,12 @@
                                          nil];
 
     if (vastTag.length > 0) {
+        if (![@"https://" isEqualToString:[vastTag substringToIndex:8]]) {
+            [self queueMessage:@"The URL is not valid. Using secure HTTP URL is mandatory."];
+            _statusField.text = @"ERROR";
+            return;
+        }
+        
         [playerParams setValue:vastTag forKey:TPR_PLAYER_PARAMETER_KEY_VAST_URL];
     }
 

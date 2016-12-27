@@ -58,3 +58,21 @@ For testing purposes, use account name "sdk-demo" and following placement ids:
 - Give eCPM for the Thirdpresence ad network
 - Save changes, and the integration is ready
 
+## Passing user info and keywords
+
+Thirdpresence can provide more targeted ads if user info and keywords are passed. In order to do that the data needs to be added to MoPub ad request.
+An example for adding the data. This shall be done before any ad requests.
+```
+    NSString userGender = @"male"; // allowed values are "male" or "female"
+    NSString userYearOfBirth = @"1976";
+    NSString keywords = @"advertising,sdk,programming"; // comma-separated string of keyworads
+
+    NSMutableDictionary* targeting = [[TPRDataManager sharedManager] targeting];
+    [targeting setValue:userGender forKey:TPR_MP_TARGETING_PARAM_GENDER];
+    [targeting setValue:userYearOfBirth forKey:TPR_MP_TARGETING_PARAM_YOB];
+    [targeting setValue:keywords forKey:TPR_MP_TARGETING_PARAM_KEYWORDS];
+
+```
+
+
+

@@ -1,10 +1,14 @@
-//
-//  TPRInterstitialCustomEvent.h
-//  ThirdpresenceMopubMediation
-//
-//  Created by Marko Okkonen on 28/04/16.
-//  Copyright © 2016 thirdpresence. All rights reserved.
-//
+/*!
+ 
+ @header TPRInterstitialCustomEvent.h
+ 
+ This file contains TPRInterstitialCustomEvent class declaration
+ 
+ @author Marko Okkonen
+ @copyright 2016 Thirdpresence
+ 
+ */
+
 
 #import "MoPub.h" 
 

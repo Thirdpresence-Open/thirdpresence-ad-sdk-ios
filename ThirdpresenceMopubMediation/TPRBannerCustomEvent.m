@@ -7,9 +7,15 @@
 //
 
 #import "TPRBannerCustomEvent.h"
+#import "TPRDataManager.h"
+
+#if __has_include(<ThirdpresenceAdSDK/TPRVideoBanner.h>)
+#import <ThirdpresenceAdSDK/TPRVideoBanner.h>
+#import <ThirdpresenceAdSDK/TPRBannerView.h>
+#else
 #import "TPRVideoBanner.h"
 #import "TPRBannerView.h"
-#import "TPRConstants.h"
+#endif
 
 @interface TPRBannerCustomEvent () <TPRVideoAdDelegate>
 @property (strong) TPRVideoBanner *banner;
@@ -33,7 +39,7 @@
     
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:6];
     
-    NSString *account = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_ACCOUNT];
+    NSString *account = [info objectForKey:TPR_MP_PUB_PARAM_ACCOUNT];
     if (account) {
         [environment setValue:account forKey:TPR_ENVIRONMENT_KEY_ACCOUNT];
     } else {
@@ -44,7 +50,7 @@
         [self.delegate bannerCustomEvent:self didFailToLoadAdWithError:error];
     }
     
-    NSString *placementId = [info objectForKey:TPR_PUBLISHER_PARAM_KEY_PLACEMENT_ID];
+    NSString *placementId = [info objectForKey:TPR_MP_PUB_PARAM_PLACEMENT_ID];
     if (placementId) {
         [environment setValue:placementId forKey:TPR_ENVIRONMENT_KEY_PLACEMENT_ID];
     } else {
@@ -70,13 +76,20 @@
     [environment setValue:@"mopub" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     [environment setValue:[MoPub sharedInstance].version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
+    NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] initWithDictionary:[[TPRDataManager sharedManager] targeting] copyItems:YES];
+    
+    NSString *appName = [info objectForKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    if ([appName length] > 0) {
+        [playerParams setValue:appName forKey:TPR_PLAYER_PARAMETER_KEY_APP_NAME];
+    }
+    
     CGRect frame = CGRectMake(0, 0, size.width, size.height);
     
     self.bannerView = [[TPRBannerView alloc] initWithFrame:frame];
     
     self.banner = [[TPRVideoBanner alloc] initWithBannerView:_bannerView
                                                  environment:environment
-                                                      params:info
+                                                      params:playerParams
                                                      timeout:TPR_PLAYER_DEFAULT_TIMEOUT];
     self.banner.delegate = self;
     self.banner.disableAutoDisplay = YES;

@@ -40,8 +40,8 @@ pod 'thirdpresence-ad-sdk-ios/ThirdpresenceAdAdmobMediation'
 - Drag and drop the ThirdpresenceAdSDK folder to the Project Navigator in the XCode, and add the source to the required targets. Make sure to check the 'Create groups' option.
 
 - Do the same for a mediation library if you use mediation. The mediation libraries below are currently available:
-    - ThirdpresenceMopubMediation (MoPub interstitial and rewarded video) 
-    - ThirdpresenceAdmobMediation (Admob interstitial)
+    - ThirdpresenceMopubMediation
+    - ThirdpresenceAdmobMediation 
 
 ## Additional requirements
 
@@ -152,8 +152,6 @@ Instantiate and setup the ad placement:
 
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
-                                         @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
-                                         @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
                                          @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
                                          @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];
@@ -260,8 +258,6 @@ Instantiate and setup the ad placement:
 
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
-                                    @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
-                                    @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
                                     @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
                                     @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB, nil];
 
@@ -340,8 +336,6 @@ ViewController.m:
 
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         @"<APP_NAME>", TPR_PLAYER_PARAMETER_KEY_APP_NAME,
-                                        @"<APP_VERSION>",TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
-                                        @"<APP_STORE_URL>", TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
                                         @"<USER_GENDER>", TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
                                         @"<USER_YEAR_OF_BIRTH>", TPR_PLAYER_PARAMETER_KEY_USER_YOB,nil];
 
@@ -363,7 +357,10 @@ Finally clean up when the view controller is deallocated.
     }
 ```
 
+In case the banner view is in an UIScrollView or similar where it might be not visible at the time the view is loaded then the ad should not be displayed before the view is actually visible. By default the ad is displayed automatically right after it is loaded. Set property disableAutoDisplay in TPRVideoBanner to true and implement TPRVideoAdDelegate protocol. See the SampleApp for detailed example.
+
+
 
 ### API reference
 
-See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.0/index.html)
+See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.1/index.html)

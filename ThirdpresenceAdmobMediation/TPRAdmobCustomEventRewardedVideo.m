@@ -128,10 +128,10 @@
     
     [environment setValue:@"admob" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     
-    NSString *version = [[NSString alloc]initWithCString:GoogleMobileAdsVersionString encoding:NSUTF8StringEncoding];
+    NSString *version = [NSString stringWithUTF8String:(char *)GoogleMobileAdsVersionString];
     [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
-    NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];
+    NSDictionary *playerParams = [TPRAdmobCustomEventHelper createPlayerParams:self.networkConnector];
     
     self.rewardedVideo = [[TPRRewardedVideo alloc] initWithEnvironment:environment
                                                                 params:playerParams
@@ -166,16 +166,17 @@
 
 - (void)remove {
     _adLoaded = NO;
-    if (_adDisplayed) {
-        [self.networkConnector adapterDidCloseRewardBasedVideoAd:self];
-    }
-
+   
     if (self.rewardedVideo) {
         [self.rewardedVideo removePlayer];
         self.rewardedVideo.delegate = nil;
         self.rewardedVideo = nil;
     }
-
+    
+    if (_adDisplayed) {
+        [self.networkConnector adapterDidCloseRewardBasedVideoAd:self];
+    }
+    _adDisplayed = NO;
     self.networkConnector = nil;
 }
 
@@ -210,8 +211,9 @@
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
             [self remove];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {
-            
-            GADAdReward* reward = [[GADAdReward alloc] initWithRewardType:self.rewardedVideo.rewardTitle rewardAmount:self.rewardedVideo.rewardAmount];
+            NSString *type = self.rewardedVideo.rewardTitle;
+            NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[self.rewardedVideo.rewardAmount decimalValue]];
+            GADAdReward* reward = [[GADAdReward alloc] initWithRewardType:type rewardAmount:amount];
             [self.networkConnector adapter:self didRewardUserWithReward:reward];
             
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {

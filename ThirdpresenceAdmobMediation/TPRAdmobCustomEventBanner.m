@@ -77,10 +77,10 @@
     
     [environment setValue:@"admob" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     
-    NSString *version = [[NSString alloc]initWithCString:GoogleMobileAdsVersionString encoding:NSUTF8StringEncoding];
+    NSString *version = [NSString stringWithUTF8String:(char *)GoogleMobileAdsVersionString];
     [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
-    NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];
+    NSDictionary *playerParams = [TPRAdmobCustomEventHelper createPlayerParams:request];
     
     self.bannerView = [[TPRBannerView alloc] initWithFrame:CGRectMake(0, 0, adSize.size.width, adSize.size.height)];
     

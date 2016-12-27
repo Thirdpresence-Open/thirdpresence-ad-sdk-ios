@@ -84,11 +84,11 @@
     
     [environment setValue:@"admob" forKey:TPR_ENVIRONMENT_KEY_EXT_SDK];
     
-    NSString *version = [[NSString alloc]initWithCString:GoogleMobileAdsVersionString encoding:NSUTF8StringEncoding];
+    NSString *version = [NSString stringWithUTF8String:(char *)GoogleMobileAdsVersionString];
     [environment setValue:version forKey:TPR_ENVIRONMENT_KEY_EXT_SDK_VERSION];
     
-    NSMutableDictionary* playerParams = [NSMutableDictionary dictionary];
-    
+    NSDictionary *playerParams = [TPRAdmobCustomEventHelper createPlayerParams:request];
+
     self.interstitial = [[TPRVideoInterstitial alloc] initWithEnvironment:environment
                                                                    params:playerParams
                                                                   timeout:TPR_PLAYER_DEFAULT_TIMEOUT];

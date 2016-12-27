@@ -31,10 +31,9 @@ For common additional requirements, see [Thirdpresence Ad SDK - Additional requi
 
 | Ad Unit | Custom Event Class | Custom Event Class Data |
 | --- | --- | --- |
-| Medium Ad | TPRCustomEventBanner | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME" } |
-| Fullscreen Ad | TPRInterstitialCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME"} |
-| Rewarded Video | TPRRewardedVideoCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "appversion":"REPLACE_ME", "appstoreurl":"REPLACE_ME", "rewardtitle":"REPLACE_ME", "rewardamount":"REPLACE_ME"}  |
-
+| Medium Ad | TPRCustomEventBanner | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME" } |
+| Fullscreen Ad | TPRInterstitialCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME"} |
+| Rewarded Video | TPRRewardedVideoCustomEvent | { "account":"REPLACE_ME", "placementid":"REPLACE_ME", "appname":"REPLACE_ME", "rewardtitle":"REPLACE_ME", "rewardamount":"REPLACE_ME"}  |
 
 The Custom Event Method field should be left blank.
 
