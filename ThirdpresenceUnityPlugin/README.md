@@ -14,7 +14,7 @@ http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/1.5.2/thirdprese
 
 The plugin is built with the following tools:
 
-- Unity SDK 5.4.1
+- Unity SDK 5.5.0
 - Java JDK 1.8
 - iOS 10.0
 
