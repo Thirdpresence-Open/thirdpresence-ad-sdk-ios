@@ -102,7 +102,7 @@
     if (_playerHandler) {
         UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         if (!root.presentingViewController.presentedViewController) {
-            _playerViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            _playerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             [root presentViewController:_playerViewController animated:YES completion: nil];
             [_playerHandler displayAd];
         } else {

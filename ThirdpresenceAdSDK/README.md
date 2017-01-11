@@ -363,4 +363,4 @@ In case the banner view is in an UIScrollView or similar where it might be not v
 
 ### API reference
 
-See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.1/index.html)
+See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.2/index.html)
