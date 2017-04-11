@@ -13,6 +13,7 @@
 		FB1611921DF04CB500B8D0E3 /* TPRBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611901DF04CB500B8D0E3 /* TPRBannerView.m */; };
 		FB1611A41DF166E000B8D0E3 /* TPRWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = FB1611A21DF166E000B8D0E3 /* TPRWebView.h */; };
 		FB1611A51DF166E000B8D0E3 /* TPRWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1611A31DF166E000B8D0E3 /* TPRWebView.m */; };
+		FB23D1451E6EA91D005289D5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB23D1441E6EA91D005289D5 /* AVFoundation.framework */; };
 		FB5DD3361CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32B1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h */; };
 		FB5DD3371CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD32C1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.m */; };
 		FB5DD3381CEB0DE5008C3A34 /* TPRPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD32D1CEB0DE5008C3A34 /* TPRPlayerViewController.h */; };
@@ -24,20 +25,9 @@
 		FB5DD33E1CEB0DE5008C3A34 /* TPRVideoAd.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD3331CEB0DE5008C3A34 /* TPRVideoAd.m */; };
 		FB5DD33F1CEB0DE5008C3A34 /* TPRVideoInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5DD3341CEB0DE5008C3A34 /* TPRVideoInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB5DD3401CEB0DE5008C3A34 /* TPRVideoInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD3351CEB0DE5008C3A34 /* TPRVideoInterstitial.m */; };
+		FBD506871E49C81C000E7BB8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD506861E49C81C000E7BB8 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FBD5068D1E4D9981000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD5068A1E4CDB7B000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FB9F39771D90F7E400B26119 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FB16118B1DF04A3500B8D0E3 /* TPRVideoBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoBanner.h; sourceTree = "<group>"; };
@@ -46,6 +36,7 @@
 		FB1611901DF04CB500B8D0E3 /* TPRBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRBannerView.m; sourceTree = "<group>"; };
 		FB1611A21DF166E000B8D0E3 /* TPRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRWebView.h; sourceTree = "<group>"; };
 		FB1611A31DF166E000B8D0E3 /* TPRWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRWebView.m; sourceTree = "<group>"; };
+		FB23D1441E6EA91D005289D5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FB4978781CC6346000F446A1 /* ThirdpresenceAdSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ThirdpresenceAdSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB49787D1CC6346000F446A1 /* ThirdpresenceAdSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ThirdpresenceAdSDK-Info.plist"; sourceTree = "<group>"; };
 		FB5DD32B1CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoPlayerHandler.h; sourceTree = "<group>"; };
@@ -60,6 +51,8 @@
 		FB5DD3341CEB0DE5008C3A34 /* TPRVideoInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoInterstitial.h; sourceTree = "<group>"; };
 		FB5DD3351CEB0DE5008C3A34 /* TPRVideoInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoInterstitial.m; sourceTree = "<group>"; };
 		FBC505081D8A75F300663B37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FBD506861E49C81C000E7BB8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		FBD5068A1E4CDB7B000E7BB8 /* TRDPMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRDPMoatMobileAppKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB23D1451E6EA91D005289D5 /* AVFoundation.framework in Frameworks */,
+				FBD5068D1E4D9981000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */,
+				FBD506871E49C81C000E7BB8 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +76,7 @@
 				FBA1162B1D65EA95004EE03A /* misc */,
 				FB49787A1CC6346000F446A1 /* ThirdpresenceAdSDK */,
 				FB4978791CC6346000F446A1 /* Products */,
+				FBD506821E49C7DE000E7BB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +91,7 @@
 		FB49787A1CC6346000F446A1 /* ThirdpresenceAdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				FBD5068A1E4CDB7B000E7BB8 /* TRDPMoatMobileAppKit.framework */,
 				FB5DD32A1CEB0DE5008C3A34 /* internal */,
 				FB5DD32F1CEB0DE5008C3A34 /* ThirdpresenceAdSDK.h */,
 				FB5DD3301CEB0DE5008C3A34 /* TPRRewardedVideo.h */,
@@ -131,6 +129,15 @@
 			name = misc;
 			sourceTree = "<group>";
 		};
+		FBD506821E49C7DE000E7BB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB23D1441E6EA91D005289D5 /* AVFoundation.framework */,
+				FBD506861E49C81C000E7BB8 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -161,7 +168,6 @@
 				FB4978741CC6346000F446A1 /* Frameworks */,
 				FB4978751CC6346000F446A1 /* Headers */,
 				FB4978761CC6346000F446A1 /* Resources */,
-				FB9F39771D90F7E400B26119 /* Copy Files */,
 			);
 			buildRules = (
 			);

@@ -17,6 +17,7 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 @private
     XCUIApplication *app;
     id<NSObject> interruptionMonitor;
+    BOOL alertHandled;
 }
 @end
 
@@ -24,39 +25,38 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 
 - (void)setUp {
     [super setUp];
-    
+
     self.continueAfterFailure = NO;
     
     app = [[XCUIApplication alloc] init];
     [app launch];
 
-    interruptionMonitor = [self addUIInterruptionMonitorWithDescription:@"Location alert" handler:^BOOL(XCUIElement *interruptingElement) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label MATCHES 'Allow'"];
-        XCUIElement *button = [[interruptingElement.buttons containingPredicate:predicate] element];
-        if ([button exists]) {
-            [button tap];
-            return true;
-        }
+    sleep(1); // Time for animations
     
-        return false;
-    }];
+    if (!alertHandled) {
 
-    [app tap];
-    
-    // Wait for location alert to appear
-    sleep(5);
-    
-    NSPredicate *alertPredicate = [NSPredicate predicateWithFormat:@"exists == false"];
-    XCUIElement *alert = [app.alerts element];
-    
-    [self expectationForPredicate:alertPredicate evaluatedWithObject:alert handler:nil];
-    
-    [self waitForExpectationsWithTimeout:INIT_TIMEOUT handler: ^(NSError * __nullable error) {
-        if (error) {
-            XCTFail(@"Alerts did not disappear in time");
+        interruptionMonitor = [self addUIInterruptionMonitorWithDescription:@"Location alert" handler:^BOOL(XCUIElement *interruptingElement) {
+            sleep(1); // Time for animations
+            if (interruptingElement.buttons[@"Allow"].exists) {
+                [interruptingElement.buttons[@"Allow"] tap];
+                alertHandled = YES;
+            }
+            sleep(1); // Time for animations
+            return YES;
+
+        }];
+
+        [app tap];
+        if (app.buttons[@"Allow"].exists) {
+            [app.buttons[@"Allow"] tap];
+            alertHandled = YES;
         }
-    }];
-    
+        else {
+            // wait for alert
+            sleep(5);
+        }
+        
+    }
     NSLog(@"setUp completed");
 }
 
@@ -66,9 +66,23 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 }
 
 - (void)testInterstitialAd {
+    
+#if USE_STAGING_SERVER == 1
+    [app.tables.staticTexts[@"Use staging server"] tap];
+#endif
+    
     [app.tables.staticTexts[@"Interstitial"] tap];
     
     sleep(1);
+    
+#if USE_STAGING_SERVER == 0
+    XCUIElement *placementField = [[app.textFields containingPredicate:
+                                 [NSPredicate predicateWithFormat:@"identifier MATCHES 'placement_field'"]] element];
+    [placementField.buttons[@"Clear text"] tap];
+    [placementField tap];
+    [placementField typeText:@"5c23vpeypb"];
+    
+#endif
     
     [[[app.buttons containingPredicate:
       [NSPredicate predicateWithFormat:@"identifier MATCHES 'init_button'"]] element] tap];
@@ -114,7 +128,20 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 
 - (void)testRewardedAd {
     
+#if USE_STAGING_SERVER == 1
+    [app.tables.staticTexts[@"Use staging server"] tap];
+#endif
+    
     [app.tables.staticTexts[@"Rewarded video"] tap];
+  
+#if USE_STAGING_SERVER == 0
+    XCUIElement *placementField = [[app.textFields containingPredicate:
+                                    [NSPredicate predicateWithFormat:@"identifier MATCHES 'placement_field'"]] element];
+    [placementField.buttons[@"Clear text"] tap];
+    [placementField tap];
+    [placementField typeText:@"izqeiozlat"];
+    
+#endif
     
     sleep(1);
     
@@ -165,7 +192,26 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 }
 
 - (void)testBannerAd {
+    
+#if USE_STAGING_SERVER == 1
+    [app.tables.staticTexts[@"Use staging server"] tap];
+#endif
+    
     [app.tables.staticTexts[@"Banner"] tap];
+    
+
+#if USE_STAGING_SERVER == 0
+    XCUIElement *placementField = [[app.textFields containingPredicate:
+                                    [NSPredicate predicateWithFormat:@"identifier MATCHES 'placement_field'"]] element];
+    
+    [placementField.buttons[@"Clear text"] tap];
+    [placementField tap];
+    [placementField typeText:@"p3hidjfvui"];
+    
+    [[[app.buttons containingPredicate:
+       [NSPredicate predicateWithFormat:@"identifier MATCHES 'reload_button'"]] element] tap];
+    
+#endif
     
     sleep(1);
     
@@ -174,7 +220,7 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
     
     [self expectationForPredicate:[NSPredicate predicateWithFormat:@"value MATCHES 'DISPLAYING'"] evaluatedWithObject: statusField handler:nil];
     
-    [self waitForExpectationsWithTimeout:LOAD_TIMEOUT handler: ^(NSError * __nullable error) {
+    [self waitForExpectationsWithTimeout:INIT_TIMEOUT + LOAD_TIMEOUT handler: ^(NSError * __nullable error) {
         if (error) {
             XCTFail(@"Timeout while displaying");
         }

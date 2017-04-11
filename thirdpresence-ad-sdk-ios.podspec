@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "thirdpresence-ad-sdk-ios"
-  s.version          = "1.5.2"
+  s.version          = "1.5.3"
   s.summary          = "Thirdpresence Ad SDK for iOS apps"
   s.description      = <<-DESC
     Thirdpresence Ad SDK is a VPAID compatible ad SDK for apps. 
@@ -17,8 +17,7 @@ Pod::Spec.new do |s|
   s.subspec 'ThirdpresenceAdSDK' do |ss1|
 	ss1.source_files = 'ThirdpresenceAdSDK/**/*.{h,m}', 'ThirdpresenceAdSDK/TRDPMoatMobileAppKit.framework/Headers/*.h'
  	ss1.public_header_files = 'ThirdpresenceAdSDK/*.h', 'ThirdpresenceAdSDK/TRDPMoatMobileAppKit.framework/Headers/*.h'
- 	# Uncomment this when MOAT SDK framework is available
-	#ss1.ios.vendored_framework = 'ThirdpresenceAdSDK/TRDPMoatMobileAppKit.framework'
+	ss1.ios.vendored_framework = 'ThirdpresenceAdSDK/TRDPMoatMobileAppKit.framework'
 	ss1.resource = "ThirdpresenceAdSDK-Info.plist"
   end
   

@@ -12,6 +12,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class TRDPMoatWebTracker;
+
 @interface TPRWebView : UIWebView
 
 /*!
@@ -29,12 +31,6 @@
 - (BOOL) prepare:(NSString*)playerUrl;
 
 /*!
- @brief Enables third-party ad tracker
- @return true if succeeded
- */
-- (BOOL) enableAdTracker;
-
-/*!
  @brief Loads an ad
  */
 - (void) loadAd;
@@ -50,21 +46,16 @@
 - (void) reset;
 
 /*!
+ @brief Updates the volume level to the player
+ @param volume the volume level in scale 0 to 1
+ */
+- (void) updateVolume:(float)volume;
+
+/*!
  @brief Updates coordinates to the player
  @param latitude the latitude coordinate
  @param longitude the longitude coordinate
  */
 - (void) updateLocationWithLatitude:(double)latitude longitude:(double)longitude;
-
-/*!
- @brief Initializes ad tracker
- @discussion This shall be called when ad view is fully visible and ad tracker is enabled
- */
-- (void) initAdTracker;
-
-/*!
- @brief Enables ad tracker (MOAT)
- */
-@property (assign) BOOL enableAdTracker;
 
 @end

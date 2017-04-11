@@ -103,8 +103,9 @@
         UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         if (!root.presentingViewController.presentedViewController) {
             _playerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [root presentViewController:_playerViewController animated:YES completion: nil];
-            [_playerHandler displayAd];
+            [root presentViewController:_playerViewController animated:YES completion: ^{
+                [_playerHandler displayAd];
+            }];
         } else {
             TPRLog(@"[TPR] Failure: already displaying a modal view controller");
             NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN

@@ -9,8 +9,8 @@
 #import "TPRWebView.h"
 #import "TPRVideoAd.h"
 
-// MOAT SDK Framework to be added
-//#import <TRDPMoatMobileAppKit/TRDPMoatMobileAppKit.h>
+// MOAT
+#import <TRDPMoatMobileAppKit/TRDPMoatWebTracker.h>
 
 NSTimeInterval const REQUEST_TIMEOUT = 5.0;
 
@@ -43,7 +43,6 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
 - (void)callJSFunction:(NSString*)function arg1:(NSString*)arg1 arg2:(NSString*)arg2 {
     NSString* functiontring = [NSString stringWithFormat:@"javascript:%@(%@,%@)", function, arg1, arg2];
     [self stringByEvaluatingJavaScriptFromString:functiontring];
-    
 }
 
 - (BOOL) prepare:(NSString*)playerUrl {
@@ -62,6 +61,12 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
     [self callJSFunction:@"startAd" arg1:nil arg2:nil];
 }
 
+- (void) updateVolume:(float)volume {
+    [self callJSFunction:@"setVolume"
+                    arg1:[NSString stringWithFormat:@"%f", volume]
+                    arg2:nil];
+}
+
 - (void) reset {
     [self stopLoading];
 }
@@ -72,22 +77,5 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
                             arg2:[NSString stringWithFormat:@"%f", longitude]];
 }
 
-- (void)initAdTracker {
-    BOOL success = NO;
-    if (self.enableAdTracker) {
-        Class classObj = NSClassFromString(@"TRDPMoatBootstrap");
-        SEL selector = NSSelectorFromString(@"injectDelegateWrapper:");
-        if (classObj && [classObj respondsToSelector:selector]) {
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [classObj performSelector:selector withObject:self];
-            success = YES;
-        }
-    }
-    if (success) {
-        TPRLog(@"[TPR] MOAT ad tracker enabled");
-    } else {
-        TPRLog(@"[TPR] MOAT SDK not available");
-    }
-}
 
 @end

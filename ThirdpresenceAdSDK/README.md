@@ -47,6 +47,7 @@ pod 'thirdpresence-ad-sdk-ios/ThirdpresenceAdAdmobMediation'
 
 Enable the frameworks below to your application target:
 - AdSupport.framework
+- AVFoundation.framework
 - CoreLocation.framework (optional, but highly recommended for enabling more targeted ads)
 
 From January 2017 Apple App Review requires App Transport Security (ATS) to be used. Therefore Thirdpresence SDK uses Secure HTTP by default (since version 1.4.1). 
@@ -363,4 +364,4 @@ In case the banner view is in an UIScrollView or similar where it might be not v
 
 ### API reference
 
-See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.2/index.html)
+See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.3/index.html)

@@ -7,6 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "AppDelegate.h"
+#import <ThirdpresenceAdSDK/ThirdpresenceAdSDK.h>
 
 @interface BaseViewController ()
 
@@ -18,14 +20,12 @@
     [super viewDidLoad];
     
     _pendingMessages = [NSMutableArray arrayWithCapacity:10];
-    
-    // Requests user's authorization to use location services
-    // This is required to get mored targeted ads and therefore better revenue
-    self.locationManager = [[CLLocationManager alloc] init];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
+
+    if ([self useStagingServer]) {
+        _serverType = TPR_SERVER_TYPE_STAGING;
+    } else {
+        _serverType = TPR_SERVER_TYPE_PRODUCTION;
     }
-    [self.locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,10 +39,8 @@
 
 - (void) dealloc {
     [self.pendingMessages removeAllObjects];
-    self.pendingMessages = nil;
-    
-    [self.locationManager stopUpdatingLocation];
-    self.locationManager = nil;
+    self.pendingMessages = nil;    
+    self.serverType = nil;
 }
 
 /**
@@ -84,6 +82,16 @@
         [_pendingMessages addObject:message];
     }
     [self showNextMessage];
+}
+
+/**
+ *  Checks whether to use staging server
+ *
+ *  @return true if staging server to be used
+ */
+- (BOOL) useStagingServer {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return appDelegate.useStagingServer;
 }
 
 @end

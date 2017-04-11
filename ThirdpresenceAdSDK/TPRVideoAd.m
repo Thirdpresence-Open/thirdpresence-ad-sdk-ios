@@ -22,6 +22,7 @@ NSString *const TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP = @"usehttp";
 NSString *const TPR_ENVIRONMENT_KEY_ENABLE_MOAT = @"enablemoat";
 NSString *const TPR_ENVIRONMENT_KEY_REWARD_TITLE = @"rewardtitle";
 NSString *const TPR_ENVIRONMENT_KEY_REWARD_AMOUNT = @"rewardamount";
+NSString *const TPR_ENVIRONMENT_KEY_MOAT_AD_TRACKING = @"moatadtracking";
 
 // Player parameter keys
 NSString *const TPR_PLAYER_PARAMETER_KEY_APP_NAME = @"appname";

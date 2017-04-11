@@ -10,6 +10,8 @@
 #import "ThirdpresenceAdSDK.h"
 #import <AdSupport/ASIdentifierManager.h>
 #import <CoreLocation/CLLocationManager.h>
+#import <TRDPMoatMobileAppKit/TRDPMoatAnalytics.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface TPRVideoPlayerHandler ()
 
@@ -23,17 +25,24 @@
 - (void)sendEvent:(NSString*)eventName arg1:(NSObject*)arg1 arg2:(NSObject*)arg2 arg3:(NSObject*)arg3;
 - (void)sendEvent:(TPRPlayerEvent*)event;
 - (NSString*)getAdvertisingID;
+- (void)updateVolume;
 - (void)initLocationServices;
 - (CLLocation*)getLastKnownLocation;
 - (void)updateLocationToPlayer;
+- (void)startAdTrackingAnalytics;
+- (void)createAdTrackers;
+- (void)startAdTracking;
+- (void)stopAdTracking;
 
+@property (strong) TRDPMoatWebTracker *moatWebTracker;
 @property (strong, readonly) CLLocationManager* locationManager;
 @property (strong) TPRPlacementType* placementType;
+@property (strong) AVAudioSession* avSession;
 @end
 
 @implementation TPRVideoPlayerHandler
 
-NSString *const PLAYER_URL_BASE = @"%@//d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&type=%@&customization=%@";
+NSString *const PLAYER_URL_BASE = @"%@//d1c13tt6n7tja5.cloudfront.net/tags/%@/sdk/LATEST/sdk_player.v3.html?env=%@&cid=%@&playerid=%@&adsdk=%@&type=%@&customization=%@&adverification=%@";
 
 NSString *const TPR_PLAYER_NOTIFICATION = @"TPRPlayerNotification";
 NSString *const PLAYER_EVENT_CUSTOM_SCHEME = @"thirdpresence";
@@ -41,6 +50,10 @@ NSString *const PLAYER_EVENT_HOST_NAME = @"onPlayerEvent";
 
 NSInteger const LOCATION_DISTANCE_FILTER = 1000;
 NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
+
+NSString *const AD_VERIFICATION_TYPE_MOAT = @"moat";
+
+static void *VolumeObserverContext = &VolumeObserverContext;
 
 - (instancetype)initWithPlayer:(TPRWebView *)webView
                    environment:(NSDictionary *)environment
@@ -66,13 +79,15 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
+    _avSession = [AVAudioSession sharedInstance];
+    [_avSession addObserver:self
+                 forKeyPath:@"outputVolume"
+                    options:NSKeyValueObservingOptionNew
+                    context:VolumeObserverContext];
+    
     _webView.delegate = self;
     
-    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_ENABLE_MOAT];
-    if ([enableMoat isEqualToString:TPR_VALUE_TRUE]) {
-        [_webView enableAdTracker];
-    }
-    
+    [self startAdTrackingAnalytics];
     [self initLocationServices];
 
     _adPlaying = NO;
@@ -222,16 +237,19 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     
     NSString *useHTTP = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP];
     NSString *protocol = [useHTTP isEqualToString:TPR_VALUE_TRUE] ? @"http:" : @"https:";
+   
+    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_MOAT_AD_TRACKING];
     
     _playerPageURL = [NSString stringWithFormat:PLAYER_URL_BASE,
-                     protocol,
-                     env,
-                     env,
-                     account,
-                     placementId,
-                     versionString,
-                     _placementType,
-                     customization ? [self encodeUrlString:customization] : @""
+                      protocol,
+                      env,
+                      env,
+                      account,
+                      placementId,
+                      versionString,
+                      _placementType,
+                      customization ? [self encodeUrlString:customization] : @"",
+                      [enableMoat isEqualToString:TPR_VALUE_FALSE] ? @"" : AD_VERIFICATION_TYPE_MOAT
                      ];
     
     _playerTimeoutTimer = [self startTimer:_playerTimeout target:@selector(timeoutOccuredOn:)];
@@ -257,6 +275,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
         _adLoadPending = NO;
         if (!_adLoading) {
             _adLoading = YES;
+            [self createAdTrackers];
             _loadAdTimeoutTimer = [self startTimer:_loadAdTimeout target:@selector(timeoutOccuredOn:)];
             [_webView loadAd];
         }
@@ -281,12 +300,16 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
         [self sendEvent:TPR_EVENT_NAME_PLAYER_ERROR arg1:error arg2:nil arg3:nil];
     }
     else {
+        [self startAdTracking];
+        [self updateVolume];
         [_webView startAd];
         _adPlaying = YES;
     }
 }
 
 - (void)resetState {
+    [self stopAdTracking];
+    
     [_webView reset];
     
     [self cancelTimer:_playerTimeoutTimer];
@@ -309,6 +332,12 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     
     _webView.delegate = nil;
     _webView = nil;
+    
+    
+    [_avSession removeObserver:self
+                    forKeyPath:@"outputVolume"
+                       context:VolumeObserverContext];
+    _avSession = nil;
     
     [_locationManager  stopMonitoringSignificantLocationChanges];
     _locationManager.delegate = nil;
@@ -418,6 +447,7 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
                [eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE] ||
                [eventName isEqualToString:TPR_EVENT_NAME_AD_SKIPPED]) {
         _adPlaying = NO;
+
     }
     
     [self sendEvent:event];
@@ -492,6 +522,13 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     return nil;
 }
 
+- (void)updateVolume {
+    if (_avSession) {
+        float volume = [_avSession outputVolume];
+        [_webView updateVolume:volume];
+    }
+}
+
 - (void)initLocationServices {
     if ([CLLocationManager class] && [CLLocationManager authorizationStatus] >= kCLAuthorizationStatusAuthorizedAlways) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -529,7 +566,39 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
     }
 }
 
+- (void)startAdTrackingAnalytics {
+    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_MOAT_AD_TRACKING];
+    if (![enableMoat isEqualToString:TPR_VALUE_FALSE]) {
+        TRDPMoatOptions *options = [[TRDPMoatOptions alloc] init];
+#ifdef DEBUG
+        options.debugLoggingEnabled = true;
+#endif
+        [[TRDPMoatAnalytics sharedInstance] startWithOptions:options];
+    }
+}
 
+- (void)createAdTrackers {
+    NSString* enableMoat = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_MOAT_AD_TRACKING];
+    if (!enableMoat || [enableMoat isEqualToString:TPR_VALUE_TRUE]) {
+        self.moatWebTracker = [TRDPMoatWebTracker trackerWithWebComponent:_webView];
+        TPRLog(@"[TPR] MOAT ad tracker enabled");
+    } else {
+        TPRLog(@"[TPR] MOAT SDK not available");
+    }
+}
+
+- (void)startAdTracking {
+    if (self.moatWebTracker) {
+        [self.moatWebTracker startTracking];
+    }
+}
+
+- (void)stopAdTracking {
+    if (self.moatWebTracker) {
+        [self.moatWebTracker stopTracking];
+        self.moatWebTracker = nil;
+    }
+}
 
 - (void)sendEvent:(NSString*)eventName arg1:(NSObject*)arg1 arg2:(NSObject*)arg2 arg3:(NSObject*)arg3  {
     TPRPlayerEvent *event = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -546,6 +615,21 @@ NSTimeInterval const LOCATION_EXPIRATION_LIMIT = 3600;
                                                             object:self
                                                           userInfo:event];
     });
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    if (context == VolumeObserverContext) {
+        [self updateVolume];
+    } else {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    }
 }
 
 @end

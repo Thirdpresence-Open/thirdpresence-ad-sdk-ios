@@ -21,7 +21,7 @@
     _accountField.text = DEFAULT_ACCOUNT;
     _accountField.delegate = self;
     
-    _placementField.text = DEFAULT_REWARDED_VIDEO_PLACEMENT_ID;
+    _placementField.text = [self useStagingServer] ? STAGING_REWARDED_VIDEO_PLACEMENT_ID : DEFAULT_REWARDED_VIDEO_PLACEMENT_ID;
     _placementField.delegate = self;
     
     _rewardField.text = @"";
@@ -79,12 +79,17 @@
     
     NSString *rewardTitle = @"diamonds";
     NSString *rewardAmount = @"10";
+    
+    // Staging server does not support HTTPS
+    NSString* useInsecureHTTP = [self useStagingServer] ? TPR_VALUE_TRUE : TPR_VALUE_FALSE;
 
     // Environment dictionary must contain at least key TPR_ENVIRONMENT_KEY_ACCOUNT and
     // TPR_ENVIRONMENT_KEY_PLACEMENT_ID, TPR_ENVIRONMENT_KEY_REWARD_TITLE and TPR_ENVIRONMENT_KEY_REWARD_AMOUNT
     // TPR_ENVIRONMENT_KEY_FORCE_LANDSCAPE allows to force player to landscape orientation
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         account, TPR_ENVIRONMENT_KEY_ACCOUNT,
+                                        useInsecureHTTP, TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP,
+                                        self.serverType, TPR_ENVIRONMENT_KEY_SERVER,
                                         placementId, TPR_ENVIRONMENT_KEY_PLACEMENT_ID,
                                         rewardTitle, TPR_ENVIRONMENT_KEY_REWARD_TITLE,
                                         rewardAmount, TPR_ENVIRONMENT_KEY_REWARD_AMOUNT, nil];
@@ -101,7 +106,6 @@
     NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          APP_NAME, TPR_PLAYER_PARAMETER_KEY_APP_NAME,
                                          APP_VERSION,TPR_PLAYER_PARAMETER_KEY_APP_VERSION,
-                                         APP_STORE_URL, TPR_PLAYER_PARAMETER_KEY_APP_STORE_URL,
                                          userGender, TPR_PLAYER_PARAMETER_KEY_USER_GENDER,
                                          userYearOfBirth, TPR_PLAYER_PARAMETER_KEY_USER_YOB,
                                          nil];

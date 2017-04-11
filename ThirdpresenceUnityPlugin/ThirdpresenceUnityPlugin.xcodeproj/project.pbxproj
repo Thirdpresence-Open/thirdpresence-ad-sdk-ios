@@ -54,6 +54,8 @@
 		FB9F399D1D91096F00B26119 /* TPRVideoAd.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39901D91096F00B26119 /* TPRVideoAd.m */; };
 		FB9F399E1D91096F00B26119 /* TPRVideoInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = FB9F39911D91096F00B26119 /* TPRVideoInterstitial.h */; };
 		FB9F399F1D91096F00B26119 /* TPRVideoInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39921D91096F00B26119 /* TPRVideoInterstitial.m */; };
+		FBD506901E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
+		FBD506921E4DD8B0000E7BB8 /* TRDPMoatMobileAppKit.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,7 @@
 			dstPath = "$PROJECT_DIR/unity-package/ThirdpresenceAdSDK/Assets/Plugins/iOS";
 			dstSubfolderSpec = 0;
 			files = (
+				FBD506921E4DD8B0000E7BB8 /* TRDPMoatMobileAppKit.framework in Copy Files */,
 				FB2A1F691DF84B8A00B08088 /* TPRVideoBanner.h in Copy Files */,
 				FB2A1F6A1DF84B8A00B08088 /* TPRBannerView.h in Copy Files */,
 				FB2A1F6B1DF84B8A00B08088 /* TPRVideoBanner.m in Copy Files */,
@@ -122,6 +125,7 @@
 		FB9F39901D91096F00B26119 /* TPRVideoAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoAd.m; sourceTree = "<group>"; };
 		FB9F39911D91096F00B26119 /* TPRVideoInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoInterstitial.h; sourceTree = "<group>"; };
 		FB9F39921D91096F00B26119 /* TPRVideoInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoInterstitial.m; sourceTree = "<group>"; };
+		FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRDPMoatMobileAppKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBD506901E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +247,7 @@
 		FB9F39931D91096F00B26119 /* ThirdpresenceAdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */,
 				FB2A1F581DF83FEA00B08088 /* ThirdpresenceAdSDK-Info.plist */,
 				FB9F398B1D91096F00B26119 /* internal */,
 				FB9F398C1D91096F00B26119 /* ThirdpresenceAdSDK.h */,

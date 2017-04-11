@@ -82,6 +82,12 @@ FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_REWARD_TITLE;
  */
 FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_REWARD_AMOUNT;
 
+/*!
+ @brief Environment dictionary key for MOAT ad tracking. Default enabled. Use @link TPR_VALUE_FALSE @/link to disable.
+ */
+FOUNDATION_EXPORT NSString *const TPR_ENVIRONMENT_KEY_MOAT_AD_TRACKING;
+
+
 
 /**
  @brief Value for production server to be used with the environment key @link TPR_ENVIRONMENT_KEY_SERVER @/link

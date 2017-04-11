@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CLLocationManager.h>
 
 @interface BaseViewController : UIViewController
 
 - (void) showNextMessage;
 - (void) queueMessage:(NSString*)message;
-
-// Location manager for providing location data for Ad SDK
-@property (strong) CLLocationManager* locationManager;
+- (BOOL) useStagingServer;
 
 // UI alert message queue
 @property (strong) NSMutableArray *pendingMessages;
@@ -23,5 +20,8 @@
 
 // Ad loaded property
 @property (assign) BOOL adLoaded;
+
+// Server type
+@property (strong) NSString* serverType;
 
 @end
