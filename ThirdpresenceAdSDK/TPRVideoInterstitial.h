@@ -78,6 +78,7 @@
 
 // Internal
 @property (readonly, strong) TPRVideoPlayerHandler* playerHandler;
+@property (weak) NSTimer *startTimeoutTimer;
 
 // Not available
 - (instancetype) init NS_UNAVAILABLE;

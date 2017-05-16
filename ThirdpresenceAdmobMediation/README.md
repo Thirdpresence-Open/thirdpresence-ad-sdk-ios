@@ -16,11 +16,11 @@ There are two options to add Thirdpresence Ad SDK libraries to your XCode projec
 1. Using CocoaPods
 2. Copying the source code
 
-For details, see [Thirdpresence Ad SDK - Adding library dependencies] (../ThirdpresenceAdSDK/#adding-library-dependencies) 
+For details, see [Thirdpresence Ad SDK - Adding library dependencies](../ThirdpresenceAdSDK/#adding-library-dependencies) 
 
 ## Additional requirements
 
-For common additional requirements, see [Thirdpresence Ad SDK - Additional requirements] (../ThirdpresenceAdSDK/#additional-requirements) 
+For common additional requirements, see [Thirdpresence Ad SDK - Additional requirements](../ThirdpresenceAdSDK/#additional-requirements) 
 
 ## Creating an ad unit
 

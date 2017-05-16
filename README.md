@@ -15,6 +15,6 @@ For details of a specific integration method, click one of the options above.
 
 ## SDK updates
 
-The current SDK version is 1.5.3.
+The current SDK version is 1.5.4.
 
 The SDK is updated on regular basis. Activate the watch function in GitHub to get notified about updates and changes. 

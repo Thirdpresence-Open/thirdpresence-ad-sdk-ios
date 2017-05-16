@@ -106,12 +106,20 @@
             [root presentViewController:_playerViewController animated:YES completion: ^{
                 [_playerHandler displayAd];
             }];
+            [self.startTimeoutTimer invalidate];
+            
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TPR_PLAYER_DISPLAY_TIMEOUT
+                                                              target:self
+                                                            selector:@selector(onDisplayTimeout:)
+                                                            userInfo:nil
+                                                             repeats:NO];
+            self.startTimeoutTimer = timer;
         } else {
             TPRLog(@"[TPR] Failure: already displaying a modal view controller");
             NSError* error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
                                                  code:TPR_ERROR_INVALID_STATE
                                              userInfo:[NSDictionary dictionaryWithObject:@"Cannot display ad while modal view controller is presented" forKey:NSLocalizedDescriptionKey]];
-             [_delegate videoAd:self failed:error];
+            [_delegate videoAd:self failed:error];
         }
         
     } else {
@@ -175,7 +183,10 @@
         } else {
             if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
                 self.ready = YES;
+            } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STARTED]) {
+                [self.startTimeoutTimer invalidate];
             }
+            
             if (_delegate) {
                 [_delegate videoAd:self eventOccured:note.userInfo];
             }
@@ -184,6 +195,13 @@
     }
     
 };
+
+- (void)onDisplayTimeout:(NSTimer*)timer {
+    NSError *error = [NSError errorWithDomain:TPR_AD_SDK_ERROR_DOMAIN
+                                         code:TPR_ERROR_TIMEOUT_DISPLAYING_AD
+                                     userInfo:[NSDictionary dictionaryWithObject:@"Failed to display the loaded ad" forKey:NSLocalizedDescriptionKey]];
+    [_delegate videoAd:self failed:error];
+}
 
 
 @end

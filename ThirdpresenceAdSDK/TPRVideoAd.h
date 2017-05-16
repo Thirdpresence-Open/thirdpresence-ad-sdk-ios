@@ -375,10 +375,20 @@ FOUNDATION_EXPORT NSInteger const TPR_ERROR_INVALID_STATE;
  */
 FOUNDATION_EXPORT NSInteger const TPR_ERROR_LOW_MEMORY;
 
+/*!
+ @brief Error code for ad not displayed in time
+ */
+FOUNDATION_EXPORT NSInteger const TPR_ERROR_TIMEOUT_DISPLAYING_AD;
+
 /*! 
  @brief Default value for player timeouts (10s) 
  */
 FOUNDATION_EXPORT NSInteger const TPR_PLAYER_DEFAULT_TIMEOUT;
+
+/*!
+ @brief Timeout for player to display the ad
+ */
+FOUNDATION_EXPORT NSTimeInterval const TPR_PLAYER_DISPLAY_TIMEOUT;
 
 /*!
  @brief Placement type identifier

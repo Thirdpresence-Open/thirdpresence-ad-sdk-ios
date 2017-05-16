@@ -68,9 +68,11 @@ NSInteger const TPR_ERROR_NO_FILL = TPR_ERROR_BASE - 5;
 NSInteger const TPR_ERROR_AD_NOT_READY = TPR_ERROR_BASE - 6;
 NSInteger const TPR_ERROR_INVALID_STATE = TPR_ERROR_BASE - 7;
 NSInteger const TPR_ERROR_LOW_MEMORY = TPR_ERROR_BASE - 8;
+NSInteger const TPR_ERROR_TIMEOUT_DISPLAYING_AD = TPR_ERROR_BASE - 9;
 
 // Default timeout for player operations
 NSInteger const TPR_PLAYER_DEFAULT_TIMEOUT = 10;
+NSTimeInterval const TPR_PLAYER_DISPLAY_TIMEOUT = 3.0;
 
 // Player event keys
 NSString *const TPR_EVENT_KEY_NAME = @"event";
