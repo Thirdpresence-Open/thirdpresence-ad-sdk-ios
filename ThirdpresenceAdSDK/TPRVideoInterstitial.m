@@ -98,7 +98,7 @@
 
 - (void)displayAd {
     TPRLog(@"[TPR] Trying to display an ad");
-
+    
     if (_playerHandler) {
         UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         if (!root.presentingViewController.presentedViewController) {
@@ -203,5 +203,8 @@
     [_delegate videoAd:self failed:error];
 }
 
+- (BOOL)adLoaded {
+    return _playerHandler.adLoaded;
+}
 
 @end

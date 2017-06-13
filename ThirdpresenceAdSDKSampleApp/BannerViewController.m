@@ -155,7 +155,6 @@ NSInteger const MIN_BANNER_WIDTH = 50;
         if ([eventName isEqualToString:TPR_EVENT_NAME_PLAYER_READY]) {
             _statusField.text = @"READY";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
-            self.adLoaded = YES;
             _statusField.text = @"LOADED";
             if ([self isBannerViewVisible]) {
                  [self.videoBanner displayAd];
@@ -163,11 +162,8 @@ NSInteger const MIN_BANNER_WIDTH = 50;
         }  else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STARTED]) {
             _statusField.text = @"DISPLAYING";
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
-            self.adLoaded = NO;
             _statusField.text = @"ERROR";
             [self queueMessage:[NSString stringWithFormat:@"Failure: %@", [event objectForKey:TPR_EVENT_KEY_ARG1]]];
-        } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
-            self.adLoaded = NO;
         }
     }
 }
@@ -218,7 +214,7 @@ NSInteger const MIN_BANNER_WIDTH = 50;
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Start playing the ad if it is loaded and visible
-    if (self.adLoaded && [self isBannerViewVisible]) {
+    if (self.videoBanner.adLoaded && [self isBannerViewVisible]) {
         [self.videoBanner displayAd];
     }
 }

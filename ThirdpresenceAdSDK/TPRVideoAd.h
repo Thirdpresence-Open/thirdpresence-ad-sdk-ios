@@ -475,6 +475,11 @@ FOUNDATION_EXPORT void TPRLog(NSString *format, ...);
  */
 @property (assign) BOOL ready;
 
+/*!
+ @brief Set true when an ad has been loaded and ready for display
+ */
+@property (assign) BOOL adLoaded;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 @end

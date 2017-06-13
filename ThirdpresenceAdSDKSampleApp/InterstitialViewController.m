@@ -181,7 +181,7 @@
         }
     }
     else if (sender == self.displayButton) {
-        if (self.adLoaded) {
+        if (self.interstitial.adLoaded) {
             [self.interstitial displayAd];
         } else {
             [self queueMessage:@"No ad loaded yet"];

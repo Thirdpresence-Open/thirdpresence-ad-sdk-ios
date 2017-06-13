@@ -108,7 +108,7 @@
             } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_LOADED]) {
                 if (!_disableAutoDisplay) {
                     [_playerHandler displayAd];
-                }
+                } 
             }
             if (_delegate) {
                 [_delegate videoAd:self eventOccured:note.userInfo];
@@ -116,6 +116,10 @@
         }
         
     }
-};
+}
+
+- (BOOL)adLoaded {
+    return _playerHandler.adLoaded;
+}
 
 @end
