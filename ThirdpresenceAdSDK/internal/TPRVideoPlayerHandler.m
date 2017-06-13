@@ -143,11 +143,14 @@ static void *VolumeObserverContext = &VolumeObserverContext;
     
     if (!versionString) {
         NSBundle* libBundle = [NSBundle bundleWithIdentifier:@"com.thirdpresence.ThirdpresenceAdSDK"];
+        if (!libBundle) {
+            libBundle = [NSBundle bundleWithIdentifier:@"org.cocoapods.thirdpresence-ad-sdk-ios"];
+        }
+        
         versionString = [libBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     }
     
     if (!versionString) {
-        // If CocoaPods used the plist file is in the main bundle
         NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ThirdpresenceAdSDK-Info" ofType:@"plist"]];
     
         versionString = [dictionary objectForKey:@"CFBundleShortVersionString"];
@@ -233,8 +236,9 @@ static void *VolumeObserverContext = &VolumeObserverContext;
         return;
     }
     
-    customization = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
+    customization = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
     NSString *useHTTP = [self.environment objectForKey:TPR_ENVIRONMENT_KEY_USE_INSECURE_HTTP];
     NSString *protocol = [useHTTP isEqualToString:TPR_VALUE_TRUE] ? @"http:" : @"https:";
    
@@ -470,13 +474,7 @@ static void *VolumeObserverContext = &VolumeObserverContext;
 }
 
 -(NSString *)encodeUrlString:(NSString *)string {
-    return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                     kCFAllocatorDefault,
-                                                                     (__bridge CFStringRef)string,
-                                                                     NULL,
-                                                                     CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                     kCFStringEncodingUTF8)
-                             );
+    return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
 
 - (NSTimer*)startTimer:(NSTimeInterval) timeout target:(SEL)selector {

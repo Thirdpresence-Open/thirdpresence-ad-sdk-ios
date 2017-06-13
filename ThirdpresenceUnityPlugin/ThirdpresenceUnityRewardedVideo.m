@@ -62,6 +62,7 @@
         [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"An ad is not loaded"];
     }
     else {
+        _adDisplaying = YES;
         [_rewardedVideo displayAd];
     }
 }
@@ -73,6 +74,7 @@
     _rewardAmount = nil;
     _rewardTitle = nil;
     _adLoaded = NO;
+    _adDisplaying = NO;
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
@@ -92,12 +94,20 @@
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STARTED]) {
             [self sendEvent:nil handler:@"onRewardedVideoShown"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
-            _adLoaded = NO;
-            [self sendErrorWithCode:TPR_ERROR_NO_FILL message:@"Player failed to display an ad"];
+            NSString* errorMessage = [event objectForKey:TPR_EVENT_KEY_ARG1];
+            if (_adLoaded) {
+                _adLoaded = NO;
+                [self sendErrorWithCode:TPR_ERROR_VIDEO_PLAYBACK message:errorMessage];
+            } else {
+                [self sendErrorWithCode:TPR_ERROR_NO_FILL message:errorMessage];
+            }                
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
             _adLoaded = NO;
+            if (_adDisplaying) {
+                _adDisplaying = NO;
+                [self sendEvent:nil handler:@"onRewardedVideoDismissed"];
+            }
             [_rewardedVideo removePlayer];
-            [self sendEvent:nil handler:@"onRewardedVideoDismissed"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self sendEvent:nil handler:@"onRewardedVideoClicked"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_VIDEO_COMPLETE]) {
@@ -119,6 +129,8 @@
 
 - (void) sendErrorWithCode:(NSInteger)errorCode message:(NSString*)message {
     NSError* error;
+    if (!message) message = @"Unknown error";
+
     NSNumber *errorCodeNumber = [NSNumber numberWithInteger:errorCode];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                 errorCodeNumber, @"code",

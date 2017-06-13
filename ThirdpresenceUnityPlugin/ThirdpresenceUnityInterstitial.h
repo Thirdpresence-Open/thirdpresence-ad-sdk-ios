@@ -11,14 +11,16 @@
 
 @interface ThirdpresenceUnityInterstitial : NSObject <TPRVideoAdDelegate>
 
-+ (id)sharedInterstitial;
-- (void)setupPlayerWithEnvironment:(NSDictionary*)env params:(NSDictionary*)params timeout:(NSTimeInterval)timeout;
++ (id) sharedInterstitial;
+- (void) setupPlayerWithEnvironment:(NSDictionary*)env params:(NSDictionary*)params timeout:(NSTimeInterval)timeout;
 - (void) displayAd;
 - (void) removePlayer;
 
 - (void) sendErrorWithCode:(NSInteger)errorCode message:(NSString*)message;
 - (void) sendEvent:(NSString*)data handler:(NSString*)func;
+- (NSMutableDictionary*) convertEnvironment:(NSDictionary*)dictionary;
 
 @property (strong) TPRVideoInterstitial* interstitial;
 @property (assign) BOOL adLoaded;
+@property (assign) BOOL adDisplaying;
 @end

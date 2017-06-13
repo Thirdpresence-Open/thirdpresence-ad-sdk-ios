@@ -51,6 +51,7 @@
         [self sendErrorWithCode:TPR_ERROR_INVALID_STATE message:@"An ad is not loaded"];
     }
     else {
+        _adDisplaying = YES;
         [_interstitial displayAd];
     }
 }
@@ -59,6 +60,7 @@
     [_interstitial removePlayer];
     _interstitial = nil;
     _adLoaded = NO;
+    _adDisplaying = NO;
 }
 
 - (void)videoAd:(TPRVideoAd*)videoAd failed:(NSError*)error {
@@ -79,17 +81,24 @@
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STARTED]) {
             [self sendEvent:nil handler:@"onInterstitialShown"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_ERROR]) {
-            _adLoaded = NO;
-            [self sendErrorWithCode:TPR_ERROR_NO_FILL message:@"Player failed to display an ad"];
+            NSString* errorMessage = [event objectForKey:TPR_EVENT_KEY_ARG1];
+            if (_adLoaded) {
+                _adLoaded = NO;
+                [self sendErrorWithCode:TPR_ERROR_VIDEO_PLAYBACK message:errorMessage];
+            } else {
+                [self sendErrorWithCode:TPR_ERROR_NO_FILL message:errorMessage];
+            }
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_STOPPED]) {
             _adLoaded = NO;
+            if (_adDisplaying) {
+                _adDisplaying = NO;
+                [self sendEvent:nil handler:@"onInterstitialDismissed"];
+            }
             [self.interstitial removePlayer];
-            [self sendEvent:nil handler:@"onInterstitialDismissed"];
         } else if ([eventName isEqualToString:TPR_EVENT_NAME_AD_CLICKTHRU]) {
             [self sendEvent:nil handler:@"onInterstitialClicked"];
         }
     }
-    
 }
 
 - (NSMutableDictionary*) convertEnvironment:(NSDictionary*)dictionary {
@@ -100,6 +109,7 @@
 
 - (void) sendErrorWithCode:(NSInteger)errorCode message:(NSString*)message {
     NSError* error;
+    if (!message) message = @"Unknown error";
     NSNumber *errorCodeNumber = [NSNumber numberWithInteger:errorCode];
     NSDictionary *dictonary = [NSDictionary dictionaryWithObjectsAndKeys:
                                errorCodeNumber, @"code",

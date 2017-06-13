@@ -380,6 +380,11 @@ FOUNDATION_EXPORT NSInteger const TPR_ERROR_LOW_MEMORY;
  */
 FOUNDATION_EXPORT NSInteger const TPR_ERROR_TIMEOUT_DISPLAYING_AD;
 
+/*!
+ @brief Error code for failure during video playback
+ */
+FOUNDATION_EXPORT NSInteger const TPR_ERROR_VIDEO_PLAYBACK;
+
 /*! 
  @brief Default value for player timeouts (10s) 
  */
