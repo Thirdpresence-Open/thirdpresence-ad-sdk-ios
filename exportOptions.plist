@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>signingStyle</key>
+	<string>manual</string>
+    <key>method</key>
+    <string>development</string>
+    <key>teamID</key>
+    <string>H478BW6B43</string>
+    <key>signingCertificate</key>
+    <string>iOS Developer</string>
+    <key>provisioningProfiles</key>
+    <dict>
+    	<key>com.thirdpresence.ThirdpresenceAdSDKSampleApp</key>
+        <string>578943d5-56fd-4a40-9ac7-80c8d618e351</string>
+        <key>com.thirdpresence.MoPubSampleApp</key>
+        <string>578943d5-56fd-4a40-9ac7-80c8d618e351</string>
+        <key>com.thirdpresence.AdmobExample</key>
+        <string>578943d5-56fd-4a40-9ac7-80c8d618e351</string>
+        <key>com.thirdpresence.spaceshooter</key>
+        <string>578943d5-56fd-4a40-9ac7-80c8d618e351</string>
+    </dict>
+</dict>
+</plist>
