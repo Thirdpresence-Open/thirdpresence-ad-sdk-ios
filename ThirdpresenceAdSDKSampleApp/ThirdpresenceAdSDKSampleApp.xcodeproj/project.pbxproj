@@ -395,7 +395,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"USE_STAGING_SERVER=$(USE_STAGING_SERVER)",
@@ -408,8 +409,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44f616f8-d4c2-456f-ac51-4a93673a571c";
-				PROVISIONING_PROFILE_SPECIFIER = "Thirdpresence apps";
+				PROVISIONING_PROFILE = "578943d5-56fd-4a40-9ac7-80c8d618e351";
+				PROVISIONING_PROFILE_SPECIFIER = SharedProfile;
 				TEST_TARGET_NAME = ThirdpresenceAdSDKSampleApp;
 				USE_STAGING_SERVER = 0;
 			};
@@ -420,6 +421,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				GCC_PREPROCESSOR_DEFINITIONS = "USE_STAGING_SERVER=$(USE_STAGING_SERVER)";
 				INFOPLIST_FILE = ThirdpresenceAdSDKSampleAppUITests/Info.plist;
@@ -428,8 +431,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44f616f8-d4c2-456f-ac51-4a93673a571c";
-				PROVISIONING_PROFILE_SPECIFIER = "Thirdpresence apps";
+				PROVISIONING_PROFILE = "578943d5-56fd-4a40-9ac7-80c8d618e351";
+				PROVISIONING_PROFILE_SPECIFIER = SharedProfile;
 				TEST_TARGET_NAME = ThirdpresenceAdSDKSampleApp;
 				USE_STAGING_SERVER = 0;
 			};
@@ -455,8 +458,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: marko.okkonen@thirdpresence.com (66B7V3NBUM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -503,8 +505,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: marko.okkonen@thirdpresence.com (66B7V3NBUM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -530,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../build/$(CONFIGURATION)-iphoneos",
@@ -542,8 +544,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dcd0a07-45ca-49a0-af7a-bcf10cb3d703";
-				PROVISIONING_PROFILE_SPECIFIER = "com.thirdpresence.ThirdpresenceAdSDKSampleApp Development";
+				PROVISIONING_PROFILE = "578943d5-56fd-4a40-9ac7-80c8d618e351";
+				PROVISIONING_PROFILE_SPECIFIER = SharedProfile;
 			};
 			name = Debug;
 		};
@@ -552,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../build/$(CONFIGURATION)-iphoneos",
@@ -564,8 +567,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirdpresence.ThirdpresenceAdSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dcd0a07-45ca-49a0-af7a-bcf10cb3d703";
-				PROVISIONING_PROFILE_SPECIFIER = "com.thirdpresence.ThirdpresenceAdSDKSampleApp Development";
+				PROVISIONING_PROFILE = "578943d5-56fd-4a40-9ac7-80c8d618e351";
+				PROVISIONING_PROFILE_SPECIFIER = SharedProfile;
 			};
 			name = Release;
 		};

@@ -11,7 +11,7 @@
 
 NSTimeInterval const INIT_TIMEOUT = 5.0;
 NSTimeInterval const LOAD_TIMEOUT = 10.0;
-NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
+NSTimeInterval const DISPLAY_TIMEOUT = 45.0;
 
 @interface ThirdpresenceAdSDKSampleAppUITests : XCTestCase {
 @private
@@ -46,7 +46,6 @@ NSTimeInterval const DISPLAY_TIMEOUT = 35.0;
 
         }];
 
-        [app tap];
         if (app.buttons[@"Allow"].exists) {
             [app.buttons[@"Allow"] tap];
             alertHandled = YES;
