@@ -13,6 +13,7 @@
 #import "TPRVideoAd.h"
 
 @class TPRVideoPlayerHandler;
+@class TPRViewControllerTransitioningDelegate;
 
 /*!
  @brief TPRVideoInterstitial implements a video interstitial ad placement
@@ -79,7 +80,7 @@
 // Internal
 @property (readonly, strong) TPRVideoPlayerHandler* playerHandler;
 @property (weak) NSTimer *startTimeoutTimer;
-
+@property (strong) TPRViewControllerTransitioningDelegate* playerControllerTransitionDelegate;
 // Not available
 - (instancetype) init NS_UNAVAILABLE;
 

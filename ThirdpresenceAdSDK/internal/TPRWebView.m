@@ -24,8 +24,7 @@ NSTimeInterval const REQUEST_TIMEOUT = 5.0;
     self.scrollView.bounces = NO;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self internalInit];

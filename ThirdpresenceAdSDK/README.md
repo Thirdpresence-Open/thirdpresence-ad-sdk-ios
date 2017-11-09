@@ -4,7 +4,7 @@ Thirdpresence Ad SDK provides an API to display video banner, interstitial and r
 
 ## Minimum requirements
 
-- XCode 7 or later
+- XCode 9.1 or later
 - Deployment target iOS 8.0 or later
 
 ## Adding library dependencies
@@ -364,4 +364,4 @@ In case the banner view is in an UIScrollView or similar where it might be not v
 
 ### API reference
 
-See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.8/index.html)
+See Thirdpresence Ad SDK [API Reference](https://thirdpresence-ad-tags.s3.amazonaws.com/sdk/javadoc/ios/1.5.9/index.html)

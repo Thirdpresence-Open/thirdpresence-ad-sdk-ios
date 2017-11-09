@@ -8,6 +8,7 @@
 
 #import "TPRVideoInterstitial.h"
 #import "TPRVideoPlayerHandler.h"
+#import "TPRViewControllerTransitioningDelegate.h"
 #import "ThirdpresenceAdSDK.h"
 
 @interface TPRVideoInterstitial ()
@@ -102,7 +103,12 @@
     if (_playerHandler) {
         UIViewController *root = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         if (!root.presentingViewController.presentedViewController) {
-            _playerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            _playerViewController.modalPresentationStyle = UIModalPresentationCustom;
+            
+            self.playerControllerTransitionDelegate = [[TPRViewControllerTransitioningDelegate alloc] init];
+            _playerViewController.transitioningDelegate = _playerControllerTransitionDelegate;
+            _playerViewController.modalPresentationCapturesStatusBarAppearance = NO;
+            
             [root presentViewController:_playerViewController animated:YES completion: ^{
                 [_playerHandler displayAd];
             }];

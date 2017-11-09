@@ -27,6 +27,10 @@
 		FB5DD3401CEB0DE5008C3A34 /* TPRVideoInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB5DD3351CEB0DE5008C3A34 /* TPRVideoInterstitial.m */; };
 		FBD506871E49C81C000E7BB8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD506861E49C81C000E7BB8 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FBD5068D1E4D9981000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD5068A1E4CDB7B000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
+		FBF1B47D1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FBF1B47B1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.h */; };
+		FBF1B47E1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF1B47C1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.m */; };
+		FBF1B4811FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = FBF1B47F1FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.h */; };
+		FBF1B4821FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF1B4801FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,10 @@
 		FBC505081D8A75F300663B37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FBD506861E49C81C000E7BB8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		FBD5068A1E4CDB7B000E7BB8 /* TRDPMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRDPMoatMobileAppKit.framework; sourceTree = "<group>"; };
+		FBF1B47B1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPRViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
+		FBF1B47C1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPRViewControllerTransitioningDelegate.m; sourceTree = "<group>"; };
+		FBF1B47F1FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPRVideoPlayerPresentationController.h; sourceTree = "<group>"; };
+		FBF1B4801FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPRVideoPlayerPresentationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,10 @@
 				FB5DD32E1CEB0DE5008C3A34 /* TPRPlayerViewController.m */,
 				FB1611A21DF166E000B8D0E3 /* TPRWebView.h */,
 				FB1611A31DF166E000B8D0E3 /* TPRWebView.m */,
+				FBF1B47B1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.h */,
+				FBF1B47C1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.m */,
+				FBF1B47F1FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.h */,
+				FBF1B4801FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.m */,
 			);
 			path = internal;
 			sourceTree = "<group>";
@@ -147,6 +159,7 @@
 			files = (
 				FB5DD33A1CEB0DE5008C3A34 /* ThirdpresenceAdSDK.h in Headers */,
 				FB5DD33B1CEB0DE5008C3A34 /* TPRRewardedVideo.h in Headers */,
+				FBF1B4811FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.h in Headers */,
 				FB5DD33F1CEB0DE5008C3A34 /* TPRVideoInterstitial.h in Headers */,
 				FB5DD33D1CEB0DE5008C3A34 /* TPRVideoAd.h in Headers */,
 				FB16118D1DF04A3500B8D0E3 /* TPRVideoBanner.h in Headers */,
@@ -154,6 +167,7 @@
 				FB5DD3361CEB0DE5008C3A34 /* TPRVideoPlayerHandler.h in Headers */,
 				FB5DD3381CEB0DE5008C3A34 /* TPRPlayerViewController.h in Headers */,
 				FB1611A41DF166E000B8D0E3 /* TPRWebView.h in Headers */,
+				FBF1B47D1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +198,7 @@
 		FB49786F1CC6346000F446A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Marko Okkonen";
 				TargetAttributes = {
 					FB4978771CC6346000F446A1 = {
@@ -229,7 +243,9 @@
 				FB16118E1DF04A3500B8D0E3 /* TPRVideoBanner.m in Sources */,
 				FB5DD3391CEB0DE5008C3A34 /* TPRPlayerViewController.m in Sources */,
 				FB1611921DF04CB500B8D0E3 /* TPRBannerView.m in Sources */,
+				FBF1B47E1FB1C60900E4B3A2 /* TPRViewControllerTransitioningDelegate.m in Sources */,
 				FB5DD33E1CEB0DE5008C3A34 /* TPRVideoAd.m in Sources */,
+				FBF1B4821FB1CA1D00E4B3A2 /* TPRVideoPlayerPresentationController.m in Sources */,
 				FB5DD3401CEB0DE5008C3A34 /* TPRVideoInterstitial.m in Sources */,
 				FB5DD33C1CEB0DE5008C3A34 /* TPRRewardedVideo.m in Sources */,
 				FB1611A51DF166E000B8D0E3 /* TPRWebView.m in Sources */,
@@ -355,7 +371,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -381,7 +397,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H478BW6B43;
 				DYLIB_COMPATIBILITY_VERSION = 1;

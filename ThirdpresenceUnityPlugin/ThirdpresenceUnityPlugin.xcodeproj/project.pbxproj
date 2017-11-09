@@ -56,6 +56,10 @@
 		FB9F399F1D91096F00B26119 /* TPRVideoInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39921D91096F00B26119 /* TPRVideoInterstitial.m */; };
 		FBD506901E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
 		FBD506921E4DD8B0000E7BB8 /* TRDPMoatMobileAppKit.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */; };
+		FBF1B48C1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = FBF1B4881FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h */; };
+		FBF1B48D1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FBF1B4891FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h */; };
+		FBF1B48E1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF1B48A1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m */; };
+		FBF1B48F1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF1B48B1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -126,6 +130,10 @@
 		FB9F39911D91096F00B26119 /* TPRVideoInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoInterstitial.h; sourceTree = "<group>"; };
 		FB9F39921D91096F00B26119 /* TPRVideoInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoInterstitial.m; sourceTree = "<group>"; };
 		FBD5068F1E4DA453000E7BB8 /* TRDPMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TRDPMoatMobileAppKit.framework; sourceTree = "<group>"; };
+		FBF1B4881FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRVideoPlayerPresentationController.h; sourceTree = "<group>"; };
+		FBF1B4891FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
+		FBF1B48A1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRVideoPlayerPresentationController.m; sourceTree = "<group>"; };
+		FBF1B48B1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRViewControllerTransitioningDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +242,10 @@
 		FB9F398B1D91096F00B26119 /* internal */ = {
 			isa = PBXGroup;
 			children = (
+				FBF1B4881FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h */,
+				FBF1B48A1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m */,
+				FBF1B4891FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h */,
+				FBF1B48B1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m */,
 				FB2A1F501DF83EBF00B08088 /* TPRPlayerViewController.m */,
 				FB2A1F511DF83EBF00B08088 /* TPRPlayerViewController.h */,
 				FB2A1F521DF83EBF00B08088 /* TPRWebView.m */,
@@ -274,11 +286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB2A1F661DF84B6D00B08088 /* TPRBannerView.h in Headers */,
+				FBF1B48C1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h in Headers */,
 				FB9F399A1D91096F00B26119 /* TPRRewardedVideo.h in Headers */,
 				FB2A1F551DF83EBF00B08088 /* TPRPlayerViewController.h in Headers */,
 				FB2A1F651DF84B6D00B08088 /* TPRVideoBanner.h in Headers */,
 				FB70E1431D54A2630098DFBA /* ThirdpresenceUnityInterstitial.h in Headers */,
 				FB9F39951D91096F00B26119 /* TPRVideoPlayerHandler.h in Headers */,
+				FBF1B48D1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h in Headers */,
 				FB9F399E1D91096F00B26119 /* TPRVideoInterstitial.h in Headers */,
 				FB2A1F571DF83EBF00B08088 /* TPRWebView.h in Headers */,
 				FB9F399C1D91096F00B26119 /* TPRVideoAd.h in Headers */,
@@ -380,8 +394,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB2A1F561DF83EBF00B08088 /* TPRWebView.m in Sources */,
+				FBF1B48E1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m in Sources */,
 				FB9F399D1D91096F00B26119 /* TPRVideoAd.m in Sources */,
 				FB72454D1D5B5C95004BC8B2 /* TPRUnityStub.c in Sources */,
+				FBF1B48F1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m in Sources */,
 				FB72453E1D59F443004BC8B2 /* ThirdpresenceUnityRewardedVideo.m in Sources */,
 				FB72454B1D5B5C54004BC8B2 /* ThirdpresenceUnity.c in Sources */,
 				FB9F399B1D91096F00B26119 /* TPRRewardedVideo.m in Sources */,

@@ -6,7 +6,7 @@ https://firebase.google.com/docs/admob/
 
 ## Minimum requirements
 
-- XCode 7 or later
+- XCode 9.1 or later
 - Deployment target iOS 8.0 or later
 
 ## Adding library dependencies

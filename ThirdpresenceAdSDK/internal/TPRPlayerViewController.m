@@ -15,9 +15,9 @@
     self = [super init];
     
     _orientationMask = orientationMask;
-    
     CGRect frame = [[UIScreen mainScreen] bounds];
     _webView = [[TPRWebView alloc] initWithFrame:frame];
+    [_webView setBackgroundColor:[UIColor blackColor]];
     self.view = self.webView;
     
     return self;

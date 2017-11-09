@@ -10,13 +10,13 @@ The Thirdpresence Ad SDK Unity plugin provides means to display interstitial and
 ## Getting Unity plugin package
 
 The pre-built plugin is available here:
-http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/1.5.8/thirdpresence-ad-sdk-ios.unitypackage
+http://s3.amazonaws.com/thirdpresence-ad-tags/sdk/plugins/unity/1.5.9/thirdpresence-ad-sdk-ios.unitypackage
 
 The plugin is built with the following tools:
 
 - Unity SDK 2017.2.0f3
 - Java JDK 1.8
-- XCode 9 (iOS 11)
+- XCode 9.1 (iOS 11)
 
 Another option is to manually build the SDK and the Unity plugin. All the source code is available in this repository. Before building the Unity project, check that the path to the Unity Editor is correctly set in "Build Settings -> User-Defined -> TPR_AD_SDK_UNITY_EDITOR"
 
