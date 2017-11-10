@@ -28,34 +28,29 @@ NSTimeInterval const DISPLAY_TIMEOUT = 45.0;
 
     self.continueAfterFailure = NO;
     
-    app = [[XCUIApplication alloc] init];
-    [app launch];
-
-    sleep(1); // Time for animations
-    
-    if (!alertHandled) {
-
-        interruptionMonitor = [self addUIInterruptionMonitorWithDescription:@"Location alert" handler:^BOOL(XCUIElement *interruptingElement) {
-            sleep(1); // Time for animations
-            if (interruptingElement.buttons[@"Allow"].exists) {
-                [interruptingElement.buttons[@"Allow"] tap];
-                alertHandled = YES;
-            }
-            sleep(1); // Time for animations
-            return YES;
-
-        }];
-
-        if (app.buttons[@"Allow"].exists) {
-            [app.buttons[@"Allow"] tap];
+    interruptionMonitor = [self addUIInterruptionMonitorWithDescription:@"Location alert" handler:^BOOL(XCUIElement *interruptingElement) {
+        if (interruptingElement.buttons[@"Allow"].exists) {
+            [interruptingElement.buttons[@"Allow"] tap];
             alertHandled = YES;
         }
-        else {
-            // wait for alert
-            sleep(5);
-        }
-        
+        sleep(1); // Time for animations
+        return YES;
+
+    }];
+
+    app = [[XCUIApplication alloc] init];
+    [app launch];
+    
+    sleep(1); // Time for animations
+
+    [app tap];
+    
+    if (app.buttons[@"Allow"].exists) {
+        [app.buttons[@"Allow"] tap];
+        alertHandled = YES;
     }
+  
+
     NSLog(@"setUp completed");
 }
 
@@ -75,13 +70,14 @@ NSTimeInterval const DISPLAY_TIMEOUT = 45.0;
     sleep(1);
     
 #if USE_STAGING_SERVER == 0
+ 
     XCUIElement *placementField = [[app.textFields containingPredicate:
                                  [NSPredicate predicateWithFormat:@"identifier MATCHES 'placement_field'"]] element];
     [placementField.buttons[@"Clear text"] tap];
     [placementField tap];
     [placementField typeText:@"5c23vpeypb"];
-    
 #endif
+
     
     [[[app.buttons containingPredicate:
       [NSPredicate predicateWithFormat:@"identifier MATCHES 'init_button'"]] element] tap];

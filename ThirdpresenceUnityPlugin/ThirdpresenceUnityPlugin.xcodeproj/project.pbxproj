@@ -38,6 +38,10 @@
 		FB4583911D5D9D6C007DFC02 /* ThirdpresenceUnityRewardedVideo.m in Copy Files */ = {isa = PBXBuildFile; fileRef = FB72453C1D59F443004BC8B2 /* ThirdpresenceUnityRewardedVideo.m */; };
 		FB4583921D5D9D6C007DFC02 /* ThirdpresenceUnity.h in Copy Files */ = {isa = PBXBuildFile; fileRef = FB7245471D5A4FD2004BC8B2 /* ThirdpresenceUnity.h */; };
 		FB4583931D5D9D6C007DFC02 /* ThirdpresenceUnity.c in Copy Files */ = {isa = PBXBuildFile; fileRef = FB72454A1D5B5C54004BC8B2 /* ThirdpresenceUnity.c */; };
+		FB5CC94A1FB5908D006C75E9 /* TPRVideoPlayerPresentationController.h in Copy Files */ = {isa = PBXBuildFile; fileRef = FBF1B4881FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.h */; };
+		FB5CC94B1FB5908D006C75E9 /* TPRVideoPlayerPresentationController.m in Copy Files */ = {isa = PBXBuildFile; fileRef = FBF1B48A1FB32F9A00E4B3A2 /* TPRVideoPlayerPresentationController.m */; };
+		FB5CC94C1FB5908D006C75E9 /* TPRViewControllerTransitioningDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = FBF1B4891FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.h */; };
+		FB5CC94D1FB5908D006C75E9 /* TPRViewControllerTransitioningDelegate.m in Copy Files */ = {isa = PBXBuildFile; fileRef = FBF1B48B1FB32F9A00E4B3A2 /* TPRViewControllerTransitioningDelegate.m */; };
 		FB70E1431D54A2630098DFBA /* ThirdpresenceUnityInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = FB70E1411D54A2630098DFBA /* ThirdpresenceUnityInterstitial.h */; };
 		FB70E1441D54A2630098DFBA /* ThirdpresenceUnityInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = FB70E1421D54A2630098DFBA /* ThirdpresenceUnityInterstitial.m */; };
 		FB72453D1D59F443004BC8B2 /* ThirdpresenceUnityRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = FB72453B1D59F443004BC8B2 /* ThirdpresenceUnityRewardedVideo.h */; };
@@ -69,6 +73,10 @@
 			dstPath = "$PROJECT_DIR/unity-package/ThirdpresenceAdSDK/Assets/Plugins/iOS";
 			dstSubfolderSpec = 0;
 			files = (
+				FB5CC94A1FB5908D006C75E9 /* TPRVideoPlayerPresentationController.h in Copy Files */,
+				FB5CC94B1FB5908D006C75E9 /* TPRVideoPlayerPresentationController.m in Copy Files */,
+				FB5CC94C1FB5908D006C75E9 /* TPRViewControllerTransitioningDelegate.h in Copy Files */,
+				FB5CC94D1FB5908D006C75E9 /* TPRViewControllerTransitioningDelegate.m in Copy Files */,
 				FBD506921E4DD8B0000E7BB8 /* TRDPMoatMobileAppKit.framework in Copy Files */,
 				FB2A1F691DF84B8A00B08088 /* TPRVideoBanner.h in Copy Files */,
 				FB2A1F6A1DF84B8A00B08088 /* TPRBannerView.h in Copy Files */,
