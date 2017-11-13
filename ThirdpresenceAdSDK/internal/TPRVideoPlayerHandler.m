@@ -474,7 +474,8 @@ static void *VolumeObserverContext = &VolumeObserverContext;
 }
 
 -(NSString *)encodeUrlString:(NSString *)string {
-    return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    return (__bridge_transfer NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef) string,
+                                                                                  NULL, (CFStringRef) @"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
 }
 
 - (NSTimer*)startTimer:(NSTimeInterval) timeout target:(SEL)selector {
