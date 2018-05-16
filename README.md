@@ -2,6 +2,8 @@
 
 Thirdpresence Ad SDK is based on a WebView and the Thirdpresence HTML5 player. The SDK provides implementations for video banner, interstitial video and rewarded video ad units. 
 
+__Development of the Thirdpresence Ad SDK is discontinued. The current version is still functional, but it is not GDPR compliant__
+
 ## Integration to an application
 
 There are a number of different ways to integrate the SDK with your app:
